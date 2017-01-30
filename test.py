@@ -8,7 +8,7 @@ from pygame.locals import *
 import sys
 sys.path.append('Model/')
 #importation de nos classes
-from class_Animated import *
+from class_Hero import *
 
 #initialisation de pygame
 pygame.init()
@@ -27,7 +27,7 @@ imagesBlanchon = [
                     ]
                  ]
 
-blanchon = Animated(200, 200, 32, 32, imagesBlanchon)
+blanchon = Hero(200, 200, 32, 32, imagesBlanchon, 0.25, 0.5, 8, 8)
 
 clock = pygame.time.Clock()
 fps = 60
@@ -47,7 +47,8 @@ while 1 :
     #on teste les différentes touches directionelles
     #tout en vérifiant que le personnage ne sort pas de l'écran
     #Si la touche est pressée on fait bouger le personnage
-	    if event.key == K_RIGHT:
+	    if event.key == K_a:
 	           blanchon.changeState("atk")
+
 
     pygame.display.flip()
