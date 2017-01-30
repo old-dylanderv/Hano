@@ -25,15 +25,15 @@ class Animated(Entity):
         oldState = self.state
         try:
             self.state = self.states.index(newState)
-            indexImg = 0
+            self.indexImg = 0
             break
         except ValueError:
             self.state = oldState
 
     def nextImg(self):
-        indexImg ++
-        if(indexImg == len(self.images[self.states.index(self.state)]):
-            indexImg = 0
+        self.indexImg ++
+        if(self.indexImg == len(self.images[self.states.index(self.state)]):
+            self.indexImg = 0
 
     def get_img(self):
         return self.images[self.states.index(self.state)][indexImg]
