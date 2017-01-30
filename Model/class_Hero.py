@@ -10,7 +10,7 @@ from class_Charac import *
 class Hero(Charac):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x)
-        self.doubleJump = true
+        self.doubleJump = True
         self.up = False;
         self.down = False;
         self.left = False;
@@ -37,7 +37,7 @@ class Hero(Charac):
             self.down = False
 
     def update(self):
-        if(self.left == True and self.right == True):
+        if(self.left == True and self.right == False):
             Charac.moveLeft(self)
         elif(self.right == True):
             Charac.moveRight(self)
@@ -52,3 +52,9 @@ class Hero(Charac):
                 self.doubleJump = False
 
         Charac.update(self)
+
+    def getKeyRight(self):
+        return self.right
+
+    def getKeyLeft(self):
+        return self.left

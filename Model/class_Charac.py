@@ -15,7 +15,7 @@ class Charac(Animated):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
-        self.onGround = False
+        self.onGround = True
         self.speed_x = 0
         self.speed_y = 0
         self.baseAcc_x = baseAcc_x
@@ -36,10 +36,9 @@ class Charac(Animated):
         if(self.onGround == True):
             self.speed_y = 0
         else:
-            self.speedY += self.weight
-            self.y += self.speedY
-
-        super.update()
+            self.speed_y += self.weight
+            self.y += self.speed_y
+        Animated.update(self)
 
     def jump(self):
         self.speedY = -self.baseJumpForce
@@ -52,9 +51,10 @@ class Charac(Animated):
         self.currAcc_x = self.baseAcc_x
 
     def stop(self):
-        if(speed_x > 1):
+        if(self.speed_x > 1):
             self.currAcc_x = -self.baseAcc_x
-        elif(speed_x < 1):
+        elif(self.speed_x < -1):
             self.currAcc_x = self.baseAcc_x
         else:
-            self.speed_x = 0 
+            self.speed_x = 0
+            self.currAcc_x = 0
