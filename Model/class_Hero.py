@@ -11,23 +11,44 @@ class Hero(Charac):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x)
         self.doubleJump = true
+        self.up = False;
+        self.down = False;
+        self.left = False;
+        self.right = False;
 
-    def input(self, event):
+    def key_down(self, event):
         if(event.key == K_RIGHT):
-            self.moveRight()
+            self.right = True
         elif(event.key == K_LEFT):
-            self.moveLeft()
+            self.left = True
         elif(event.key == K_UP):
+            self.up = True
+        elif(event.key == K_DOWN):
+            self.down = True
+
+    def key_up(self, event):
+        if(event.key == K_RIGHT):
+            self.right = False
+        elif(event.key == K_LEFT):
+            self.left = False
+        elif(event.key == K_UP):
+            self.up = False
+        elif(event.key == K_DOWN):
+            self.down = False
+
+    def update(self):
+        if(self.left == True and self.right == True):
+            Charac.moveLeft(self)
+        elif(self.right == True):
+            Charac.moveRight(self)
+        elif(self.up == False and self.down == False):
+            Charac.stop(self)
+
+        if(self.up == True):
             if(self.onGround == True):
-                self.jump()
+                Charac.jump(self)
             elif(self.doubleJump == True):
-                self.jump()
+                Charac.jump(self)
                 self.doubleJump = False
 
-    #def update(self):
-
-    #def jump(self):
-
-    #def moveLeft(self):
-
-    #def moveRight(self):
+        Charac.update(self)
