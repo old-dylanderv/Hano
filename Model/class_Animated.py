@@ -12,8 +12,9 @@ class Animated(Entity):
         self.images = images
         self.indexImg = 0
         self.states = []
-        self.states.append("idle")
+        self.states.append(["idle",500])
         self.state = self.states[0]
+        self.timerAnim = 0
 
     def changeState(self, newState):
         oldState = self.state
@@ -23,10 +24,13 @@ class Animated(Entity):
         except ValueError:
             self.state = oldState
 
-    def nextImg(self):
-        self.indexImg = self.indexImg + 1
-        if(self.indexImg == len(self.images[self.states.index(self.state)])):
-            self.indexImg = 0
+    def nextImg(self, fps):
+        self.timerAnim = self.timerAnim + (1000/fps)
+        if self.timerAnim > self.states[self.states.index(self.state)][1]:
+            self.timerAnim = self.timerAnim - self.states[self.states.index(self.state)][1]
+            self.indexImg = self.indexImg + 1
+            if(self.indexImg == len(self.images[self.states.index(self.state)])):
+                self.indexImg = 0
 
     def get_img(self):
         return self.images[self.states.index(self.state)][self.indexImg]

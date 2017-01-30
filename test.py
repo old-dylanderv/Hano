@@ -21,14 +21,17 @@ imagesBlanchon = [ [pygame.image.load("Images/b_stop_1.png").convert(), pygame.i
 
 blanchon = Animated(200, 200, 32, 32, imagesBlanchon)
 
+clock = pygame.time.Clock()
+fps = 60
 
 while 1 :
+    clock.tick(fps)
     #boucle sur les différents événement reçut
     for event in pygame.event.get():
     	if event.type == QUIT: 			#si l'utilisateur clique sur la croix
 		      sys.exit()  				#on ferme la fenêtre
 
-    blanchon.nextImg()
+    blanchon.nextImg(fps)
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
 
