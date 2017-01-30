@@ -13,8 +13,8 @@ from class_Platform import *
 #initialisation de pygame
 pygame.init()
 
-WIDTH = 700
-HEIGHT = 530
+WIDTH = 1000
+HEIGHT = 650
 fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
