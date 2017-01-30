@@ -11,17 +11,18 @@ class Animated(Entity):
         self.rect = pygame.Rect(x, y, width, height)
         self.images = images
         self.indexImg = 0
-        self.states = {"idle":500, "atk":75}
+        self.states = {"idleLeft":500, "idleRight":500}
         self.state = self.states.keys()[0]
         self.timerAnim = 0
 
     def changeState(self, newState):
-        oldState = self.state
-        try:
-            self.state = self.states.keys()[self.states.keys().index(newState)]
-            self.indexImg = 0
-        except ValueError:
-            self.state = oldState
+        if(newState != self.state):
+            oldState = self.state
+            try:
+                self.state = self.states.keys()[self.states.keys().index(newState)]
+                self.indexImg = 0
+            except ValueError:
+                self.state = oldState
 
     def nextImg(self, fps):
         self.timerAnim = self.timerAnim + (1000/fps)
