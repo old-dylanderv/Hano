@@ -1,6 +1,7 @@
 # -*- coding:Utf-8 -*-
 import pygame
 from pygame.locals import *
+from class_Animated import *
 
 #Charac est la classe générique des mobs, des boss et du héro
 #Charac possede:
