@@ -6,6 +6,7 @@ import pygame
 from pygame.locals import *
 #importation de la bibliothèque system
 import sys
+sys.path.append('Model/')
 #importation de nos classes
 from class_Animated import *
 
