@@ -21,10 +21,10 @@ class Hero(Charac):
         self.states['crouchLeft'] = 50
         self.states['crouchRight'] = 50
         self.doubleJump = True
-        self.up = False;
-        self.down = False;
-        self.left = False;
-        self.right = False;
+        self.up = False
+        self.down = False
+        self.left = False
+        self.right = False
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
