@@ -11,6 +11,7 @@ class Platform(Animated):
     def __init__(self, x, y, width, height, images, friction):
         Animated.__init__(self, x, y, width, height, images)
         self.friction = friction
+        
 
     def get_friction(self):
         return self.friction

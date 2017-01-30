@@ -13,8 +13,8 @@ from class_Platform import *
 #initialisation de pygame
 pygame.init()
 
-WIDTH = 700
-HEIGHT = 530
+WIDTH = 1000
+HEIGHT = 650
 fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
@@ -81,18 +81,36 @@ imagesBlanchon = {
                     ],
                   "jumpLeft":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha()), True, False)
                     ]
                  }
 
+imagePlateform = {
+                    "idleLeft":
+                      [
+                       pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), True, False),
+                       pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha()), True, False)
+                      ],
+                    "idleRight":
+                      [
+                       pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
+                       pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                      ]
+                 }
+
+
+
 blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.25, 0.5, 8, 8, WIDTH)
-sol = Platform(0, HEIGHT, WIDTH, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
-platform1 = Platform(50, HEIGHT-100, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
-platform2 = Platform(200, HEIGHT-200, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
+sol = Platform(0, HEIGHT, WIDTH, 10, imagePlateform, 1)
+platform1 = Platform(50, HEIGHT-100, 100, 10, imagePlateform, 1)
+platform2 = Platform(200, HEIGHT-200, 100, 10, imagePlateform, 1)
 clock = pygame.time.Clock()
 fps = 60
 myfont = pygame.font.SysFont("monospace", 15)
+img = pygame.Surface((50,430))
+
+#Quand on glisse et qu'on saute, le perso se deplace dans la direction de la glissade
 
 while 1 :
     clock.tick(fps)
@@ -108,10 +126,14 @@ while 1 :
     blanchon.nextImg(fps)
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
+    fenetre.blit(platform1.get_img(), platform1.get_rect())
+    fenetre.blit(platform2.get_img(), platform2.get_rect())
 
     #INFO TEST
     label = myfont.render("double jump = "+str(blanchon.getDoubleJump()), 1, (255,255,0))
     fenetre.blit(label, (10, 10))
+    label1 = myfont.render("State = "+str(blanchon.get_state()), 1, (255,255,0))
+    fenetre.blit(label1, (10, 30))
 
     pygame.display.flip()
     #Servira a tester si le joueur est descendu d'une plateforme
