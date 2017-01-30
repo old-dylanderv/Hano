@@ -51,27 +51,30 @@ class Hero(Charac):
         #Left = true && Right = false
         if(self.left == True and self.right == False):
             Charac.moveLeft(self)
-            if(self.speed_x > 0):
-                Animated.changeState(self, "slideLeft")
-            else:
-                Animated.changeState(self, "moveLeft")
+            if(self.onGround == True):
+                if(self.speed_x > 0):
+                    Animated.changeState(self, "slideLeft")
+                else:
+                    Animated.changeState(self, "moveLeft")
         elif(self.right == True): #Left = false && Right = true
             Charac.moveRight(self)
-            if(self.speed_x < 0):
-                Animated.changeState(self, "slideRight")
-            else:
-                Animated.changeState(self, "moveRight")
+            if(self.onGround == True):
+                if(self.speed_x < 0):
+                    Animated.changeState(self, "slideRight")
+                else:
+                    Animated.changeState(self, "moveRight")
         elif(self.up == False and self.down == False): #pas de déplacement
             Charac.stop(self)
-            if(self.speed_x < 0):
-                Animated.changeState(self, "slideRight")
-            elif(self.speed_x > 0):
-                Animated.changeState(self, "slideLeft")
-            else:
-                if(self.facing == 0):
-                    Animated.changeState(self, "idleRight")
+            if(self.onGround == True): 
+                if(self.speed_x < 0):
+                    Animated.changeState(self, "slideRight")
+                elif(self.speed_x > 0):
+                    Animated.changeState(self, "slideLeft")
                 else:
-                    Animated.changeState(self, "idleLeft")
+                    if(self.facing == 0):
+                        Animated.changeState(self, "idleRight")
+                    else:
+                        Animated.changeState(self, "idleLeft")
 
         if(self.up == True):
             if(self.onGround == True):

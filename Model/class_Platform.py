@@ -23,3 +23,6 @@ class Platform(Animated):
 
     def get_y(self):
         return self.y
+
+    def get_img(self):
+        return self.images

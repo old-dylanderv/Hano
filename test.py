@@ -46,13 +46,13 @@ imagesBlanchon = {
                     ],
                   "fallRight":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpdown_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpdown_2.png").convert_alpha())
                     ],
                   "fallLeft":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpdown_1.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpdown_2.png").convert_alpha()), True, False),
                     ],
                   "crouchRight":
                     [
@@ -66,33 +66,32 @@ imagesBlanchon = {
                     ],
                   "slideRight":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_slide.png").convert_alpha())
                     ],
                   "slideLeft":
                     [
-                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), True, False),
-                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha()), True, False)
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_slide.png").convert_alpha()), True, False)
                     ],
                   "jumpRight":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_2.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_3.png").convert_alpha())
                     ],
                   "jumpLeft":
                     [
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_2.png").convert_alpha())
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_1.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_2.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_3.png").convert_alpha()), True, False)
                     ]
                  }
 
-blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.5, 8, 8, WIDTH)
-sol = Platform(0, HEIGHT, WIDTH, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
-platform1 = Platform(50, HEIGHT-100, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
-platform2 = Platform(200, HEIGHT-200, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
+blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH)
+sol = Platform(0, HEIGHT, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
+platform1 = Platform(50, HEIGHT-100, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
+platform2 = Platform(200, HEIGHT-200, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
 clock = pygame.time.Clock()
 fps = 60
-myfont = pygame.font.SysFont("monospace", 15)
 
 while 1 :
     clock.tick(fps)
@@ -108,10 +107,9 @@ while 1 :
     blanchon.nextImg(fps)
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
-
-    #INFO TEST
-    label = myfont.render("double jump = "+str(blanchon.getDoubleJump()), 1, (255,255,0))
-    fenetre.blit(label, (10, 10))
+    fenetre.blit(sol.get_img(), sol.get_rect())
+    fenetre.blit(platform1.get_img(), platform1.get_rect())
+    fenetre.blit(platform2.get_img(), platform2.get_rect())
 
     pygame.display.flip()
     #Servira a tester si le joueur est descendu d'une plateforme

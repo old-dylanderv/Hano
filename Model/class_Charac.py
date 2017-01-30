@@ -49,6 +49,7 @@ class Charac(Animated):
         else:
             self.speed_y += self.weight
             self.y += self.speed_y
+            self.friction = 0.1
         Animated.update(self)
 
     def jump(self):
@@ -77,7 +78,7 @@ class Charac(Animated):
 
     def isOnGround(self):
         return self.onGround
-        
+
     def testPlatform(self, platform):
         if(self.x + self.rect.width > platform.get_x1() and self.x < platform.get_x2()):
             if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y >= platform.get_y()):
