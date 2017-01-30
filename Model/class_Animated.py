@@ -1,9 +1,10 @@
+# coding=utf-8
 import pygame
 from pygame.locals import *
-import class_Entity
+from class_Entity import *
 
-#images contient des sets d'images pour chaque animation
-#states contient les états animés (ex: idle, walkLeft, walkRight ...)
+#images contient des sets dimages pour chaque animation
+#states contient les etats animes (ex: idle, walkLeft, walkRight ...)
 class Animated(Entity):
     def __init__(self, x, y, width, height, images):
         Entity.__init__(self, x, y)
