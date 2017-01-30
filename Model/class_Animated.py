@@ -35,7 +35,9 @@ class Animated(Entity):
         return self.images[self.states.keys().index(self.state)][self.indexImg]
 
     #Permet de mettre a jour la position de l'image a afficher
-    #def update(self):
+    def update(self):
+        self.rect.x = self.x
+        self.rect.y = self.y
 
     def get_rect(self):
         return self.rect
