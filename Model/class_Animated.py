@@ -20,7 +20,6 @@ class Animated(Entity):
         try:
             self.state = self.states.index(newState)
             self.indexImg = 0
-            break
         except ValueError:
             self.state = oldState
 
@@ -33,7 +32,7 @@ class Animated(Entity):
         return self.images[self.states.index(self.state)][indexImg]
 
     #Permet de mettre a jour la position de l'image a afficher
-    def update(self):
+    #def update(self):
 
     def get_rect(self):
         return self.rect
