@@ -12,6 +12,7 @@ from class_Animated import *
 #   une accélération en x (currAcc_x)
 #   une vitesse maximale en x
 #   une orientation (0 = droite, 1 = gauche)
+#   un coefficient de frottement lié au milieu
 class Charac(Animated):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Animated.__init__(self, x, y, width, height, images)
@@ -24,6 +25,7 @@ class Charac(Animated):
         self.currAcc_x = 0
         self.baseJumpForce = baseJumpForce
         self.maxSpeed_x = maxSpeed_x
+        self.friction = 1
 
     def update(self):
         #Bloc de gestion de la vitesse en x
@@ -62,3 +64,10 @@ class Charac(Animated):
         else:
             self.speed_x = 0
             self.currAcc_x = 0
+#TO DO : APPLIQUER LE COEFFICIENT DE FRICTION A L'ACCELERATION X
+    def testPlatform(platform):
+        if(self.x + self.width > platform.get_x1() and self.x < platform.get_x2()):
+            if(self.y + self.height <= platform.get_y() and self.y + self.height + self.speed_y >= platform.get_y()):
+                self.onGround = True
+                self.friction = platform.get_friction()
+                self.y = platform.get_y() - self.height
