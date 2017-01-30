@@ -21,6 +21,7 @@ class Hero(Charac):
         self.states['crouchLeft'] = 50
         self.states['crouchRight'] = 50
         self.doubleJump = True
+        self.jumpKeyReset = False
         self.up = False
         self.down = False
         self.left = False
@@ -75,17 +76,22 @@ class Hero(Charac):
         if(self.up == True):
             if(self.onGround == True):
                 Charac.jump(self)
+                self.jumpKeyReset = True
                 if(self.facing == 0):
                     Animated.changeState(self, "jumpRight")
                 else:
                     Animated.changeState(self, "jumpLeft")
             elif(self.doubleJump == True):
                 Charac.jump(self)
+                self.doubleJump = False
                 if(self.facing == 0):
                     Animated.changeState(self, "jumpRight")
                 else:
                     Animated.changeState(self, "jumpLeft")
-                self.doubleJump = False
+        else: #Il faut relacher la touche de saut pour pouvoir doublesauter
+            if(self.jumpKeyReset == True and self.onGround == False):
+                self.doubleJump = True
+                self.jumpKeyReset = False
 
         if(self.y < 0):
             if(self.facing == 0):
@@ -95,8 +101,6 @@ class Hero(Charac):
 
         Charac.update(self)
 
-    def getKeyRight(self):
-        return self.right
-
-    def getKeyLeft(self):
-        return self.left
+#FONCTIONS DE TEST
+    def getDoubleJump(self):
+        return self.doubleJump

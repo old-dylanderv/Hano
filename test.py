@@ -96,22 +96,22 @@ while 1 :
     clock.tick(fps)
     #boucle sur les différents événement reçut
     for event in pygame.event.get():
-    	if event.type == QUIT: 			#si l'utilisateur clique sur la croix
-		      sys.exit()  				#on ferme la fenêtre
+        if event.type == QUIT: 	#si l'utilisateur clique sur la croix
+            sys.exit()          #on ferme la fenêtre
+        if event.type == KEYDOWN:
+            blanchon.key_down(event)
+        if event.type == KEYUP:
+            blanchon.key_up(event)
 
     blanchon.nextImg(fps)
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
 
-    if event.type == KEYDOWN:
-		blanchon.key_down(event)
-    if event.type == KEYUP:
-		blanchon.key_up(event)
 
-    label = myfont.render(str(blanchon.getKeyLeft()), 1, (255,255,0))
-    fenetre.blit(label, (100, 100))
-    label1 = myfont.render(str(blanchon.getKeyRight()), 1, (255,255,0))
-    fenetre.blit(label1, (200, 100))
+
+    label = myfont.render("double jump = "+str(blanchon.getDoubleJump()), 1, (255,255,0))
+    fenetre.blit(label, (10, 10))
+
 
     pygame.display.flip()
     blanchon.testPlatform(sol)
