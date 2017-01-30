@@ -88,6 +88,8 @@ imagesBlanchon = {
 
 blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.25, 0.5, 8, 8, WIDTH)
 sol = Platform(0, HEIGHT, WIDTH, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
+platform1 = Platform(50, HEIGHT-100, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
+platform2 = Platform(200, HEIGHT-200, 100, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
 clock = pygame.time.Clock()
 fps = 60
 myfont = pygame.font.SysFont("monospace", 15)
@@ -107,12 +109,21 @@ while 1 :
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
 
-
-
+    #INFO TEST
     label = myfont.render("double jump = "+str(blanchon.getDoubleJump()), 1, (255,255,0))
     fenetre.blit(label, (10, 10))
 
-
     pygame.display.flip()
+    #Servira a tester si le joueur est descendu d'une plateforme
+    heroOnGround = blanchon.isOnGround()
+
+    blanchon.setOnAir()
     blanchon.testPlatform(sol)
+    blanchon.testPlatform(platform1)
+    blanchon.testPlatform(platform2)
+
+    #Le hero est descendu d'une plateforme
+    if(heroOnGround == True and blanchon.isOnGround() == False):
+        blanchon.giveDoubleJump() #On lui donne un saut
+
     blanchon.update()

@@ -42,7 +42,7 @@ class Charac(Animated):
         elif(self.x + self.rect.width > self.windowWidth):
             self.x = self.windowWidth - self.rect.width
             self.speed_x = 0
-            
+
         #Bloc de gestion de la vitesse en y
         if(self.onGround == True):
             self.speed_y = 0
@@ -72,6 +72,12 @@ class Charac(Animated):
             self.speed_x = 0
             self.currAcc_x = 0
 
+    def setOnAir(self):
+        self.onGround = False
+
+    def isOnGround(self):
+        return self.onGround
+        
     def testPlatform(self, platform):
         if(self.x + self.rect.width > platform.get_x1() and self.x < platform.get_x2()):
             if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y >= platform.get_y()):
