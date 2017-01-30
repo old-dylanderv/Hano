@@ -4,16 +4,16 @@ from pygame.locals import *
 #images contient des sets d'images pour chaque animation
 #states contient les états animés (ex: idle, walkLeft, walkRight ...)
 class Charac(Animated):
-    def __init__(self, x, y, images):
-        Animated.__init__(self, x, y, images)
+    def __init__(self, x, y, width, height, images):
+        Animated.__init__(self, x, y, width, height, images)
         self.gravity = 0.25
-        self.onGround = 
+        self.onGround = False;
 
     def get_x(self):
-        return self.x
+        return super.get_x()
 
     def get_y(self):
-        return self.y
+        return super.get_x()
 
     def changeState(self, newState):
         super.changeState(self, newState)

@@ -15,10 +15,10 @@ class Animated(Entity):
         self.state = self.states[0]
 
     def get_x(self):
-        return self.x
+        return super.get_x()
 
     def get_y(self):
-        return self.y
+        return super.get_y()
 
     def changeState(self, newState):
         oldState = self.state
