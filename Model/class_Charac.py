@@ -23,7 +23,7 @@ class Charac(Animated):
         self.speed_y = 0
         self.baseAcc_x = baseAcc_x
         self.currAcc_x = 0
-        self.baseJumpForce = baseJumpForce
+        self.baseJumpForce = -1*baseJumpForce
         self.maxSpeed_x = maxSpeed_x
         self.friction = 1
 
@@ -45,29 +45,29 @@ class Charac(Animated):
         Animated.update(self)
 
     def jump(self):
-        self.speedY = -self.baseJumpForce
+        self.speed_y = self.baseJumpForce
         self.onGround = False
 
     def moveLeft(self):
         self.facing = 1
-        self.currAcc_x = -self.baseAcc_x
+        self.currAcc_x = -self.baseAcc_x*self.friction
 
     def moveRight(self):
         self.facing = 0
-        self.currAcc_x = self.baseAcc_x
+        self.currAcc_x = self.baseAcc_x*self.friction
 
     def stop(self):
         if(self.speed_x > 1):
-            self.currAcc_x = -self.baseAcc_x
+            self.currAcc_x = -self.baseAcc_x*self.friction
         elif(self.speed_x < -1):
-            self.currAcc_x = self.baseAcc_x
+            self.currAcc_x = self.baseAcc_x*self.friction
         else:
             self.speed_x = 0
             self.currAcc_x = 0
-#TO DO : APPLIQUER LE COEFFICIENT DE FRICTION A L'ACCELERATION X
-    def testPlatform(platform):
-        if(self.x + self.width > platform.get_x1() and self.x < platform.get_x2()):
-            if(self.y + self.height <= platform.get_y() and self.y + self.height + self.speed_y >= platform.get_y()):
+
+    def testPlatform(self, platform):
+        if(self.x + self.rect.width > platform.get_x1() and self.x < platform.get_x2()):
+            if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y >= platform.get_y()):
                 self.onGround = True
                 self.friction = platform.get_friction()
-                self.y = platform.get_y() - self.height
+                self.y = platform.get_y() - self.rect.height

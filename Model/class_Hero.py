@@ -47,19 +47,20 @@ class Hero(Charac):
             self.down = False
 
     def update(self):
+        #Left = true && Right = false
         if(self.left == True and self.right == False):
             Charac.moveLeft(self)
             if(self.speed_x > 0):
                 Animated.changeState(self, "slideLeft")
             else:
                 Animated.changeState(self, "moveLeft")
-        elif(self.right == True):
+        elif(self.right == True): #Left = false && Right = true
             Charac.moveRight(self)
             if(self.speed_x < 0):
                 Animated.changeState(self, "slideRight")
             else:
                 Animated.changeState(self, "moveRight")
-        elif(self.up == False and self.down == False):
+        elif(self.up == False and self.down == False): #pas de déplacement
             Charac.stop(self)
             if(self.speed_x < 0):
                 Animated.changeState(self, "slideRight")

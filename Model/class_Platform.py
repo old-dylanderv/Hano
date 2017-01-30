@@ -19,7 +19,7 @@ class Platform(Animated):
         return self.x
 
     def get_x2(self):
-        return self.x + self.width
+        return self.x + self.rect.width
 
     def get_y(self):
         return self.y

@@ -9,11 +9,13 @@ import sys
 sys.path.append('Model/')
 #importation de nos classes
 from class_Hero import *
-
+from class_Platform import *
 #initialisation de pygame
 pygame.init()
 
-fenetre  = pygame.display.set_mode((700,530), RESIZABLE)
+WIDTH = 700
+HEIGHT = 530
+fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
 
@@ -84,8 +86,8 @@ imagesBlanchon = {
                     ]
                  }
 
-blanchon = Hero(200, 200, 32, 32, imagesBlanchon, 0.25, 0.5, 8, 8)
-
+blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.25, 0.5, 8, 8)
+sol = Platform(0, HEIGHT, WIDTH, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
 clock = pygame.time.Clock()
 fps = 60
 myfont = pygame.font.SysFont("monospace", 15)
@@ -112,4 +114,5 @@ while 1 :
     fenetre.blit(label1, (200, 100))
 
     pygame.display.flip()
+    blanchon.testPlatform(sol)
     blanchon.update()
