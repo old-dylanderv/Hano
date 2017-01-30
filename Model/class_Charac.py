@@ -61,7 +61,4 @@ class Charac(Animated):
             self.currAcc_x = self.baseAcc_x
         else:
             self.speed_x = 0
-<<<<<<< HEAD
-=======
             self.currAcc_x = 0
->>>>>>> 44de141014a5c9e6cd4caf3e88e33284e289ab27
