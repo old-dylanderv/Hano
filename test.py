@@ -86,7 +86,7 @@ imagesBlanchon = {
                     ]
                  }
 
-blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.25, 0.5, 8, 8)
+blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.25, 0.5, 8, 8, WIDTH)
 sol = Platform(0, HEIGHT, WIDTH, 10, pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_idle_1.png").convert_alpha()), 1)
 clock = pygame.time.Clock()
 fps = 60

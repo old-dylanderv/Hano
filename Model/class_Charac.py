@@ -14,11 +14,11 @@ from class_Animated import *
 #   une orientation (0 = droite, 1 = gauche)
 #   un coefficient de frottement lié au milieu
 class Charac(Animated):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
         self.facing = 0
-        self.onGround = True
+        self.onGround = False
         self.speed_x = 0
         self.speed_y = 0
         self.baseAcc_x = baseAcc_x
@@ -26,6 +26,7 @@ class Charac(Animated):
         self.baseJumpForce = -1*baseJumpForce
         self.maxSpeed_x = maxSpeed_x
         self.friction = 1
+        self.windowWidth = windowWidth
 
     def update(self):
         #Bloc de gestion de la vitesse en x
@@ -35,7 +36,13 @@ class Charac(Animated):
         elif(self.speed_x < -self.maxSpeed_x):
             self.speed_x = -self.maxSpeed_x
         self.x += self.speed_x
-
+        if(self.x < 0):
+            self.x = 0
+            self.speed_x = 0
+        elif(self.x + self.rect.width > self.windowWidth):
+            self.x = self.windowWidth - self.rect.width
+            self.speed_x = 0
+            
         #Bloc de gestion de la vitesse en y
         if(self.onGround == True):
             self.speed_y = 0
