@@ -11,11 +11,13 @@ from class_Animated import *
 #   une poussée en x (baseAcc_x)
 #   une accélération en x (currAcc_x)
 #   une vitesse maximale en x
+#   une orientation (0 = droite, 1 = gauche)
 class Charac(Animated):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
         self.onGround = False
+        self.facing = 0
         self.speed_x = 0
         self.speed_y = 0
         self.baseAcc_x = baseAcc_x
@@ -46,9 +48,11 @@ class Charac(Animated):
         self.onGround = False
 
     def moveLeft(self):
+        self.facing = 1
         self.currAcc_x = -self.baseAcc_x
 
     def moveRight(self):
+        self.facing = 0
         self.currAcc_x = self.baseAcc_x
 
     def stop(self):
@@ -57,4 +61,4 @@ class Charac(Animated):
         elif(speed_x < 1):
             self.currAcc_x = self.baseAcc_x
         else:
-            self.speed_x = 0 
+            self.speed_x = 0

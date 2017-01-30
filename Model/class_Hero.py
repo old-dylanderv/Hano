@@ -10,6 +10,16 @@ from class_Charac import *
 class Hero(Charac):
     def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x)
+        self.states['moveLeft'] = 100
+        self.states['moveRight'] = 100
+        self.states['jumpLeft'] = 50
+        self.states['jumpRight'] = 50
+        self.states['fallLeft'] = 100
+        self.states['fallRight'] = 100
+        self.states['slideLeft'] = 50
+        self.states['slideRight'] = 50
+        self.states['crouchLeft'] = 50
+        self.states['crouchRight'] = 50
         self.doubleJump = true
         self.up = False;
         self.down = False;
@@ -39,16 +49,47 @@ class Hero(Charac):
     def update(self):
         if(self.left == True and self.right == True):
             Charac.moveLeft(self)
+            if(self.speed_x > 0):
+                Animated.changeState(self, "slideLeft")
+            else:
+                Animated.changeState(self, "moveLeft")
         elif(self.right == True):
             Charac.moveRight(self)
+            if(self.speed_x < 0):
+                Animated.changeState(self, "slideRight")
+            else:
+                Animated.changeState(self, "moveRight")
         elif(self.up == False and self.down == False):
             Charac.stop(self)
+            if(self.speed_x < 0):
+                Animated.changeState(self, "slideRight")
+            elif(self.speed_x > 0):
+                Animated.changeState(self, "slideLeft")
+            else:
+                if(self.facing == 0):
+                    Animated.changeState(self, "idleRight")
+                else:
+                    Animated.changeState(self, "idleLeft")
 
         if(self.up == True):
             if(self.onGround == True):
                 Charac.jump(self)
+                if(self.facing == 0):
+                    Animated.changeState(self, "jumpRight")
+                else:
+                    Animated.changeState(self, "jumpLeft")
             elif(self.doubleJump == True):
                 Charac.jump(self)
+                if(self.facing == 0):
+                    Animated.changeState(self, "jumpRight")
+                else:
+                    Animated.changeState(self, "jumpLeft")
                 self.doubleJump = False
+
+        if(self.y < 0):
+            if(self.facing == 0):
+                Animated.changeState(self, "fallRight")
+            else:
+                Animated.changeState(self, "fallLeft")
 
         Charac.update(self)
