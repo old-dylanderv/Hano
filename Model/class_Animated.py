@@ -1,11 +1,13 @@
 import pygame
 from pygame.locals import *
+import class_Entity
 
 #images contient des sets d'images pour chaque animation
 #states contient les états animés (ex: idle, walkLeft, walkRight ...)
 class Animated(Entity):
-    def __init__(self, x, y, images):
+    def __init__(self, x, y, width, height, images):
         Entity.__init__(self, x, y)
+        self.rect = pygame.Rect(x, y, width, height)
         self.images = images
         self.indexImg = 0
         self.states = []
@@ -32,5 +34,11 @@ class Animated(Entity):
         if(indexImg == len(self.images[self.states.index(self.state)]):
             indexImg = 0
 
-    def display(self):
+    def get_img(self):
         return self.images[self.states.index(self.state)][indexImg]
+
+    #Permet de mettre a jour la position de l'image a afficher
+    def update(self):
+
+    def get_rect(self):
+        return self.rect

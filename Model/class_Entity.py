@@ -11,5 +11,3 @@ class Entity():
 
     def get_y(self):
         return self.y
-
-    def display(self):
