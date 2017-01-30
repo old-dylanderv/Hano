@@ -28,7 +28,7 @@ class Charac(Animated):
         self.speed_x += self.currAcc_x
         if(self.speed_x > self.maxSpeed_x):
             self.speed_x = self.maxSpeed_x
-        else if(self.speed_x < -self.maxSpeed_x):
+        elif(self.speed_x < -self.maxSpeed_x):
             self.speed_x = -self.maxSpeed_x
         self.x += self.speed_x
 
