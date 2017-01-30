@@ -11,9 +11,8 @@ class Animated(Entity):
         self.rect = pygame.Rect(x, y, width, height)
         self.images = images
         self.indexImg = 0
-        self.states = []
-        self.states.append(["idle",500])
-        self.state = self.states[0]
+        self.states = {"idle":500}
+        self.state = self.states.keys()[0]
         self.timerAnim = 0
 
     def changeState(self, newState):
@@ -26,14 +25,14 @@ class Animated(Entity):
 
     def nextImg(self, fps):
         self.timerAnim = self.timerAnim + (1000/fps)
-        if self.timerAnim > self.states[self.states.index(self.state)][1]:
-            self.timerAnim = self.timerAnim - self.states[self.states.index(self.state)][1]
+        if self.timerAnim > self.states.get(self.state):
+            self.timerAnim = self.timerAnim - self.states.get(self.state)
             self.indexImg = self.indexImg + 1
-            if(self.indexImg == len(self.images[self.states.index(self.state)])):
+            if(self.indexImg == len(self.images[self.states.keys().index(self.state)])):
                 self.indexImg = 0
 
     def get_img(self):
-        return self.images[self.states.index(self.state)][self.indexImg]
+        return self.images[self.states.keys().index(self.state)][self.indexImg]
 
     #Permet de mettre a jour la position de l'image a afficher
     #def update(self):
