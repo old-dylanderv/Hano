@@ -11,7 +11,7 @@ class Animated(Entity):
         self.rect = pygame.Rect(x, y, width, height)
         self.images = images
         self.indexImg = 0
-        self.states = {"idle":500}
+        self.states = {"idle":500, "atk":100}
         self.state = self.states.keys()[0]
         self.timerAnim = 0
 
