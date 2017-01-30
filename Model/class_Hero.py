@@ -106,7 +106,3 @@ class Hero(Charac):
 
     def giveDoubleJump(self):
         self.doubleJump = True
-
-#FONCTIONS DE TEST
-    def getDoubleJump(self):
-        return self.doubleJump
