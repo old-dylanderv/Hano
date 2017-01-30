@@ -1,0 +1,53 @@
+Le re-Tours de Hanoï :
+
+-Jeu Solo
+-Vue de profil
+-Arène (mob + boss)
+
+-Enchainement d'action ou de touche (à reflechir)
+-Vague timée (on peut se faire deborder)
+-Capacité ultime
+
+But : Avoir le plus haut score possible (score à definir)
+
+-Plateforme dans le niveau (à changer a chaque boss...)
+-Element pertubarteur sur l'arène (aide / gène)
+
+-Drop d'item
+
+Joueur :
+  Autohit (Triple coup dernier coup plus de dégats)
+  Projection (Cd)
+  Attaque a distance (Cd)
+  Autohit aérienne (Permet de projeter les mobs au sol quand ils sont en l'air + Degats de chute ?)
+  Ulti (à voir // Arrêt de temps)
+
+Mobs :
+  Type (Amélioration au fur et a mesure) :
+    -De base
+    -Gros porc
+    -Distance
+    -Aerien
+    -Qu'on peut projeter uniquement
+    -(Mob Combo)
+  4 coups max
+
+Boss :
+  Barre de vie
+
+Jeu :
+  Augmenter le combo :
+    -Mettre un coup
+    -Enchainer des action (projeter & coup aerien)
+  Diminuer combo :
+    -Ne pas taper pdnt un certain temps
+    -Combo break quand on se fait toucher (Pas tout enlever (sauf en hard), peut etre diminuer /2 ou -100)
+  2 phases:
+    -Vague de mobs (Timée & nombre grandissant)
+    -Boss ( & plus en plus fort & pattern plus dur)
+  Score :
+    -Combo Max - Mobs tué - Temps (ou temps supplémentaire à chaque vague)
+
+Style : Blanchon
+
+BONUS : Perso en plus
