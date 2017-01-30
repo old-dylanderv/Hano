@@ -4,15 +4,16 @@ from pygame.locals import *
 
 #Charac est la classe générique des mobs, des boss et du héro
 #Charac possede:
+#   un poids (weight) qui détermine la vitesse de leur chute
 #   une vitesse (speed_x et speed_y)
 #   une force de saut (baseJumpForce)
 #   une poussée en x (baseAcc_x)
 #   une accélération en x (currAcc_x)
 #   une vitesse maximale en x
 class Charac(Animated):
-    def __init__(self, x, y, width, height, images, baseAcc_x, baseJumpForce, maxSpeed_x):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x):
         Animated.__init__(self, x, y, width, height, images)
-        self.gravity = 0.25
+        self.weight = weight
         self.onGround = False
         self.speed_x = 0
         self.speed_y = 0
@@ -34,7 +35,7 @@ class Charac(Animated):
         if(self.onGround == True):
             self.speed_y = 0
         else:
-            self.speedY += self.gravity
+            self.speedY += self.weight
             self.y += self.speedY
 
     def jump(self):
