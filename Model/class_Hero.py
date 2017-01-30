@@ -63,9 +63,9 @@ class Hero(Charac):
                     Animated.changeState(self, "slideRight")
                 else:
                     Animated.changeState(self, "moveRight")
-        elif(self.up == False and self.down == False): #pas de déplacement
+        else: #pas de déplacement horizontal
             Charac.stop(self)
-            if(self.onGround == True): 
+            if(self.onGround == True):
                 if(self.speed_x < 0):
                     Animated.changeState(self, "slideRight")
                 elif(self.speed_x > 0):
