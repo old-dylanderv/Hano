@@ -15,12 +15,6 @@ class Animated(Entity):
         self.states.append("idle")
         self.state = self.states[0]
 
-    def get_x(self):
-        return super.get_x()
-
-    def get_y(self):
-        return super.get_x()
-
     def changeState(self, newState):
         oldState = self.state
         try:
@@ -31,7 +25,7 @@ class Animated(Entity):
             self.state = oldState
 
     def nextImg(self):
-        self.indexImg ++
+        self.indexImg = self.indexImg + 1
         if(self.indexImg == len(self.images[self.states.index(self.state)]):
             self.indexImg = 0
 
