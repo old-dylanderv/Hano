@@ -12,6 +12,8 @@ class Hero(Charac):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth)
         self.states['moveLeft'] = 100
         self.states['moveRight'] = 100
+        self.states['startJumpLeft'] = 50
+        self.states['startJumpRight'] = 50
         self.states['jumpLeft'] = 50
         self.states['jumpRight'] = 50
         self.states['fallLeft'] = 100
