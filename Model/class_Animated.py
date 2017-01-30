@@ -29,7 +29,7 @@ class Animated(Entity):
             self.indexImg = 0
 
     def get_img(self):
-        return self.images[self.states.index(self.state)][indexImg]
+        return self.images[self.states.index(self.state)][self.indexImg]
 
     #Permet de mettre a jour la position de l'image a afficher
     #def update(self):

@@ -17,7 +17,7 @@ fenetre  = pygame.display.set_mode((700,530), RESIZABLE)
 
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
 
-imagesBlanchon = ( (pygame.image.load("Images/b_stop_1.png").convert_alpha(), pygame.image.load("Images/b_stop_2.png").convert_alpha()) )
+imagesBlanchon = [ [pygame.image.load("Images/b_stop_1.png").convert(), pygame.image.load("Images/b_stop_2.png").convert()] ]
 
 blanchon = Animated(200, 200, 32, 32, imagesBlanchon)
 
@@ -28,4 +28,8 @@ while 1 :
     	if event.type == QUIT: 			#si l'utilisateur clique sur la croix
 		      sys.exit()  				#on ferme la fenêtre
 
-    fenetre.blit(blanchon.self.get_rect, blanchon.get_img())
+    blanchon.nextImg()
+    fenetre.blit(fond_e, (0,0))
+    fenetre.blit(blanchon.get_img(), blanchon.get_rect())
+
+    pygame.display.flip()
