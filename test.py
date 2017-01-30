@@ -17,9 +17,6 @@ fenetre  = pygame.display.set_mode((700,530), RESIZABLE)
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
 
 blanchon = Animated(200, 200, ("Images/b_stop_1.png","Images/b_stop_2.png"))
-<<<<<<< HEAD
+
 
 while 1
-    
-=======
->>>>>>> master
