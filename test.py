@@ -23,7 +23,18 @@ imagesBlanchon = [
                     ],
                     [pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_1.png").convert_alpha()),
                      pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_2.png").convert_alpha()),
-                     #pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_2.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_3.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_4.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_5.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_2.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_3.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_4.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_5.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa3_6.png").convert_alpha())
                     ]
                  ]
 
@@ -31,6 +42,7 @@ blanchon = Hero(200, 200, 32, 32, imagesBlanchon, 0.25, 0.5, 8, 8)
 
 clock = pygame.time.Clock()
 fps = 60
+myfont = pygame.font.SysFont("monospace", 15)
 
 while 1 :
     clock.tick(fps)
@@ -44,11 +56,14 @@ while 1 :
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
 
     if event.type == KEYDOWN:
-    #on teste les différentes touches directionelles
-    #tout en vérifiant que le personnage ne sort pas de l'écran
-    #Si la touche est pressée on fait bouger le personnage
-	    if event.key == K_a:
-	           blanchon.changeState("atk")
+		blanchon.key_down(event)
+    if event.type == KEYUP:
+		blanchon.key_up(event)
 
+    label = myfont.render(str(blanchon.getKeyLeft()), 1, (255,255,0))
+    fenetre.blit(label, (100, 100))
+    label1 = myfont.render(str(blanchon.getKeyRight()), 1, (255,255,0))
+    fenetre.blit(label1, (200, 100))
 
     pygame.display.flip()
+    blanchon.update()

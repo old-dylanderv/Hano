@@ -20,7 +20,7 @@ class Hero(Charac):
         self.states['slideRight'] = 50
         self.states['crouchLeft'] = 50
         self.states['crouchRight'] = 50
-        self.doubleJump = true
+        self.doubleJump = True
         self.up = False;
         self.down = False;
         self.left = False;
@@ -47,7 +47,7 @@ class Hero(Charac):
             self.down = False
 
     def update(self):
-        if(self.left == True and self.right == True):
+        if(self.left == True and self.right == False):
             Charac.moveLeft(self)
             if(self.speed_x > 0):
                 Animated.changeState(self, "slideLeft")
@@ -93,3 +93,9 @@ class Hero(Charac):
                 Animated.changeState(self, "fallLeft")
 
         Charac.update(self)
+
+    def getKeyRight(self):
+        return self.right
+
+    def getKeyLeft(self):
+        return self.left

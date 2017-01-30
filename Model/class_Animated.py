@@ -16,7 +16,7 @@ class Animated(Entity):
         self.timerAnim = 0
 
     def changeState(self, newState):
-        if(newState != self.state):    
+        if(newState != self.state):
             oldState = self.state
             try:
                 self.state = self.states.keys()[self.states.keys().index(newState)]
