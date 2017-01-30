@@ -23,7 +23,7 @@ imagesBlanchon = [
                     ],
                     [pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_1.png").convert_alpha()),
                      pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_2.png").convert_alpha()),
-                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha()),
+                     #pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha()),
                     ]
                  ]
 
@@ -42,5 +42,12 @@ while 1 :
     blanchon.nextImg(fps)
     fenetre.blit(fond_e, (0,0))
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
+
+    if event.type == KEYDOWN:
+    #on teste les différentes touches directionelles
+    #tout en vérifiant que le personnage ne sort pas de l'écran
+    #Si la touche est pressée on fait bouger le personnage
+	    if event.key == K_RIGHT:
+	           blanchon.changeState("atk")
 
     pygame.display.flip()

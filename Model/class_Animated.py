@@ -18,7 +18,7 @@ class Animated(Entity):
     def changeState(self, newState):
         oldState = self.state
         try:
-            self.state = self.states.index(newState)
+            self.state = self.states.keys().index(newState)
             self.indexImg = 0
         except ValueError:
             self.state = oldState
@@ -26,7 +26,7 @@ class Animated(Entity):
     def nextImg(self, fps):
         self.timerAnim = self.timerAnim + (1000/fps)
         if self.timerAnim > self.states.get(self.state):
-            self.timerAnim = self.timerAnim - self.states.get(self.state)
+            self.timerAnim = self.timerAnim - int(self.states.get(self.state))
             self.indexImg = self.indexImg + 1
             if(self.indexImg == len(self.images[self.states.keys().index(self.state)])):
                 self.indexImg = 0
