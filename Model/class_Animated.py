@@ -26,7 +26,7 @@ class Animated(Entity):
 
     def nextImg(self):
         self.indexImg = self.indexImg + 1
-        if(self.indexImg == len(self.images[self.states.index(self.state)]):
+        if(self.indexImg == len(self.images[self.states.index(self.state)])):
             self.indexImg = 0
 
     def get_img(self):
