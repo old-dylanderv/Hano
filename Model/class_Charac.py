@@ -50,3 +50,11 @@ class Charac(Animated):
 
     def moveRight(self):
         self.currAcc_x = self.baseAcc_x
+
+    def stop(self):
+        if(speed_x > 1):
+            self.currAcc_x = -self.baseAcc_x
+        elif(speed_x < 1):
+            self.currAcc_x = self.baseAcc_x
+        else:
+            self.speed_x = 0 
