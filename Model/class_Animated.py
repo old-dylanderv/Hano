@@ -19,7 +19,7 @@ class Animated(Entity):
         return super.get_x()
 
     def get_y(self):
-        return super.get_y()
+        return super.get_x()
 
     def changeState(self, newState):
         oldState = self.state
