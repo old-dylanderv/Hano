@@ -1,7 +1,7 @@
 # -*- coding:Utf-8 -*-
 import pygame
 from pygame.locals import *
-
+from class_Charac import *
 #Hero est la classe générique des héros
 #Carastéristiques des héros:
 #   Ils sont controlés au clavier
@@ -15,19 +15,19 @@ class Hero(Charac):
     def input(self, event):
         if(event.key == K_RIGHT):
             self.moveRight()
-        else if(event.key == K_LEFT):
+        elif(event.key == K_LEFT):
             self.moveLeft()
-        else if(event.key == K_UP):
+        elif(event.key == K_UP):
             if(self.onGround == True):
                 self.jump()
-            else if(self.doubleJump == True):
+            elif(self.doubleJump == True):
                 self.jump()
                 self.doubleJump = False
 
-    def update(self):
+    #def update(self):
 
-    def jump(self):
+    #def jump(self):
 
-    def moveLeft(self):
+    #def moveLeft(self):
 
-    def moveRight(self):
+    #def moveRight(self):
