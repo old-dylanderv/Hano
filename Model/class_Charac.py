@@ -38,6 +38,8 @@ class Charac(Animated):
             self.speedY += self.weight
             self.y += self.speedY
 
+        super.update()
+
     def jump(self):
         self.speedY = -self.baseJumpForce
         self.onGround = False
