@@ -45,6 +45,3 @@ class Animated(Entity):
 
     def get_rect(self):
         return self.rect
-
-    def get_state(self):
-        return self.state

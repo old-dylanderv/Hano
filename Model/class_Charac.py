@@ -49,7 +49,7 @@ class Charac(Animated):
         else:
             self.speed_y += self.weight
             self.y += self.speed_y
-            self.friction = 0.1
+            self.friction = 0.4
         Animated.update(self)
 
     def jump(self):
