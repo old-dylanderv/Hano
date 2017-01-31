@@ -23,8 +23,10 @@ class Animated(Entity):
             try:
                 self.state = self.states.keys()[self.states.keys().index(newState)]
                 self.indexImg = 0
+                print(newState+" est pas dans la pool de states")
             except ValueError:
                 self.state = oldState
+                print(newState+" n'est pas dans la pool de states")
 
     def nextImg(self, fps):
         self.timerAnim = self.timerAnim + (1000/fps)

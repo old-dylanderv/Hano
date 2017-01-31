@@ -2,14 +2,16 @@
 import pygame
 from pygame.locals import *
 from class_Charac import *
+from class_Atk import *
+from class_AtkEffect import *
 #Hero est la classe générique des héros
 #Carastéristiques des héros:
 #   Ils sont controlés au clavier
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
 class Hero(Charac):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp):
-        Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp)
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList):
+        Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList)
         self.states['moveLeft'] = 100
         self.states['moveRight'] = 100
         self.states['jumpLeft'] = 100
@@ -20,12 +22,19 @@ class Hero(Charac):
         self.states['slideRight'] = 50
         self.states['crouchLeft'] = 50
         self.states['crouchRight'] = 50
+        self.states['aa1Right'] = 75
+        self.states['aa1Left'] = 75
+        self.combo = 1
         self.doubleJump = True
         self.jumpKeyReset = False
         self.up = False
         self.down = False
         self.left = False
         self.right = False
+        self.autoHit = False
+        self.spell1 = False
+        self.guard = False
+        self.ult = False
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
@@ -36,6 +45,15 @@ class Hero(Charac):
             self.up = True
         elif(event.key == K_DOWN):
             self.down = True
+        elif(event.key == K_a):
+            self.autoHit = True
+        elif(event.key == K_z):
+            self.spell1 = True
+        elif(event.key == K_e):
+            self.guard = True
+        elif(event.key == K_r):
+            self.ult = True
+
 
     def key_up(self, event):
         if(event.key == K_RIGHT):
@@ -46,8 +64,17 @@ class Hero(Charac):
             self.up = False
         elif(event.key == K_DOWN):
             self.down = False
+        elif(event.key == K_a):
+            self.autoHit = False
+        elif(event.key == K_z):
+            self.spell1 = False
+        elif(event.key == K_e):
+            self.guard = False
+        elif(event.key == K_r):
+            self.ult = False
 
-    def update(self):
+    def update(self, fps):
+        #BLOC GESTION MOUVEMENT -----------------------------------
         #Left = true && Right = false
         if(self.left == True and self.right == False):
             Charac.moveLeft(self)
@@ -71,7 +98,7 @@ class Hero(Charac):
                 elif(self.speed_x > 0):
                     Animated.changeState(self, "slideLeft")
                 else:
-                    if(self.facing == 0):
+                    if(self.facing == 1):
                         Animated.changeState(self, "idleRight")
                     else:
                         Animated.changeState(self, "idleLeft")
@@ -80,14 +107,14 @@ class Hero(Charac):
             if(self.onGround == True):
                 Charac.jump(self)
                 self.jumpKeyReset = True
-                if(self.facing == 0):
+                if(self.facing == 1):
                     Animated.changeState(self, "jumpRight")
                 else:
                     Animated.changeState(self, "jumpLeft")
             elif(self.doubleJump == True):
                 Charac.jump(self)
                 self.doubleJump = False
-                if(self.facing == 0):
+                if(self.facing == 1):
                     Animated.changeState(self, "jumpRight")
                 else:
                     Animated.changeState(self, "jumpLeft")
@@ -97,12 +124,21 @@ class Hero(Charac):
                 self.jumpKeyReset = False
 
         if(self.speed_y > 0):
-            if(self.facing == 0):
+            if(self.facing == 1):
                 Animated.changeState(self, "fallRight")
             else:
                 Animated.changeState(self, "fallLeft")
 
-        Charac.update(self)
+        #BLOC GESTION SPELL -------------------------------------
+        if(self.autoHit == True):
+            if(self.atkList[0].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo) != None):
+                print("spell lance")
+                if(self.facing == 1):
+                    Animated.changeState(self, "aa1Right")
+                else:
+                    Animated.changeState(self, "aa1Left")
+
+        Charac.update(self, fps)
 
     def giveDoubleJump(self):
         self.doubleJump = True

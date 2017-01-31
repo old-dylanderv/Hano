@@ -10,6 +10,7 @@ sys.path.append('Model/')
 #importation de nos classes
 from class_Hero import *
 from class_Platform import *
+from class_Atk import *
 #initialisation de pygame
 pygame.init()
 
@@ -77,15 +78,29 @@ imagesBlanchon = {
                   "jumpLeft":
                     [
                      pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_jumpup_3.png").convert_alpha()), True, False)
+                    ],
+                  "aa1Right":
+                    [
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_2.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha())
+                    ],
+                  "aa1Left":
+                    [
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_1.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_2.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa1_3.png").convert_alpha()), True, False),
                     ]
                  }
 
-blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH, 100.0)
+blanchon_atkList = [Atk(5, 10, 10, {"idleRight":[pygame.image.load("Images/plateformtest.png").convert()],"idleLeft":[pygame.image.load("Images/plateformtest.png").convert()]}, 10 , 3, 0, 0, 0, 100)]
+blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
 sol = Platform(0, HEIGHT, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
 platform1 = Platform(50, HEIGHT-100, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
 platform2 = Platform(200, HEIGHT-200, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
 clock = pygame.time.Clock()
 fps = 60
+myfont = pygame.font.SysFont("monospace", 15)
 
 while 1 :
     clock.tick(fps)
@@ -105,6 +120,8 @@ while 1 :
     fenetre.blit(platform1.get_img(), platform1.get_rect())
     fenetre.blit(platform2.get_img(), platform2.get_rect())
 
+    label = myfont.render(blanchon.get_cd(0), 1, (255,255,0))
+    fenetre.blit(label, (100, 100))
 
     pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 62, 6))
     pygame.draw.rect(fenetre, (255,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
@@ -124,4 +141,4 @@ while 1 :
     if(heroOnGround == True and blanchon.isOnGround() == False):
         blanchon.giveDoubleJump() #On lui donne un saut
 
-    blanchon.update()
+    blanchon.update(fps)

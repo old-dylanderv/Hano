@@ -11,14 +11,14 @@ from class_Animated import *
 #   une poussée en x (baseAcc_x)
 #   une accélération en x (currAcc_x)
 #   une vitesse maximale en x
-#   une orientation (0 = droite, 1 = gauche)
+#   une orientation (1 = droite, -1 = gauche)
 #   un coefficient de frottement lié au milieu
 #   des PV
 class Charac(Animated):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList, atkEffectList):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
-        self.facing = 0
+        self.facing = 1
         self.onGround = False
         self.speed_x = 0
         self.speed_y = 0
@@ -31,7 +31,7 @@ class Charac(Animated):
         self.hpMax = hp
         self.hp = hp
         self.atkList = atkList
-        self.atkEffectList = atkEffectList
+        self.atkEffectList = []
 
     def update(self, fps):
         #Bloc de gestion de la vitesse en x
@@ -57,26 +57,33 @@ class Charac(Animated):
             self.friction = 0.4
 
         #Gestion des spells
-        nbAtk = len(self.atkEffectList)
-        for i in range (0, nbAtk):
+        nbAtkEffect = len(self.atkEffectList)
+        for i in range (0, nbAtkEffect):
             self.atkEffectList[i].update(fps)
+
+        nbAtk = len(self.atkList)
+        for i in range (0, nbAtk):
+            self.atkList[i].update(fps)
 
         #Animation du Charac
         Animated.update(self)
 
-    def get_AtkEffectList():
+    def get_AtkEffectList(self):
         return self.atkEffectList
+
+    def get_cd(self, indexAtk):
+        return self.atkList[indexAtk].get_cd()
 
     def jump(self):
         self.speed_y = self.baseJumpForce
         self.onGround = False
 
     def moveLeft(self):
-        self.facing = 1
+        self.facing = -1
         self.currAcc_x = -self.baseAcc_x*self.friction
 
     def moveRight(self):
-        self.facing = 0
+        self.facing = 1
         self.currAcc_x = self.baseAcc_x*self.friction
 
     def stop(self):
