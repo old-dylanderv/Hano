@@ -15,7 +15,7 @@ from class_Animated import *
 #   un coefficient de frottement lié au milieu
 #   des PV
 class Charac(Animated):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList, atkEffectList):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
         self.facing = 0
@@ -30,8 +30,10 @@ class Charac(Animated):
         self.windowWidth = windowWidth
         self.hpMax = hp
         self.hp = hp
+        self.atkList = atkList
+        self.atkEffectList = atkEffectList
 
-    def update(self):
+    def update(self, fps):
         #Bloc de gestion de la vitesse en x
         self.speed_x += self.currAcc_x
         if(self.speed_x > self.maxSpeed_x):
@@ -53,7 +55,17 @@ class Charac(Animated):
             self.speed_y += self.weight
             self.y += self.speed_y
             self.friction = 0.4
+
+        #Gestion des spells
+        nbAtk = len(self.atkEffectList)
+        for i in range (0, nbAtk):
+            self.atkEffectList[i].update(fps)
+
+        #Animation du Charac
         Animated.update(self)
+
+    def get_AtkEffectList():
+        return self.atkEffectList
 
     def jump(self):
         self.speed_y = self.baseJumpForce
