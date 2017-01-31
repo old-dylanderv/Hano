@@ -146,9 +146,9 @@ class Hero(Charac):
             #BLOC GESTION SPELL -------------------------------------
             if(self.autoHit == True):
                 if(self.facing == 1):
-                    atkEffect = self.atkList[0].launch(self.x+self.rect.width/2+20, self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[0].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
                 else:
-                    atkEffect = self.atkList[0].launch(self.x-self.rect.width/2+20-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[0].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
@@ -157,15 +157,15 @@ class Hero(Charac):
                         Animated.changeState(self, "Oaa1Left")
             if(self.spell1 == True):
                 if(self.facing == 1):
-                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, self.speed_x)
                 else:
-                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
-                        Animated.changeState(self, "Oaa1Right")
+                        Animated.changeState(self, "Oaa2Right")
                     else:
-                        Animated.changeState(self, "Oaa1Left")
+                        Animated.changeState(self, "Oaa2Left")
 
         Charac.update(self, fps)
 

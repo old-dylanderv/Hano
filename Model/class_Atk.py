@@ -38,12 +38,12 @@ class Atk():
 
     #Facing 1 => droite
     #Facing -1 => gauche
-    def launch(self, x, y, facing, combo):
+    def launch(self, x, y, facing, combo, bonusSpeed_x = 0, bonusSpeed_y = 0):
         if(self.timer <= 0):
             self.timer = self.cd
-            return self.cast(x, y, facing, combo)
+            return self.cast(x, y, facing, combo, bonusSpeed_x, bonusSpeed_y)
         else:
             return None
 
-    def cast(self, x, y, facing, combo):
-        return AtkEffect(x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing, self.speed_y, facing, self.duration)
+    def cast(self, x, y, facing, combo, bonusSpeed_x, bonusSpeed_y):
+        return AtkEffect(x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing+bonusSpeed_x, (self.speed_y+bonusSpeed_y), facing, self.duration)

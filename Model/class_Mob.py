@@ -24,8 +24,8 @@ class Mob(Charac):
         self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
-        self.states['OdmgRight'] = 100
-        self.states['OdmgLeft'] = 100
+        self.states['OdmgRight'] = 200
+        self.states['OdmgLeft'] = 200
         self.up = False
         self.down = False
         self.left = False
