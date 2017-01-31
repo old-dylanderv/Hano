@@ -17,7 +17,7 @@ WIDTH = 1280
 HEIGHT = 720
 fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
-fond_e = pygame.image.load("Images/fondfinal.png").convert()
+fond_e = pygame.transform.scale(pygame.image.load("Images/background.png").convert(), (1280,720))
 
 imagesBlanchon = {
                   "idleLeft":
