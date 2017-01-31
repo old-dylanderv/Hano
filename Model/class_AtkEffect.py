@@ -48,11 +48,11 @@ class AtkEffect(Animated):
         return self.knockback
 
     def get_dmg(self):
-        return self.knockback
+        return self.dmg
 
     def get_duration(self):
         return self.duration
-        
+
     def isLive(self):
         return self.duration > 0
 
