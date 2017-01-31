@@ -8,8 +8,8 @@ from class_Charac import *
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
 class Hero(Charac):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth):
-        Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth)
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp):
+        Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp)
         self.states['moveLeft'] = 100
         self.states['moveRight'] = 100
         self.states['jumpLeft'] = 100
