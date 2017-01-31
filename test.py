@@ -13,8 +13,8 @@ from class_Platform import *
 #initialisation de pygame
 pygame.init()
 
-WIDTH = 1000
-HEIGHT = 650
+WIDTH = 1280
+HEIGHT = 720
 fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
 fond_e = pygame.image.load("Images/fondfinal.png").convert()
@@ -105,7 +105,9 @@ while 1 :
     fenetre.blit(platform1.get_img(), platform1.get_rect())
     fenetre.blit(platform2.get_img(), platform2.get_rect())
 
-    pygame.draw.rect(fenetre, (255,0,0), (50,  50,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 200, 200), 0)),   10))
+
+    pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 62, 6))
+    pygame.draw.rect(fenetre, (255,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
 
     blanchon.set_hp(0.2)
 
