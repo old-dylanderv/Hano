@@ -27,6 +27,9 @@ class AtkEffect(Animated):
         else:
             Animated.changeState(self, "idleLeft")
 
+    def isLive(self):
+        return self.duration > 0
+
     def update(self, fps):
         if(self.duration > 0):
             self.duration = self.duration - (1000/fps)

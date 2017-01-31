@@ -60,6 +60,8 @@ class Charac(Animated):
         nbAtkEffect = len(self.atkEffectList)
         for i in range (0, nbAtkEffect):
             self.atkEffectList[i].update(fps)
+            if(self.atkEffectList[i].isLive() == False):
+                self.atkEffectList.pop(i)
 
         nbAtk = len(self.atkList)
         for i in range (0, nbAtk):
@@ -111,7 +113,7 @@ class Charac(Animated):
         return self.hpMax
 
     def testPlatform(self, platform):
-        if(self.x + self.rect.width > platform.get_x1() and self.x < platform.get_x2()):
+        if(self.x + self.rect.width -15 > platform.get_x1() and self.x+15 < platform.get_x2()):
             if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y >= platform.get_y()):
                 self.onGround = True
                 self.speed_y = 0
