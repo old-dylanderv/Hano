@@ -129,6 +129,7 @@ class Charac(Animated):
                 self.speed_y = -2
                 self.onGround = False
                 self.set_hp(atkEffect.get_dmg())
+                atkEffect.delete()
                 if(self.facing == 1):
                     Animated.changeState(self, "OdmgRight")
                 else:
