@@ -13,8 +13,9 @@ from class_Animated import *
 #   une vitesse maximale en x
 #   une orientation (0 = droite, 1 = gauche)
 #   un coefficient de frottement lié au milieu
+#   des PV
 class Charac(Animated):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp):
         Animated.__init__(self, x, y, width, height, images)
         self.weight = weight
         self.facing = 0
@@ -27,6 +28,8 @@ class Charac(Animated):
         self.maxSpeed_x = maxSpeed_x
         self.friction = 1
         self.windowWidth = windowWidth
+        self.hpMax = hp
+        self.hp = hp
 
     def update(self):
         #Bloc de gestion de la vitesse en x
