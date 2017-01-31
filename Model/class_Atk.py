@@ -42,4 +42,4 @@ class Atk():
             return None
 
     def cast(self, x, y, facing, combo):
-        return AtkEffect(x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback, self.weight, self.speed_x*facing, self.speed_y, facing, self.duration)
+        return AtkEffect(x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing, self.speed_y, facing, self.duration)

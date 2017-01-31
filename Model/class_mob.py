@@ -24,6 +24,8 @@ class Mob(Charac):
         self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
+        self.states['OdmgRight'] = 100
+        self.states['OdmgLeft'] = 100
 
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------

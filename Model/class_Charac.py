@@ -119,3 +119,15 @@ class Charac(Animated):
                 self.speed_y = 0
                 self.friction = platform.get_friction()
                 self.y = platform.get_y() - self.rect.height
+
+    def testAtkEffect(self, atkEffect):
+        if(self.x + self.rect.width -15 > atkEffect.get_x1() and self.x+15 < atkEffect.get_x2()):
+            if(self.y + self.rect.height <= atkEffect.get_y1() and self.y + self.rect.height + self.speed_y >= atkEffect.get_y2()):
+                self.speed_x = atkEffect.get_knockBack()
+                self.speed_y = -2
+                self.onGround = False
+                set_hp(atkEffect.get_dmg())
+                if(self.facing == 1):
+                    Animated.changeState(self, "OdmgRight")
+                else:
+                    Animated.changeState(self, "OdmgLeft")

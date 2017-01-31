@@ -14,6 +14,10 @@ from class_Animated import *
 class AtkEffect(Animated):
     def __init__(self, x, y, width, height, images, dmg , knockback, weight, speed_x, speed_y, facing, duration):
         Animated.__init__(self, x, y, width, height, images)
+        self.x1 = x
+        self.x2 = x + width
+        self.y1 = y
+        self.y2 = y + height
         self.states["idleRight"] = 75
         self.states["idleLeft"] = 75
         self.dmg = dmg
@@ -27,8 +31,29 @@ class AtkEffect(Animated):
         else:
             Animated.changeState(self, "idleLeft")
 
+    def get_x1():
+        return self.x1
+
+    def get_x2():
+        return self.x2
+
+    def get_y1():
+        return self.y1
+
+    def get_y2():
+        return self.y2
+
+    def get_knockBack():
+        return self.knockback
+
+    def get_dmg():
+        return self.knockback
+
     def isLive(self):
         return self.duration > 0
+
+    def delete(self):
+        self.duration = 0
 
     def update(self, fps):
         if(self.duration > 0):
