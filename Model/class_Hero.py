@@ -140,7 +140,9 @@ class Hero(Charac):
                     Animated.changeState(self, "FfallLeft")
             #BLOC GESTION SPELL -------------------------------------
             if(self.autoHit == True):
-                if(self.atkList[0].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo) != None):
+                atkEffect = self.atkList[0].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo)
+                if(atkEffect != None):
+                    self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
                         Animated.changeState(self, "Oaa1Right")
                     else:

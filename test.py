@@ -11,6 +11,7 @@ sys.path.append('Model/')
 from class_Hero import *
 from class_Platform import *
 from class_Atk import *
+from class_Mob import *
 #initialisation de pygame
 pygame.init()
 
@@ -100,19 +101,29 @@ imagesBlanchon = {
                  }
 
 imagesArcher = {
+                  "RidleRight":
+                    [
+                     pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha())
+                    ],
                   "RidleLeft":
                     [
-                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False)
                     ],
-                   "RidleLeft":
+                  "OdmgRight":
                     [
-                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False),
+                     pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_1.png").convert_alpha()),
+                     pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha())
+                    ],
+                  "OdmgLeft":
+                    [
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_1.png").convert_alpha()), True, False),
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha()), True, False)
                     ]
                 }
 
 
-blanchon_atkList = [Atk(2, 10, 10, {"idleRight":[pygame.image.load("Images/plateformtest.png").convert()],"idleLeft":[pygame.image.load("Images/plateformtest.png").convert()]}, 10 , 3, 0, 0, 0, 100)]
-blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
+blanchon_atkList = [Atk(1, 10, 10, {"idleRight":[pygame.image.load("Images/plateformtest.png").convert()],"idleLeft":[pygame.image.load("Images/plateformtest.png").convert()]}, 10 , 5, 0, 0, 0, 200)]
+blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.3, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
 sol = Platform(0, HEIGHT-50, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
 #INIT PLATEFORMES
 platforms = []
@@ -120,7 +131,8 @@ platforms.append(Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/pla
 platforms.append(Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1))
 
 #INIT ENNEMIS
-ennemies = []
+foes = []
+foes.append(Mob(500, 500, 64, 64, imagesArcher, 0.3, 0.5, 5, 6, WIDTH, 50, []))
 
 #INIT SYSTEM CLOCK
 clock = pygame.time.Clock()
@@ -138,7 +150,7 @@ while 1 :
         if event.type == KEYUP:
             blanchon.key_up(event)
 
-#AFFICHAGE----------------------------------------------------------------------
+#GESTION DU DECORS--------------------------------------------------------------
     #Fond
     fenetre.blit(fond_e, (0,0))
 
@@ -147,15 +159,22 @@ while 1 :
     for i in range (0, nbPlatf):
         fenetre.blit(platforms[i].get_img(), platforms[i].get_rect())
 
-    #Hero
+    #TEST: Affichage poll d'attEffect de blanchon
+    for i in range (0, len(blanchon.get_AtkEffectList())):
+        label = myfont.render(str(blanchon.get_AtkEffectList()[i].get_duration()), 1, (0,100,150))
+        fenetre.blit(label, (100, i*100))
+        label = myfont.render(str(blanchon.get_AtkEffectList()[i].get_x1())+" ; "+str(blanchon.get_AtkEffectList()[i].get_y1()), 1, (0,100,150))
+        fenetre.blit(label, (200, i*100))
+
+
+#GESTION DU HERO----------------------------------------------------------------
+
+    #Affichage Hero
     blanchon.nextImg(fps)
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
     pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 62, 6))
-    pygame.draw.rect(fenetre, (255,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
+    pygame.draw.rect(fenetre, (0,255,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
 
-    pygame.display.flip()
-
-#PHYSIQUE-----------------------------------------------------------------------
     #Teste Hero => Plateforme
     heroOnGround = blanchon.isOnGround()
     blanchon.setOnAir()
@@ -169,14 +188,23 @@ while 1 :
 
     blanchon.update(fps)
 
+#GESTION DES MOBS---------------------------------------------------------------
+
     #Teste Mob => Plateforme && Atk Hero => Mob
-    nbEnnemies = len(ennemies)
+    nbFoes = len(foes)
     nbAtkHero = len(blanchon.get_AtkEffectList())
-    for i in range (0, nbEnemies)
-        EnnemyOnGround = ennemies[i].isOnGround()
-        ennemies[i].setOnAir()
-        ennemies[i].testPlatform(sol)
+    for i in range (0, nbFoes):
+        foes[i].nextImg(fps)
+        fenetre.blit(foes[i].get_img(), foes[i].get_rect())
+        pygame.draw.rect(fenetre, (0,0,0), (foes[i].get_rect().x, foes[i].get_rect().y - 10, 62, 6))
+        pygame.draw.rect(fenetre, (255,0,0), (foes[i].get_rect().x, foes[i].get_rect().y - 10,   int(max(min(foes[i].get_hp() / float(foes[i].get_hpMax()) * 60, 60), 0)),   6))
+        EnnemyOnGround = foes[i].isOnGround()
+        foes[i].setOnAir()
+        foes[i].testPlatform(sol)
         for j in range (0, nbPlatf):
-            ennemies[i].testPlatform(platforms[j])
+            foes[i].testPlatform(platforms[j])
         for k in range (0, nbAtkHero):
-            ennemies[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
+            foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
+        foes[i].update(fps)
+
+    pygame.display.flip()

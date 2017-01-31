@@ -22,6 +22,7 @@ class AtkEffect(Animated):
         self.states["idleLeft"] = 75
         self.dmg = dmg
         self.knockback = knockback
+        self.weight = weight
         self.speed_x = speed_x
         self.speed_y = speed_y
         self.duration = duration
@@ -31,24 +32,27 @@ class AtkEffect(Animated):
         else:
             Animated.changeState(self, "idleLeft")
 
-    def get_x1():
+    def get_x1(self):
         return self.x1
 
-    def get_x2():
+    def get_x2(self):
         return self.x2
 
-    def get_y1():
+    def get_y1(self):
         return self.y1
 
-    def get_y2():
+    def get_y2(self):
         return self.y2
 
-    def get_knockBack():
+    def get_knockBack(self):
         return self.knockback
 
-    def get_dmg():
+    def get_dmg(self):
         return self.knockback
 
+    def get_duration(self):
+        return self.duration
+        
     def isLive(self):
         return self.duration > 0
 

@@ -57,11 +57,13 @@ class Charac(Animated):
             self.friction = 0.4
 
         #Gestion des spells
-        nbAtkEffect = len(self.atkEffectList)
-        for i in range (0, nbAtkEffect):
+        i = 0
+        while(i < len(self.atkEffectList)):
             self.atkEffectList[i].update(fps)
             if(self.atkEffectList[i].isLive() == False):
                 self.atkEffectList.pop(i)
+            else:
+                i += 1
 
         nbAtk = len(self.atkList)
         for i in range (0, nbAtk):
@@ -122,11 +124,11 @@ class Charac(Animated):
 
     def testAtkEffect(self, atkEffect):
         if(self.x + self.rect.width -15 > atkEffect.get_x1() and self.x+15 < atkEffect.get_x2()):
-            if(self.y + self.rect.height <= atkEffect.get_y1() and self.y + self.rect.height + self.speed_y >= atkEffect.get_y2()):
+            if(self.y + self.rect.height >= atkEffect.get_y1() and self.y <= atkEffect.get_y2()):
                 self.speed_x = atkEffect.get_knockBack()
                 self.speed_y = -2
                 self.onGround = False
-                set_hp(atkEffect.get_dmg())
+                self.set_hp(atkEffect.get_dmg())
                 if(self.facing == 1):
                     Animated.changeState(self, "OdmgRight")
                 else:
