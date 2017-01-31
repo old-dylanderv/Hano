@@ -82,6 +82,15 @@ class Charac(Animated):
     def isOnGround(self):
         return self.onGround
 
+    def get_hp(self):
+        return self.hp
+
+    def set_hp(self, dmg):
+        self.hp -= dmg
+
+    def get_hpMax(self):
+        return self.hpMax
+
     def testPlatform(self, platform):
         if(self.x + self.rect.width > platform.get_x1() and self.x < platform.get_x2()):
             if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y >= platform.get_y()):
