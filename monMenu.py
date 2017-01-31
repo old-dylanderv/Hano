@@ -2,6 +2,8 @@
 import pygame
 from pygame.locals import *
 
+import test
+
 pygame.init()
 
 class MenuItem():
@@ -90,14 +92,9 @@ class AnimItem(MenuItem):
 
     def randState(self):
         state = self.states.keys()[(pygame.time.get_ticks() % 7)]
-        print(state)
         self.changeState(state)
 
     def get_image(self):
-        print("len")
-        print(len(self.images.get(self.state)))
-        print("index")
-        print(self.indexImg)
         return self.images.get(self.state)[self.indexImg]
 
 class GameMenu():
@@ -128,7 +125,6 @@ class GameMenu():
         if self.cur_item is None:
             self.cur_item = 0
         else:
-            print(self.cur_item)
             # Find the chosen item
             if key == pygame.K_UP and self.cur_item > 0:
                 self.items[self.cur_item].set_selected(False)
@@ -146,6 +142,9 @@ class GameMenu():
                 self.items[self.cur_item].set_selected(False)
                 self.cur_item = 0
                 self.items[self.cur_item].set_selected(True)
+            elif key == K_RETURN:
+                if self.cur_item == 0:
+                    test.main(self)
 
 
     def run(self):
@@ -155,12 +154,8 @@ class GameMenu():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                if event.type != K_RETURN and event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN:
                     self.set_item_selection(event.key)
-                #if event.type == K_RETURN:
-                    #if self.cur_item == 0:
-
-
 
 
             self.hero.nextImg(60)
