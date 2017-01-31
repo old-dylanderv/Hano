@@ -24,6 +24,8 @@ class Hero(Charac):
         self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
+        self.states['Oaa2Right'] = 75
+        self.states['Oaa2Left'] = 75
         self.combo = 1
         self.doubleJump = True
         self.jumpKeyReset = False
@@ -72,6 +74,9 @@ class Hero(Charac):
             self.guard = False
         elif(event.key == K_r):
             self.ult = False
+
+    def get_combo(self):
+        return self.combo
 
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------
@@ -141,6 +146,14 @@ class Hero(Charac):
             #BLOC GESTION SPELL -------------------------------------
             if(self.autoHit == True):
                 atkEffect = self.atkList[0].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo)
+                if(atkEffect != None):
+                    self.atkEffectList.append(atkEffect)
+                    if(self.facing == 1):
+                        Animated.changeState(self, "Oaa1Right")
+                    else:
+                        Animated.changeState(self, "Oaa1Left")
+            if(self.spell1 == True):
+                atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):

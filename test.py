@@ -204,6 +204,7 @@ while 1 :
         for j in range (0, nbPlatf):
             foes[i].testPlatform(platforms[j])
         for k in range (0, nbAtkHero):
+            fenetre.blit(blanchon.get_AtkEffectList()[k].get_img(), blanchon.get_AtkEffectList()[k].get_rect())
             foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
         foes[i].update(fps)
 
