@@ -4,11 +4,11 @@ import pygame
 pygame.init()
 
 class MenuItem():
-    def __init__(self, pos_x = 0, pos_y = 0):
-        self.image = pygame.image.load("Images/Menu/"+".png")
-        self.image = pygame.image.load("Images/Blanchon/b_idle_1.png")
-        self.width = self.image.get_rect().width
-        self.height = self.image.get_rect().height
+    def __init__(self, img, pos_x = 0, pos_y = 0):
+        self.imageNS = pygame.image.load("Images/Menu/"+img+"NS.png").convert_alpha()
+        self.imageS = pygame.image.load("Images/Menu/"+img+"S.png").convert_alpha()
+        self.width = self.imageNS.get_rect().width
+        self.height = self.imageNS.get_rect().height
         self.dimensions = (self.width, self.height)
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -19,6 +19,15 @@ class MenuItem():
         self.position = (x, y)
         self.pos_x = x
         self.pos_y = y
+
+    def set_selected(self, selected):
+        self.is_selected = selected
+
+    def get_image(self):
+        if self.is_selected:
+            return self.imageS
+        else:
+            return self.imageNS
 
 class GameMenu():
     def __init__(self, screen, items, bg_color=(127,127,127)):
@@ -40,19 +49,31 @@ class GameMenu():
             menu_item.set_position(pos_x, pos_y)
             self.items.append(menu_item)
 
-        self.cur_item = 1
+        self.cur_item = 0
+        self.items[self.cur_item].set_selected(True)
 
     def set_item_selection(self, key):
-
-
-        if key == pygame.K_UP and self.cur_item > 0:
-            self.cur_item -= 1
-        elif key == pygame.K_UP and self.cur_item == 0:
-            self.cur_item = len(self.items) - 1
-        elif key == pygame.K_DOWN and self.cur_item < len(self.items) - 1:
-            self.cur_item += 1
-        elif key == pygame.K_DOWN and self.cur_item == len(self.items) - 1:
+        if self.cur_item is None:
             self.cur_item = 0
+        else:
+            print(self.cur_item)
+            # Find the chosen item
+            if key == pygame.K_UP and self.cur_item > 0:
+                self.items[self.cur_item].set_selected(False)
+                self.cur_item -= 1
+                self.items[self.cur_item].set_selected(True)
+            elif key == pygame.K_UP and self.cur_item == 0:
+                self.items[self.cur_item].set_selected(False)
+                self.cur_item = len(self.items) - 1
+                self.items[self.cur_item].set_selected(True)
+            elif key == pygame.K_DOWN and self.cur_item < len(self.items) - 1:
+                self.items[self.cur_item].set_selected(False)
+                self.cur_item += 1
+                self.items[self.cur_item].set_selected(True)
+            elif key == pygame.K_DOWN and self.cur_item == len(self.items) - 1:
+                self.items[self.cur_item].set_selected(False)
+                self.cur_item = 0
+                self.items[self.cur_item].set_selected(True)
 
 
     def run(self):
@@ -69,16 +90,16 @@ class GameMenu():
             self.screen.fill(self.bg_color)
 
             for item in self.items:
-                self.screen.blit(item.image, item.position)
+                self.screen.blit(item.get_image(), item.position)
 
             pygame.display.flip()
 
 
 if __name__ == "__main__":
-    screen = pygame.display.set_mode((640, 480), 0, 32)
+    screen = pygame.display.set_mode((1280, 720), 0, 32)
 
-    menu_items = ("Jouer", "Option", "Crédits", "Quitter")
+    menu_items = ("Jouer", "Credits")
 
-    pygame.display.set_caption('Game Menu')
+    pygame.display.set_caption('Menu')
     gm = GameMenu(screen, menu_items)
     gm.run()
