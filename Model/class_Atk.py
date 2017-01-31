@@ -28,6 +28,10 @@ class Atk():
         if(self.timer > 0):
             self.timer = self.timer - (1.0/fps)
 
+    #Sert a lancer le spell a gauche
+    def get_width(self):
+        return self.width
+
     #Renvoie un string (pour affichage)
     def get_cd(self):
         return "{0:.2f}".format(self.timer)
