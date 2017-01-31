@@ -114,15 +114,22 @@ imagesArcher = {
 blanchon_atkList = [Atk(2, 10, 10, {"idleRight":[pygame.image.load("Images/plateformtest.png").convert()],"idleLeft":[pygame.image.load("Images/plateformtest.png").convert()]}, 10 , 3, 0, 0, 0, 100)]
 blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
 sol = Platform(0, HEIGHT-50, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
-platform1 = Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
-platform2 = Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1)
+#INIT PLATEFORMES
+platforms = []
+platforms.append(Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1))
+platforms.append(Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1))
+
+#INIT ENNEMIS
+ennemies = []
+
+#INIT SYSTEM CLOCK
 clock = pygame.time.Clock()
 fps = 60
 myfont = pygame.font.SysFont("monospace", 15)
 
 while 1 :
     clock.tick(fps)
-    #boucle sur les différents événement reçut
+#GESTION EVENT------------------------------------------------------------------
     for event in pygame.event.get():
         if event.type == QUIT: 	#si l'utilisateur clique sur la croix
             sys.exit()          #on ferme la fenêtre
@@ -131,31 +138,45 @@ while 1 :
         if event.type == KEYUP:
             blanchon.key_up(event)
 
-    blanchon.nextImg(fps)
+#AFFICHAGE----------------------------------------------------------------------
+    #Fond
     fenetre.blit(fond_e, (0,0))
+
+    #Plateformes
+    nbPlatf = len(platforms)
+    for i in range (0, nbPlatf):
+        fenetre.blit(platforms[i].get_img(), platforms[i].get_rect())
+
+    #Hero
+    blanchon.nextImg(fps)
     fenetre.blit(blanchon.get_img(), blanchon.get_rect())
-    fenetre.blit(platform1.get_img(), platform1.get_rect())
-    fenetre.blit(platform2.get_img(), platform2.get_rect())
-
-    label = myfont.render(blanchon.get_cd(0), 1, (255,255,0))
-    fenetre.blit(label, (100, 100))
-
     pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 62, 6))
     pygame.draw.rect(fenetre, (255,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
 
-    blanchon.set_hp(0.2)
-
     pygame.display.flip()
-    #Servira a tester si le joueur est descendu d'une plateforme
-    heroOnGround = blanchon.isOnGround()
 
+#PHYSIQUE-----------------------------------------------------------------------
+    #Teste Hero => Plateforme
+    heroOnGround = blanchon.isOnGround()
     blanchon.setOnAir()
     blanchon.testPlatform(sol)
-    blanchon.testPlatform(platform1)
-    blanchon.testPlatform(platform2)
+    for i in range (0, nbPlatf):
+        blanchon.testPlatform(platforms[i])
 
     #Le hero est descendu d'une plateforme
     if(heroOnGround == True and blanchon.isOnGround() == False):
         blanchon.giveDoubleJump() #On lui donne un saut
 
     blanchon.update(fps)
+
+    #Teste Mob => Plateforme && Atk Hero => Mob
+    nbEnnemies = len(ennemies)
+    nbAtkHero = len(blanchon.get_AtkEffectList())
+    for i in range (0, nbEnemies)
+        EnnemyOnGround = ennemies[i].isOnGround()
+        ennemies[i].setOnAir()
+        ennemies[i].testPlatform(sol)
+        for j in range (0, nbPlatf):
+            ennemies[i].testPlatform(platforms[j])
+        for k in range (0, nbAtkHero):
+            ennemies[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
