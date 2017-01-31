@@ -125,12 +125,10 @@ def main(self):
                         ],
                       "OdmgRight":
                         [
-                         pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_1.png").convert_alpha()),
                          pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha())
                         ],
                       "OdmgLeft":
                         [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_1.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha()), True, False)
                         ]
                     }
