@@ -99,6 +99,18 @@ imagesBlanchon = {
                     ]
                  }
 
+imagesArcher = {
+                  "RidleLeft":
+                    [
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False),
+                    ],
+                   "RidleLeft":
+                    [
+                     pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False),
+                    ]
+                }
+
+
 blanchon_atkList = [Atk(2, 10, 10, {"idleRight":[pygame.image.load("Images/plateformtest.png").convert()],"idleLeft":[pygame.image.load("Images/plateformtest.png").convert()]}, 10 , 3, 0, 0, 0, 100)]
 blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.30, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
 sol = Platform(0, HEIGHT-50, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
