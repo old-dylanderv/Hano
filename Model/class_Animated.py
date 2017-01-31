@@ -28,8 +28,9 @@ class Animated(Entity):
 
     def nextImg(self, fps):
         self.timerAnim = self.timerAnim + (1000/fps)
-        if self.timerAnim > self.states.get(self.state):
-            self.timerAnim = self.timerAnim - self.states.get(self.state)
+        timeState = self.states.get(self.state)
+        if self.timerAnim > timeState:
+            self.timerAnim = self.timerAnim - timeState
             self.indexImg = self.indexImg + 1
             if(self.indexImg == len(self.images.get(self.state))):
                 self.indexImg = 0

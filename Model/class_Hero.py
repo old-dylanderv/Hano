@@ -12,10 +12,8 @@ class Hero(Charac):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth)
         self.states['moveLeft'] = 100
         self.states['moveRight'] = 100
-        self.states['startJumpLeft'] = 50
-        self.states['startJumpRight'] = 50
-        self.states['jumpLeft'] = 50
-        self.states['jumpRight'] = 50
+        self.states['jumpLeft'] = 100
+        self.states['jumpRight'] = 100
         self.states['fallLeft'] = 100
         self.states['fallRight'] = 100
         self.states['slideLeft'] = 50
@@ -98,7 +96,7 @@ class Hero(Charac):
                 self.doubleJump = True
                 self.jumpKeyReset = False
 
-        if(self.y < 0):
+        if(self.speed_y > 0):
             if(self.facing == 0):
                 Animated.changeState(self, "fallRight")
             else:
