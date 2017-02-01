@@ -258,7 +258,6 @@ def main(self):
 
             #Check si le mob i se fait toucher par l'atk de hero k
             for k in range (0, nbAtkHero):
-                fenetre.blit(blanchon.get_AtkEffectList()[k].get_img(), blanchon.get_AtkEffectList()[k].get_rect())
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
 
             nbAtkFoe = len(foes[i].get_AtkEffectList())
@@ -271,6 +270,9 @@ def main(self):
                 foes.pop(i)
             else:
                 i += 1
+
+        for i in range (0, nbAtkHero):
+            fenetre.blit(blanchon.get_AtkEffectList()[k].get_img(), blanchon.get_AtkEffectList()[k].get_rect())
 
         #Affichage Hero
         blanchon.nextImg(fps)
