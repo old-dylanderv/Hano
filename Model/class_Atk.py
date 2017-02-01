@@ -44,6 +44,9 @@ class Atk():
     def get_cd(self):
         return "{0:.1f}".format(abs(self.timer))
 
+    def get_maxCd(self):
+        return "{0:.1f}".format(abs(self.cd))
+
     #Facing 1 => droite
     #Facing -1 => gauche
     def launch(self, x, y, facing, combo, bonusSpeed_x = 0, bonusSpeed_y = 0):
