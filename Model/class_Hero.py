@@ -24,10 +24,10 @@ class Hero(Charac):
         self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
-        self.states['Oaa2Right'] = 600
-        self.states['Oaa2Left'] = 600
-        self.states['Oaa3Right'] = 500
-        self.states['Oaa3Left'] = 500
+        self.states['Oaa2Right'] = 60
+        self.states['Oaa2Left'] = 60
+        self.states['Oaa3Right'] = 50
+        self.states['Oaa3Left'] = 50
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -84,9 +84,7 @@ class Hero(Charac):
 
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------
-        if(self.state[0] == 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
-            self.speed_x = 0
-        else:
+        if(self.state[0] != 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
             #Left = true && Right = false
             if(self.left == True and self.right == False):
                 Charac.moveLeft(self)
@@ -162,9 +160,13 @@ class Hero(Charac):
                             Animated.changeState(self, "Oaa2Left")
                 elif(self.autoHitTimer3 > 0): #Le joueur peut declencher l'auto hit 3
                     if(self.facing == 1):
-                        atkEffect = self.atkList[2].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
+                        self.speed_x = 5
+                        self.speed_y = -2
+                        atkEffect = self.atkList[2].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo, self.speed_x)
                     else:
-                        atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                        self.speed_x = -5
+                        self.speed_y = -2
+                        atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
                     if(atkEffect != None):
                         self.autoHitTimer3 = 0
                         self.atkEffectList.append(atkEffect)
