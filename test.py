@@ -171,6 +171,7 @@ def main(self):
     #INIT ENNEMIS
     foes = []
     foes.append(Mob(500, 500, 64, 64, imagesArcher, 0.3, 0.5, 5, 6, WIDTH, 50, []))
+    foes.append(Mob(600, 500, 64, 64, imagesArcher, 0.3, 0.5, 5, 6, WIDTH, 50, []))
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
@@ -204,6 +205,10 @@ def main(self):
         fenetre.blit(blanchon.get_img(), blanchon.get_rect())
         pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 60, 6))
         pygame.draw.rect(fenetre, (0,255,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
+
+        #Affichage Multiplicateur de dégats
+        CountAH = myfont.render(u"Multiplicateur de dégats : "+str(blanchon.get_combo()), 1, (255,255,0))
+        fenetre.blit(CountAH, (100, 100))
 
         #Teste Hero => Plateforme
         heroOnGround = blanchon.isOnGround()
