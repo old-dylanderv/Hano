@@ -183,9 +183,10 @@ def main(self, name = "Nom Par Defaut"):
     fps = 60
     myfont = pygame.font.SysFont("monospace", 15)
     damageFont = pygame.font.SysFont("monospace", 30)
+    damageFont.set_bold(True)
 
     damageArray = []
-    timerDamage = 500
+    timerDamage = 300
 
     while 1 :
         clock.tick(fps)
@@ -279,7 +280,7 @@ def main(self, name = "Nom Par Defaut"):
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
                 degats = foes[i].get_hp() - hpBefore
                 if (degats < 0.0):
-                    damageArray.append([damageFont.render(str(degats), 1, (255,0,0)),(foes[i].get_x(), foes[i].get_y()-40), timerDamage])
+                    damageArray.append([damageFont.render(str(degats), 1, (255,255,255)),(foes[i].get_x(), foes[i].get_y()-40), timerDamage])
 
 
             nbAtkFoe = len(foes[i].get_AtkEffectList())
