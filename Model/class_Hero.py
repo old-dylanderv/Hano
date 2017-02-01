@@ -98,7 +98,7 @@ class Hero(Charac):
 
     def isOnGround(self):
         return self.onGround
-        
+
     def get_combo(self):
         return self.combo
 

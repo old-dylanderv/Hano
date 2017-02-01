@@ -182,10 +182,11 @@ def main(self, name = "Nom Par Defaut"):
 
     #INIT ENNEMIS
     foes = []
-#    foes.append(Ninja(500, 500, WIDTH, 1))
-#    foes.append(Archer(600, 500, WIDTH, 1))
-#    foes.append(Samurai(100, 500, WIDTH, 1))
-    foes.append(Demon(500, 350, WIDTH, 1))
+    foes.append(Ninja(500, 500, WIDTH, 1))
+    foes.append(Archer(600, 500, WIDTH, 1))
+    foes.append(Samurai(100, 500, WIDTH, 1))
+#   foes.append(Demon(500, 350, WIDTH, 1))
+
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
@@ -224,20 +225,22 @@ def main(self, name = "Nom Par Defaut"):
         fenetre.blit(CountAH, (700, 680))
 
         #CoolDown Attaque de Blanchon
-        pygame.draw.rect(fenetre, (0,0,0), (95, 25, 60, 60))
         tailleRect1 = 60
         posRect1 = 25
         colorRect = (125,125,125,128)
 
         if blanchon.get_onGround() == False:
             cd = blanchon_atkList[4].get_cd()
-            if cd > 0.00:
-                posRect1 = 85 - (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
-                tailleRect1 = (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
-                fenetre.blit(blanchonAaMidAir, (100,30))
-                CdAH = myfont.render(cd, 1, (255,0,0))
-
+            if(float(cd) > 0):
+                pygame.draw.rect(fenetre, (0,0,0), (95, 25, 60, 60))
+            else:
+                pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
+            posRect1 = 85 - (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
+            tailleRect1 = (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
+            fenetre.blit(blanchonAaMidAir, (100,30))
+            CdAH = myfont.render(cd, 1, (255,0,0))
         elif blanchon.get_autoHitTimer3() > 0:
+            pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
             fenetre.blit(blanchonAa3, (100,30))
             colorRect = (255,255,0,128)
             posRect1 = 85 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)))/float(3)
@@ -245,6 +248,7 @@ def main(self, name = "Nom Par Defaut"):
             CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,0,0))
 
         elif blanchon.get_autoHitTimer2() > 0:
+            pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
             fenetre.blit(blanchonAa2, (100,30))
             colorRect = (255,255,0,128)
             posRect1 = 85 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)))/float(3)
@@ -252,19 +256,29 @@ def main(self, name = "Nom Par Defaut"):
             CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,0,0))
         else:
             cd = blanchon_atkList[0].get_cd()
-            if cd > 0.00:
-                fenetre.blit(blanchonAa1, (100,30))
-                posRect1 = 85 - (60*float(cd))/float(blanchon_atkList[0].get_maxCd())
-                tailleRect1 = (60*float(cd))/float(blanchon_atkList[0].get_maxCd())
-                CdAH = myfont.render(cd, 1, (255,0,0))
+            if(float(cd) > 0):
+                pygame.draw.rect(fenetre, (0,0,0), (95, 25, 60, 60))
+            else:
+                pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
+
+            fenetre.blit(blanchonAa1, (100,30))
+            posRect1 = 85 - (60*float(cd))/float(blanchon_atkList[0].get_maxCd())
+            tailleRect1 = (60*float(cd))/float(blanchon_atkList[0].get_maxCd())
+            CdAH = myfont.render(cd, 1, (255,0,0))
 
         CaseAa = pygame.Surface((60,tailleRect1), pygame.SRCALPHA)
         CaseAa.fill(colorRect)
         fenetre.blit(CaseAa, (95,posRect1))
-        fenetre.blit(CdAH, (110, 50))
+        if(float(cd) > 0):
+            fenetre.blit(CdAH, (110, 50))
 
-        pygame.draw.rect(fenetre, (0,0,0), (175, 25, 60, 60))
-        pygame.draw.rect(fenetre, (255,255,255), (180, 30, 50, 50))
+        if(float(blanchon_atkList[3].get_cd()) > 0):
+            pygame.draw.rect(fenetre, (0,0,0), (175, 25, 60, 60))
+            pygame.draw.rect(fenetre, (255,255,255), (180, 30, 50, 50))
+        else:
+            pygame.draw.rect(fenetre, (200,200,50), (175, 25, 60, 60))
+            pygame.draw.rect(fenetre, (255,255,255), (180, 30, 50, 50))
+
         fenetre.blit(blanchonVector, (189,47))
         tailleRect2 = 60
         posRect2 = 25
@@ -276,7 +290,8 @@ def main(self, name = "Nom Par Defaut"):
         fenetre.blit(CaseAa, (175,posRect2))
 
         CdProj = myfont.render(str(blanchon_atkList[3].get_cd()), 1, (255,0,0))
-        fenetre.blit(CdProj, (190, 50))
+        if(float(blanchon_atkList[3].get_cd()) > 0):
+            fenetre.blit(CdProj, (190, 50))
         #Teste Hero => Plateforme
         heroOnGround = blanchon.isOnGround()
         blanchon.setOnAir()
@@ -323,7 +338,7 @@ def main(self, name = "Nom Par Defaut"):
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
                 degats = foes[i].get_hp() - hpBefore
                 if (degats < 0.0):
-                    damageArray.append([damageFont.render(str(degats), 1, (255,255,255)),(foes[i].get_x(), foes[i].get_y()-40), timerDamage])
+                    damageArray.append([damageFont.render(str(degats), 1, (50,150,255)),(foes[i].get_x(), foes[i].get_y()-40), timerDamage])
 
 
             nbAtkFoe = len(foes[i].get_AtkEffectList())
