@@ -155,26 +155,6 @@ def main(self):
                         ]
                      }
 
-    imagesArcher = {
-                      "RidleRight":
-                        [
-                         pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha())
-                        ],
-                      "RidleLeft":
-                        [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha()), True, False)
-                        ],
-                      "OdmgRight":
-                        [
-                         pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha())
-                        ],
-                      "OdmgLeft":
-                        [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha()), True, False)
-                        ]
-                    }
-
-
     blanchon_atkList = [
                         Atk("autoHit1", 0.5, 32, 32, {"idleRight":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 1, 5, -1, 0, 0, 0, 225),
                         Atk("autoHit2", 0.7, 32, 32, {"idleRight":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 5, 5, -2, 0, 0, 0, 300),

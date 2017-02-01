@@ -10,34 +10,10 @@ from class_AtkEffect import *
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
 class Archer(Mob):
-    def __init__(self, x, y, strength):
-        Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList)
-        self.states['RmoveLeft'] = 100
-        self.states['RmoveRight'] = 100
-        self.states['FjumpLeft'] = 100
-        self.states['FjumpRight'] = 100
-        self.states['FfallLeft'] = 50
-        self.states['FfallRight'] = 50
-        self.states['RslideLeft'] = 50
-        self.states['RslideRight'] = 50
-        self.states['FcrouchLeft'] = 50
-        self.states['FcrouchRight'] = 50
-        self.states['Oaa1Right'] = 75
-        self.states['Oaa1Left'] = 75
-        self.states['OdmgRight'] = 400
-        self.states['OdmgLeft'] = 400
-        self.up = False
-        self.down = False
-        self.left = False
-        self.right = False
-        self.autoHit = False
-        self.spell1 = False
-        self.guard = False
-        self.ult = False
-
-    def update(self, fps):
-        self.stop()
-        Charac.update(self, fps)
-
-    def giveDoubleJump(self):
-        self.doubleJump = True
+    def __init__(self, x, y, windowWidth, strength):
+        imagesArcher = {"RidleRight":[pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha())],
+                        "RidleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha()), True, False)],
+                        "OdmgRight":[pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha())],
+                        "OdmgLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha()), True, False)]}
+        atkList = Atk("fleche", 2, 32, 16, {"idleRight":[pygame.image.load("Images/Archer/Fleche.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Archer/Fleche.png").convert_alpha(),True,False)]}, 1, 3, -1, 0.1, 8, -1, 3000),
+        Mob.__init__(self, x, y, 64, 64, imagesArcher, 0.3, 0.5, 5, 12, windowWidth, 50, atkList)
