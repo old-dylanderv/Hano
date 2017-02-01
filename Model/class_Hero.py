@@ -24,8 +24,12 @@ class Hero(Charac):
         self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
-        self.states['Oaa2Right'] = 75
-        self.states['Oaa2Left'] = 75
+        self.states['Oaa2Right'] = 600
+        self.states['Oaa2Left'] = 600
+        self.states['Oaa3Right'] = 500
+        self.states['Oaa3Left'] = 500
+        self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
+        self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
         self.doubleJump = True
         self.jumpKeyReset = False
@@ -81,8 +85,7 @@ class Hero(Charac):
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------
         if(self.state[0] == 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
-            speed_x = 0
-            speed_y = 0
+            self.speed_x = 0
         else:
             #Left = true && Right = false
             if(self.left == True and self.right == False):
@@ -145,29 +148,82 @@ class Hero(Charac):
                     Animated.changeState(self, "FfallLeft")
             #BLOC GESTION SPELL -------------------------------------
             if(self.autoHit == True):
+                if(self.autoHitTimer2 > 0): #Le joueur peut declencher l'auto hit 2
+                    if(self.facing == 1):
+                        atkEffect = self.atkList[1].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
+                    else:
+                        atkEffect = self.atkList[1].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    if(atkEffect != None):
+                        self.autoHitTimer2 = 0
+                        self.atkEffectList.append(atkEffect)
+                        if(self.facing == 1):
+                            Animated.changeState(self, "Oaa2Right")
+                        else:
+                            Animated.changeState(self, "Oaa2Left")
+                elif(self.autoHitTimer3 > 0): #Le joueur peut declencher l'auto hit 3
+                    if(self.facing == 1):
+                        atkEffect = self.atkList[2].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
+                    else:
+                        atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    if(atkEffect != None):
+                        self.autoHitTimer3 = 0
+                        self.atkEffectList.append(atkEffect)
+                        if(self.facing == 1):
+                            Animated.changeState(self, "Oaa3Right")
+                        else:
+                            Animated.changeState(self, "Oaa3Left")
+                else: #Le joueur declenche l'auto hit 1
+                    if(self.facing == 1):
+                        atkEffect = self.atkList[0].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
+                    else:
+                        atkEffect = self.atkList[0].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    if(atkEffect != None):
+                        self.atkEffectList.append(atkEffect)
+                        if(self.facing == 1):
+                            Animated.changeState(self, "Oaa1Right")
+                        else:
+                            Animated.changeState(self, "Oaa1Left")
+            if(self.spell1 == True):
                 if(self.facing == 1):
-                    atkEffect = self.atkList[0].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, self.speed_x)
                 else:
-                    atkEffect = self.atkList[0].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
                         Animated.changeState(self, "Oaa1Right")
                     else:
                         Animated.changeState(self, "Oaa1Left")
-            if(self.spell1 == True):
-                if(self.facing == 1):
-                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, self.speed_x)
-                else:
-                    atkEffect = self.atkList[1].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
-                if(atkEffect != None):
-                    self.atkEffectList.append(atkEffect)
-                    if(self.facing == 1):
-                        Animated.changeState(self, "Oaa2Right")
-                    else:
-                        Animated.changeState(self, "Oaa2Left")
+
+        if(self.autoHitTimer2 > 0):
+            self.autoHitTimer2 = self.autoHitTimer2 - (1000.0/fps)
+
+        if(self.autoHitTimer3 > 0):
+            self.autoHitTimer3 = self.autoHitTimer3 - (1000.0/fps)
 
         Charac.update(self, fps)
+
+    #Ici on peut vérifier si l'atk i à touché quelqu'un avant de la suppr
+    def deleteAtkEffect(self, i):
+        if(self.atkEffectList[i].didHit() == True):
+            self.comboManager(self.atkEffectList[i].get_nom())
+        Charac.deleteAtkEffect(self, i)
+
+    def comboManager(self, attName):
+        if(attName == "autoHit1"):
+            self.combo += 0.1
+            self.autoHitTimer2 = 1000
+        elif(attName == "autoHit2"):
+            self.combo += 0.2
+            self.autoHitTimer2 = 0
+            self.autoHitTimer3 = 2000
+        elif(attName == "autoHit3"):
+            self.combo += 0.4
+            self.autoHitTimer2 = 0
+            self.autoHitTimer3 = 0
+        elif(attName == "EOF"):
+            self.combo += 0.1
+
 
     def giveDoubleJump(self):
         self.doubleJump = True

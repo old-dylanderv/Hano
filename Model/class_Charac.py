@@ -61,7 +61,7 @@ class Charac(Animated):
         while(i < len(self.atkEffectList)):
             self.atkEffectList[i].update(fps)
             if(self.atkEffectList[i].isLive() == False):
-                self.atkEffectList.pop(i)
+                self.deleteAtkEffect(i)
             else:
                 i += 1
 
@@ -71,6 +71,10 @@ class Charac(Animated):
 
         #Animation du Charac
         Animated.update(self)
+
+    #On sépare cette fonction de l'update pour pouvoir la personnaliser dans Hero
+    def deleteAtkEffect(self, i):
+        self.atkEffectList.pop(i)
 
     def get_AtkEffectList(self):
         return self.atkEffectList

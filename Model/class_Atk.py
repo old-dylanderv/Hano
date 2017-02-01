@@ -10,7 +10,8 @@ from class_AtkEffect import *
 #   un timer a update dans la boucle de jeu (via le Charac)
 #   toutes les informations sur l'attaque à lancer
 class Atk():
-    def __init__(self, cd, width, height, images, dmg , knockback, weight, speed_x, speed_y, duration):
+    def __init__(self, nom, cd, width, height, images, dmg , knockback, weight, speed_x, speed_y, duration):
+        self.nom = nom
         self.cd = cd
         self.timer = 0
         self.dmg = dmg
@@ -46,4 +47,4 @@ class Atk():
             return None
 
     def cast(self, x, y, facing, combo, bonusSpeed_x, bonusSpeed_y):
-        return AtkEffect(x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing+bonusSpeed_x, (self.speed_y+bonusSpeed_y), facing, self.duration)
+        return AtkEffect(self.nom, x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing+bonusSpeed_x, (self.speed_y+bonusSpeed_y), facing, self.duration)
