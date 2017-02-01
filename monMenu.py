@@ -300,6 +300,53 @@ if __name__ == "__main__":
                          ]
                      }
 
+    statesSamurai = {}
+    statesSamurai["idleRight"] = 500
+    statesSamurai["idleLeft"] = 500
+    statesSamurai["moveLeft"] = 100
+    statesSamurai["moveRight"] = 100
+    statesSamurai["atkLeft"] = 75
+    statesSamurai["atkRight"] = 75
+
+    imagesSamurai = {
+                      "idleLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_2.png").convert_alpha()))), True, False)
+                        ],
+                      "idleRight":
+                        [
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_2.png").convert_alpha())))
+                        ],
+                      "moveLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_0.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_0.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_1.png").convert_alpha()))), True, False)
+                        ],
+                      "moveRight":
+                        [
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_0.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_0.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_move_1.png").convert_alpha())))
+                        ],
+                       "atkLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_2.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()))), True, False),
+                        ],
+                        "atkRight":
+                         [
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_1.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_2.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()))),
+                         ]
+                     }
+
     statesBoss = {}
     statesBoss["idleRight"] = 500
     statesBoss["idleLeft"] = 500
@@ -307,6 +354,8 @@ if __name__ == "__main__":
     statesBoss["atk1Right"] = 500
     statesBoss["atk2Left"] = 500
     statesBoss["atk2Right"] = 500
+    statesBoss["atk3Left"] = 500
+    statesBoss["atk3Right"] = 500
 
     imagesBoss = {
                       "idleLeft":
@@ -338,15 +387,26 @@ if __name__ == "__main__":
                          [
                           pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_1.png").convert_alpha())),
                           pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_2.png").convert_alpha())),
-                         ]
+                         ],
+                         "atk3Left":
+                          [
+                           pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_1.png").convert_alpha())), True, False),
+                           pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_2.png").convert_alpha())), True, False),
+                          ],
+                         "atk3Right":
+                          [
+                           pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_1.png").convert_alpha())),
+                           pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_2.png").convert_alpha())),
+                          ]
                      }
 
     menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
     title = TitleItem("title", 500, 25)
     blanchon = AnimItem(imagesBlanchon, statesBlanchon, 500, 384)
-    ninja = AnimItem(imagesNinja, statesNinja, 200, 384)
-    boss = AnimItem(imagesBoss, statesBoss, 700, 200)
-    anim = [blanchon, ninja, boss]
+    ninja = AnimItem(imagesNinja, statesNinja, 1000, 384)
+    samurai = AnimItem(imagesSamurai, statesSamurai, 200, 256)
+    boss = AnimItem(imagesBoss, statesBoss, 730, 370)
+    anim = [blanchon, ninja, boss, samurai]
     pygame.display.set_caption('Menu')
     gm = GameMenu(screen, menu_items, title, anim)
     gm.run()
