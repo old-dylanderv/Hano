@@ -158,19 +158,19 @@ def main(self):
     imagesArcher = {
                       "RidleRight":
                         [
-                         pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha())
+                         pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha())
                         ],
                       "RidleLeft":
                         [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_idle.png").convert_alpha()), True, False)
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha()), True, False)
                         ],
                       "OdmgRight":
                         [
-                         pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha())
+                         pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha())
                         ],
                       "OdmgLeft":
                         [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/archer/a_dmg_2.png").convert_alpha()), True, False)
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha()), True, False)
                         ]
                     }
 
@@ -229,8 +229,23 @@ def main(self):
 
         #Affichage Multiplicateur de dégats
         CountAH = myfont.render(u"Multiplicateur de dégats : "+str(blanchon.get_combo()), 1, (255,255,0))
-        fenetre.blit(CountAH, (100, 100))
+        fenetre.blit(CountAH, (700, 680))
 
+        #CoolDown Attaque de Blanchon
+        if blanchon.get_autoHitTimer3() > 0:
+            CdAH = myfont.render(u"Coup de pied : "+str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,255,0))
+        elif blanchon.get_autoHitTimer2() > 0:
+            CdAH = myfont.render(u"Coup d'épée : "+str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,255,0))
+        else:
+            cd = blanchon_atkList[0].get_cd()
+            if cd <= 0.00:
+                CdAH = myfont.render(u"Coup de poing : 0", 1, (255,255,0))
+            else:
+                CdAH = myfont.render(u"Coup de poing : "+cd, 1, (255,255,0))
+
+        fenetre.blit(CdAH, (100, 680))
+        CdProj = myfont.render(u"End Of File : "+str(blanchon_atkList[3].get_cd()), 1, (255,255,0))
+        fenetre.blit(CdProj, (300, 680))
         #Teste Hero => Plateforme
         heroOnGround = blanchon.isOnGround()
         blanchon.setOnAir()

@@ -42,7 +42,7 @@ class Atk():
 
     #Renvoie un string (pour affichage)
     def get_cd(self):
-        return "{0:.2f}".format(self.timer)
+        return "{0:.1f}".format(abs(self.timer))
 
     #Facing 1 => droite
     #Facing -1 => gauche

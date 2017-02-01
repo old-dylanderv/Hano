@@ -51,19 +51,11 @@ class TitleItem(MenuItem):
         return self.image
 
 class AnimItem(MenuItem):
-    def __init__(self, img, pos_x = 0, pos_y = 0):
+    def __init__(self, img, states, pos_x = 0, pos_y = 0):
         MenuItem.__init__(self, pos_x, pos_y)
         self.images = img
         self.indexImg = 0
-        self.states = {}
-        self.states["idleRight"] = 500
-        self.states["idleLeft"] = 500
-        self.states["moveLeft"] = 100
-        self.states["moveRight"] = 100
-        self.states["atkLeft"] = 75
-        self.states["atkRight"] = 75
-        self.states["crouchLeft"] = 75
-        self.states["crouchRight"] = 75
+        self.states = states
         self.state = self.states.keys()[0]
         self.timerAnim = 0
 
@@ -91,7 +83,8 @@ class AnimItem(MenuItem):
             self.timerAnim = 0
 
     def randState(self):
-        state = self.states.keys()[(pygame.time.get_ticks() % 7)]
+        print(pygame.time.get_ticks() % len(self.states))
+        state = self.states.keys()[(pygame.time.get_ticks() % len(self.states))]
         self.changeState(state)
 
     def get_image(self):
@@ -125,7 +118,6 @@ class GameMenu():
         if self.cur_item is None:
             self.cur_item = 0
         else:
-            # Find the chosen item
             if key == pygame.K_UP and self.cur_item > 0:
                 self.items[self.cur_item].set_selected(False)
                 self.cur_item -= 1
@@ -171,6 +163,16 @@ class GameMenu():
 
 if __name__ == "__main__":
     screen = pygame.display.set_mode((1280, 720), 0, 32)
+
+    statesBlanchon = {}
+    statesBlanchon["idleRight"] = 500
+    statesBlanchon["idleLeft"] = 500
+    statesBlanchon["moveLeft"] = 100
+    statesBlanchon["moveRight"] = 100
+    statesBlanchon["atkLeft"] = 75
+    statesBlanchon["atkRight"] = 75
+    statesBlanchon["crouchLeft"] = 75
+    statesBlanchon["crouchRight"] = 75
 
     imagesBlanchon = {
                       "idleLeft":
@@ -245,7 +247,7 @@ if __name__ == "__main__":
 
     menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
     title = TitleItem("title", 500, 25)
-    blanchon = AnimItem(imagesBlanchon, 500, 384)
+    blanchon = AnimItem(imagesBlanchon, statesBlanchon, 500, 384)
     pygame.display.set_caption('Menu')
     gm = GameMenu(screen, menu_items, title, blanchon)
     gm.run()
