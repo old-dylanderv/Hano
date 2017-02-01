@@ -151,15 +151,12 @@ class GameMenu():
                     self.set_item_selection(event.key)
 
 
-
-
             self.screen.blit(self.bg, (0,0))
             self.screen.blit(self.title.get_image(), self.title.get_position())
 
             for perso in self.anim:
                 perso.nextImg(60)
                 self.screen.blit(perso.get_image(), perso.get_position())
-
 
             for item in self.items:
                 self.screen.blit(item.get_image(), item.position)

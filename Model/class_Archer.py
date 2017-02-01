@@ -38,7 +38,7 @@ class Archer(Mob):
                                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_move_3.png").convert_alpha()), True, False)
                                     ]}
         atkList = Atk("fleche", 2.5, 32, 16, {"idleLeft":[pygame.image.load("Images/Archer/Fleche.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Archer/Fleche.png").convert_alpha(),True,False)]}, 2, 3, -1, 0.05, 15, -1, 3000),
-        Mob.__init__(self, x, y, 64, 64, imagesArcher, 0.2, 1, 5, 12, windowWidth, 20*strength, atkList)
+        Mob.__init__(self, x, y, 64, 64, imagesArcher, 0.2, 1, 5, 10, windowWidth, 20*strength, atkList)
         self.strength = strength
         self.arrowMax = 3 + int(strength)
         self.arrowCount = 0
