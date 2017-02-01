@@ -56,10 +56,9 @@ class Samurai(Mob):
                           pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_dmg_2.png").convert_alpha()), True, False),
                          ]
                      }
-        atkList = Atk("sabre", 3, 96, 96, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 6, -3, 0, 4, 0, 400),
-        Mob.__init__(self, x, y, 96, 96, imagesSamurai, 0.5, 1, 4, 5, windowWidth, 60*strength, atkList)
+        atkList = Atk("sabre", 3, 96, 96, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 10, -4, 0, 4, 0, 400),
+        Mob.__init__(self, x, y, 96, 96, imagesSamurai, 0.5, 1, 4, 3, windowWidth, 60*strength, atkList)
         self.strength = strength
-        self.area = False
         self.areaWidth = 200
 
     def update(self, hero, fps):
