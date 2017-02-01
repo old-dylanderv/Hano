@@ -135,7 +135,7 @@ class Charac(Animated):
                 self.speed_x += atkEffect.get_knockBack_x()
                 self.speed_y += atkEffect.get_knockBack_y()
                 if(self.onGround == True and self.speed_y > 0):
-                    self.speed_y += -atkEffect.get_knockBack_y()*0.5
+                    self.speed_y = atkEffect.get_knockBack_y()*-0.5
                 self.onGround = False
                 self.set_hp(atkEffect.get_dmg())
                 atkEffect.delete()
