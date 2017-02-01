@@ -253,12 +253,12 @@ class Hero(Charac):
     def comboManager(self, attName):
         if(attName == "autoHit1"):
             self.combo += 0.05
-            self.autoHitTimer2 = 2000
+            self.autoHitTimer2 = 3000
             self.atkList[1].put_on_cd()
         elif(attName == "autoHit2"):
             self.combo += 0.1
             self.autoHitTimer2 = 0
-            self.autoHitTimer3 = 2000
+            self.autoHitTimer3 = 3000
             self.atkList[2].put_on_cd()
         elif(attName == "autoHit3"):
             self.combo += 0.2
@@ -272,7 +272,7 @@ class Hero(Charac):
     def set_hp(self, dmg):
         self.combo = 1
         Charac.set_hp(self, dmg)
-        
+
     def get_autoHitTimer2(self):
         return self.autoHitTimer2
 

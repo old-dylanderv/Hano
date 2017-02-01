@@ -13,6 +13,7 @@ from class_Platform import *
 from class_Atk import *
 from class_Mob import *
 from class_Archer import *
+from class_Samurai import *
 #initialisation de pygame
 def main(self):
     pygame.init()
@@ -172,8 +173,9 @@ def main(self):
 
     #INIT ENNEMIS
     foes = []
-    foes.append(Archer(500, 500, WIDTH, 1))
-    foes.append(Archer(600, 500, WIDTH, 1))
+#    foes.append(Archer(500, 500, WIDTH, 1))
+#    foes.append(Archer(600, 500, WIDTH, 1))
+    foes.append(Samurai(100, 500, WIDTH, 1))
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
