@@ -252,11 +252,19 @@ def main(self):
             EnnemyOnGround = foes[i].isOnGround()
             foes[i].setOnAir()
             foes[i].testPlatform(sol)
+
             for j in range (0, nbPlatf):
                 foes[i].testPlatform(platforms[j])
+
             for k in range (0, nbAtkHero):
                 fenetre.blit(blanchon.get_AtkEffectList()[k].get_img(), blanchon.get_AtkEffectList()[k].get_rect())
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
+
+            nbAtkFoe = len(foes[i].get_AtkEffectList())
+            for l in range (0, nbAtkFoe):
+                blanchon.testAtkEffect(foes[i].get_AtkEffectList()[l])
+                fenetre.blit(foes[i].get_AtkEffectList()[l].get_img(), foes[i].get_AtkEffectList()[l].get_rect())
+
             foes[i].update(blanchon, fps)
 
         #Affichage Hero

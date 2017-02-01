@@ -30,10 +30,6 @@ class Hero(Charac):
         self.states['Oaa3Left'] = 60
         self.states['OaaaRight'] = 75
         self.states['OaaaLeft'] = 75
-        self.x1 = x+10
-        self.x2 = x+width-10
-        self.y1 = y
-        self.y2 = y+height
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -85,17 +81,17 @@ class Hero(Charac):
         elif(event.key == K_r):
             self.ult = False
 
-    def get_x1():
-        return self.x1
+    def get_x1(self):
+        return self.x+10
 
-    def get_x2():
-        return self.x2
+    def get_x2(self):
+        return self.x+self.rect.width-10
 
-    def get_y1():
-        return self.y1
+    def get_y1(self):
+        return self.y
 
-    def get_y2():
-        return self.y2
+    def get_y2(self):
+        return self.y+self.rect.height
 
     def get_combo(self):
         return self.combo
@@ -169,7 +165,7 @@ class Hero(Charac):
                         if(self.facing == 1):
                             atkEffect = self.atkList[1].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
                         else:
-                            atkEffect = self.atkList[1].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                            atkEffect = self.atkList[1].launch(self.x-self.atkList[1].get_width(), self.y+20, self.facing, self.combo)
                         if(atkEffect != None):
                             self.speed_x = 0
                             self.currAcc_x = 0
@@ -187,7 +183,7 @@ class Hero(Charac):
                         else:
                             BonusSpeed_x = -6
                             BonusSpeed_y = -2
-                            atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, BonusSpeed_x)
+                            atkEffect = self.atkList[2].launch(self.x-self.atkList[2].get_width(), self.y+20, self.facing, self.combo, BonusSpeed_x)
                         if(atkEffect != None):
                             self.onGround = False
                             self.speed_x = BonusSpeed_x
@@ -216,7 +212,7 @@ class Hero(Charac):
                     if(self.facing == 1):
                         atkEffect = self.atkList[4].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
                     else:
-                        atkEffect = self.atkList[4].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
+                        atkEffect = self.atkList[4].launch(self.x-self.atkList[4].get_width(), self.y+20, self.facing, self.combo)
                     if(atkEffect != None):
                         self.speed_x = 0
                         if(self.speed_y >= 0):
@@ -232,7 +228,7 @@ class Hero(Charac):
                 if(self.facing == 1):
                     atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, self.speed_x)
                 else:
-                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
+                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[3].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
@@ -273,6 +269,10 @@ class Hero(Charac):
         elif(attName == "airAutoHit"):
             self.combo += 0.1
 
+    def set_hp(self, dmg):
+        self.combo = 1
+        Charac.set_hp(self, dmg)
+        
     def get_autoHitTimer2(self):
         return self.autoHitTimer2
 
