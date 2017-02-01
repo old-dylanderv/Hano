@@ -167,8 +167,8 @@ def main(self):
     sol = Platform(0, HEIGHT-50, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
     #INIT PLATEFORMES
     platforms = []
-    platforms.append(Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1))
-    platforms.append(Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 1))
+    platforms.append(Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
+    platforms.append(Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
 
     #INIT ENNEMIS
     foes = []
