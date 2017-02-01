@@ -182,6 +182,10 @@ def main(self, name = "Nom Par Defaut"):
     clock = pygame.time.Clock()
     fps = 60
     myfont = pygame.font.SysFont("monospace", 15)
+    damageFont = pygame.font.SysFont("monospace", 30)
+
+    damageArray = []
+    timerDamage = 500
 
     while 1 :
         clock.tick(fps)
@@ -242,6 +246,16 @@ def main(self, name = "Nom Par Defaut"):
 
         blanchon.update(fps)
 
+    #AFFICHAGE DES DEGATS----------------------------------------------------------
+        i = 0
+        while i < len(damageArray):
+            if(damageArray[i][2] > 0):
+                fenetre.blit(damageArray[i][0], damageArray[i][1])
+                damageArray[i][2] = damageArray[i][2] - (1000/fps)
+                i += 1
+            else:
+                damageArray.pop(i)
+
     #GESTION DES MOBS---------------------------------------------------------------
 
         #Teste Mob => Plateforme && Atk Hero => Mob
@@ -261,11 +275,21 @@ def main(self, name = "Nom Par Defaut"):
 
             #Check si le mob i se fait toucher par l'atk de hero k
             for k in range (0, nbAtkHero):
+                hpBefore = foes[i].get_hp()
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
+                degats = foes[i].get_hp() - hpBefore
+                if (degats < 0.0):
+                    damageArray.append([damageFont.render(str(degats), 1, (255,0,0)),(foes[i].get_x(), foes[i].get_y()-40), timerDamage])
+
 
             nbAtkFoe = len(foes[i].get_AtkEffectList())
             for l in range (0, nbAtkFoe):
+                hpBefore = blanchon.get_hp()
                 blanchon.testAtkEffect(foes[i].get_AtkEffectList()[l])
+                degats = blanchon.get_hp() - hpBefore
+                if (degats < 0):
+                    damageArray.append([damageFont.render(str(degats), 1, (255,0,0)), (blanchon.get_x(), blanchon.get_y()-40), timerDamage])
+
                 fenetre.blit(foes[i].get_AtkEffectList()[l].get_img(), foes[i].get_AtkEffectList()[l].get_rect())
 
             foes[i].update(blanchon, fps)
