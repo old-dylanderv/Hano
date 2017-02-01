@@ -15,6 +15,7 @@ from class_Mob import *
 from class_Archer import *
 from class_Samurai import *
 from class_Ninja import *
+from class_Corbeau import *
 from class_Demon import *
 
 #initialisation de pygame
@@ -182,9 +183,10 @@ def main(self, name = "Nom Par Defaut"):
 
     #INIT ENNEMIS
     foes = []
-    foes.append(Ninja(500, 500, WIDTH, 1))
-    foes.append(Archer(600, 500, WIDTH, 1))
-    foes.append(Samurai(100, 500, WIDTH, 1))
+#    foes.append(Ninja(500, 500, WIDTH, 1))
+#    foes.append(Archer(600, 500, WIDTH, 1))
+#    foes.append(Samurai(100, 500, WIDTH, 1))
+    foes.append(Corbeau(200, 400, WIDTH, 1))
 #   foes.append(Demon(500, 350, WIDTH, 1))
 
 
@@ -242,7 +244,6 @@ def main(self, name = "Nom Par Defaut"):
         elif blanchon.get_autoHitTimer3() > 0:
             pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
             fenetre.blit(blanchonAa3, (100,30))
-            colorRect = (255,255,0,128)
             posRect1 = 85 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)))/float(3)
             tailleRect1 = (60*float("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)))/float(3)
             CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,0,0))
@@ -250,7 +251,6 @@ def main(self, name = "Nom Par Defaut"):
         elif blanchon.get_autoHitTimer2() > 0:
             pygame.draw.rect(fenetre, (200,200,50), (95, 25, 60, 60))
             fenetre.blit(blanchonAa2, (100,30))
-            colorRect = (255,255,0,128)
             posRect1 = 85 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)))/float(3)
             tailleRect1 = (60*float("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)))/float(3)
             CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,0,0))
