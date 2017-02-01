@@ -9,7 +9,7 @@ from class_AtkEffect import *
 #   Ils sont controlés au clavier
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
-class Archer(Mob):
+class Corbeau(Mob):
     def __init__(self, x, y, windowWidth, strength):
         imagesArcher = {"RidleRight":[pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha())],
                         "RidleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_idle.png").convert_alpha()), True, False)],
