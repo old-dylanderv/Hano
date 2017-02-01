@@ -19,7 +19,7 @@ class Archer(Mob):
         Mob.__init__(self, x, y, 64, 64, imagesArcher, 0.3, 0.5, 5, 12, windowWidth, 50, atkList)
         self.strength = strength
 
-    def update(self, fps):
+    def update(self, hero, fps):
         #TODO : L'IA DE L'ARCHER ICI
         self.stop()
         Mob.update(self, fps)

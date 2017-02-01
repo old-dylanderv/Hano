@@ -30,6 +30,10 @@ class Hero(Charac):
         self.states['Oaa3Left'] = 60
         self.states['OaaaRight'] = 75
         self.states['OaaaLeft'] = 75
+        self.x1 = x+10
+        self.x2 = x+width-10
+        self.y1 = y
+        self.y2 = y+height
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -80,6 +84,18 @@ class Hero(Charac):
             self.guard = False
         elif(event.key == K_r):
             self.ult = False
+
+    def get_x1():
+        return self.x1
+
+    def get_x2():
+        return self.x2
+
+    def get_y1():
+        return self.y1
+
+    def get_y2():
+        return self.y2
 
     def get_combo(self):
         return self.combo
