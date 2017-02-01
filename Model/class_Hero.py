@@ -43,6 +43,9 @@ class Hero(Charac):
         self.spell1 = False
         self.guard = False
         self.ult = False
+        self.punch = pygame.mixer.Sound("punch.wav")
+        self.sword = pygame.mixer.Sound("sword.wav")
+        self.eof = pygame.mixer.Sound("error.wav")
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
@@ -255,19 +258,24 @@ class Hero(Charac):
             self.combo += 0.05
             self.autoHitTimer2 = 3000
             self.atkList[1].put_on_cd()
+            self.punch.play()
         elif(attName == "autoHit2"):
             self.combo += 0.1
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 3000
             self.atkList[2].put_on_cd()
+            self.sword.play()
         elif(attName == "autoHit3"):
             self.combo += 0.2
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 0
+            self.punch.play()
         elif(attName == "EOF"):
             self.combo += 0.1
+            self.eof.play()
         elif(attName == "airAutoHit"):
             self.combo += 0.1
+            self.sword.play()
 
     def set_hp(self, dmg):
         self.combo = 1
