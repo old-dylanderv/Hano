@@ -9,13 +9,19 @@ from class_AtkEffect import *
 #   Ils sont controlés au clavier
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
-class Mob(Charac):
-    def __init__(self, x, y):
+class Archer(Mob):
+    def __init__(self, x, y, strength):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList)
         self.states['RmoveLeft'] = 100
         self.states['RmoveRight'] = 100
         self.states['FjumpLeft'] = 100
         self.states['FjumpRight'] = 100
+        self.states['FfallLeft'] = 50
+        self.states['FfallRight'] = 50
+        self.states['RslideLeft'] = 50
+        self.states['RslideRight'] = 50
+        self.states['FcrouchLeft'] = 50
+        self.states['FcrouchRight'] = 50
         self.states['Oaa1Right'] = 75
         self.states['Oaa1Left'] = 75
         self.states['OdmgRight'] = 400
