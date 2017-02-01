@@ -232,7 +232,13 @@ def main(self):
         fenetre.blit(CountAH, (700, 680))
 
         #CoolDown Attaque de Blanchon
-        if blanchon.get_autoHitTimer3() > 0:
+        if blanchon.get_onGround() == False:
+            cd = blanchon_atkList[4].get_cd()
+            if cd <= 0.00:
+                CdAH = myfont.render(u"Coup Aérien : 0", 1, (255,255,0))
+            else:
+                CdAH = myfont.render(u"Coup Aérien : "+cd, 1, (255,255,0))
+        elif blanchon.get_autoHitTimer3() > 0:
             CdAH = myfont.render(u"Coup de pied : "+str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,255,0))
         elif blanchon.get_autoHitTimer2() > 0:
             CdAH = myfont.render(u"Coup d'épée : "+str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,255,0))
