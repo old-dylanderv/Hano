@@ -118,6 +118,9 @@ class Charac(Animated):
     def get_hpMax(self):
         return self.hpMax
 
+    def get_onGround(self):
+        return self.onGround
+
     def testPlatform(self, platform):
         if(self.x + self.rect.width -15 > platform.get_x1() and self.x+15 < platform.get_x2()):
             if(self.y + self.rect.height <= platform.get_y() and self.y + self.rect.height + self.speed_y + self.weight >= platform.get_y()):
