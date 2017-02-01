@@ -201,13 +201,6 @@ def main(self):
             fenetre.blit(platforms[i].get_img(), platforms[i].get_rect())
 
     #GESTION DU HERO----------------------------------------------------------------
-
-        #Affichage Hero
-        blanchon.nextImg(fps)
-        fenetre.blit(blanchon.get_img(), blanchon.get_rect())
-        pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 60, 6))
-        pygame.draw.rect(fenetre, (0,255,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
-
         #Affichage Multiplicateur de dégats
         CountAH = myfont.render(u"Multiplicateur de dégats : "+str(blanchon.get_combo()), 1, (255,255,0))
         fenetre.blit(CountAH, (700, 680))
@@ -264,6 +257,12 @@ def main(self):
             for k in range (0, nbAtkHero):
                 fenetre.blit(blanchon.get_AtkEffectList()[k].get_img(), blanchon.get_AtkEffectList()[k].get_rect())
                 foes[i].testAtkEffect(blanchon.get_AtkEffectList()[k])
-            foes[i].update(fps)
+            foes[i].update(blanchon, fps)
+
+        #Affichage Hero
+        blanchon.nextImg(fps)
+        fenetre.blit(blanchon.get_img(), blanchon.get_rect())
+        pygame.draw.rect(fenetre, (0,0,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10, 60, 6))
+        pygame.draw.rect(fenetre, (0,255,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
 
         pygame.display.flip()
