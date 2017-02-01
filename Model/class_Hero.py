@@ -29,7 +29,7 @@ class Hero(Charac):
         self.states['Oaa3Right'] = 60
         self.states['Oaa3Left'] = 60
         self.states['OaaaRight'] = 75
-        self.states['OaaaRight'] = 75
+        self.states['OaaaLeft'] = 75
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -203,7 +203,8 @@ class Hero(Charac):
                         atkEffect = self.atkList[4].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
                     if(atkEffect != None):
                         self.speed_x = 0
-                        self.speed_y = 0
+                        if(self.speed_y >= 0):
+                            self.speed_y = 0
                         self.currAcc_x = 0
                         self.atkEffectList.append(atkEffect)
                         if(self.facing == 1):
@@ -255,7 +256,7 @@ class Hero(Charac):
             self.combo += 0.1
         elif(attName == "airAutoHit"):
             self.combo += 0.1
-            
+
     def get_autoHitTimer2(self):
         return self.autoHitTimer2
 

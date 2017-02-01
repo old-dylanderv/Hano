@@ -129,10 +129,10 @@ class Charac(Animated):
     def testAtkEffect(self, atkEffect):
         if(self.x + self.rect.width -15 > atkEffect.get_x1() and self.x+15 < atkEffect.get_x2()):
             if(self.y + self.rect.height >= atkEffect.get_y1() and self.y <= atkEffect.get_y2()):
-                self.speed_x = atkEffect.get_knockBack_x()
-                self.speed_y = atkEffect.get_knockBack_y()
+                self.speed_x += atkEffect.get_knockBack_x()
+                self.speed_y += atkEffect.get_knockBack_y()
                 if(self.onGround == True and self.speed_y > 0):
-                    self.speed_y = -atkEffect.get_knockBack_y()*0.5
+                    self.speed_y += -atkEffect.get_knockBack_y()*0.5
                 self.onGround = False
                 self.set_hp(atkEffect.get_dmg())
                 atkEffect.delete()
