@@ -21,5 +21,5 @@ class Archer(Mob):
 
     def update(self, fps):
         #TODO : L'IA DE L'ARCHER ICI
-
+        self.stop()
         Mob.update(self, fps)
