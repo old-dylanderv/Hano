@@ -21,7 +21,7 @@ def main(self):
     HEIGHT = 720
     fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
-    fond_e = pygame.transform.scale(pygame.image.load("Images/background.png").convert(), (1280,720))
+    fond_e = pygame.transform.scale(pygame.image.load("Images/Background/niveauRecurciforce.png").convert(), (1280,720))
 
     imagesBlanchon = {
                       "RidleLeft":
