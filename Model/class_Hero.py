@@ -26,8 +26,8 @@ class Hero(Charac):
         self.states['Oaa1Left'] = 75
         self.states['Oaa2Right'] = 60
         self.states['Oaa2Left'] = 60
-        self.states['Oaa3Right'] = 50
-        self.states['Oaa3Left'] = 50
+        self.states['Oaa3Right'] = 60
+        self.states['Oaa3Left'] = 60
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -84,12 +84,7 @@ class Hero(Charac):
 
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------
-        if(self.state[0] == 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
-            if(self.isFirstFrame() == True):
-                self.speed_x = 0
-                self.currAcc_x = 0
-                self.speed_y = 0
-        else:
+        if(self.state[0] != 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
             #Left = true && Right = false
             if(self.left == True and self.right == False):
                 Charac.moveLeft(self)
@@ -157,6 +152,8 @@ class Hero(Charac):
                     else:
                         atkEffect = self.atkList[1].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
                     if(atkEffect != None):
+                        self.speed_x = 0
+                        self.currAcc_x = 0
                         self.autoHitTimer2 = 0
                         self.atkEffectList.append(atkEffect)
                         if(self.facing == 1):
@@ -165,26 +162,32 @@ class Hero(Charac):
                             Animated.changeState(self, "Oaa2Left")
                 elif(self.autoHitTimer3 > 0): #Le joueur peut declencher l'auto hit 3
                     if(self.facing == 1):
-                        self.speed_x = 5
-                        self.speed_y = -2
-                        atkEffect = self.atkList[2].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo, self.speed_x)
+                        BonusSpeed_x = 6
+                        BonusSpeed_y = -1.5
+                        atkEffect = self.atkList[2].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo, BonusSpeed_x)
                     else:
-                        self.speed_x = -5
-                        self.speed_y = -2
-                        atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
+                        BonusSpeed_x = -6
+                        BonusSpeed_y = -2
+                        atkEffect = self.atkList[2].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo, BonusSpeed_x)
                     if(atkEffect != None):
+                        self.onGround = False
+                        self.speed_x = BonusSpeed_x
+                        self.speed_y = BonusSpeed_y
                         self.autoHitTimer3 = 0
                         self.atkEffectList.append(atkEffect)
                         if(self.facing == 1):
                             Animated.changeState(self, "Oaa3Right")
                         else:
                             Animated.changeState(self, "Oaa3Left")
+                        self.atkList[0].put_cd(1) #Si le coup de pied est lance on met un cd sur le coup de poing
                 else: #Le joueur declenche l'auto hit 1
                     if(self.facing == 1):
                         atkEffect = self.atkList[0].launch(self.x+self.rect.width, self.y+20, self.facing, self.combo)
                     else:
                         atkEffect = self.atkList[0].launch(self.x-self.atkList[0].get_width(), self.y+20, self.facing, self.combo)
                     if(atkEffect != None):
+                        self.speed_x = 0
+                        self.currAcc_x = 0
                         self.atkEffectList.append(atkEffect)
                         if(self.facing == 1):
                             Animated.changeState(self, "Oaa1Right")
@@ -201,7 +204,6 @@ class Hero(Charac):
                         Animated.changeState(self, "Oaa1Right")
                     else:
                         Animated.changeState(self, "Oaa1Left")
-                    self.atkList[0].put_on_cd() #Si le coup de pied est lance on met un cd sur le coup de poing
 
         if(self.autoHitTimer2 > 0):
             self.autoHitTimer2 = self.autoHitTimer2 - (1000.0/fps)
@@ -219,16 +221,16 @@ class Hero(Charac):
 
     def comboManager(self, attName):
         if(attName == "autoHit1"):
-            self.combo += 0.1
+            self.combo += 0.05
             self.autoHitTimer2 = 2000
             self.atkList[1].put_on_cd()
         elif(attName == "autoHit2"):
-            self.combo += 0.2
+            self.combo += 0.1
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 2000
             self.atkList[2].put_on_cd()
         elif(attName == "autoHit3"):
-            self.combo += 0.4
+            self.combo += 0.2
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 0
         elif(attName == "EOF"):

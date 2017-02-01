@@ -10,7 +10,7 @@ from class_AtkEffect import *
 #   un timer a update dans la boucle de jeu (via le Charac)
 #   toutes les informations sur l'attaque à lancer
 class Atk():
-    def __init__(self, nom, cd, width, height, images, dmg , knockback, weight, speed_x, speed_y, duration):
+    def __init__(self, nom, cd, width, height, images, dmg , knockback_x, knockback_y, weight, speed_x, speed_y, duration):
         self.nom = nom
         self.cd = cd
         self.timer = 0
@@ -18,7 +18,8 @@ class Atk():
         self.width = width
         self.height = height
         self.images = images
-        self.knockback = knockback
+        self.knockback_x = knockback_x
+        self.knockback_y = knockback_y
         self.speed_x = speed_x
         self.speed_y = speed_y
         self.weight = weight
@@ -35,7 +36,10 @@ class Atk():
 
     def put_on_cd(self):
         self.timer = self.cd
-        
+
+    def put_cd(self, cd):
+        self.timer = cd
+
     #Renvoie un string (pour affichage)
     def get_cd(self):
         return "{0:.2f}".format(self.timer)
@@ -50,4 +54,4 @@ class Atk():
             return None
 
     def cast(self, x, y, facing, combo, bonusSpeed_x, bonusSpeed_y):
-        return AtkEffect(self.nom, x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback*facing, self.weight, self.speed_x*facing+bonusSpeed_x, (self.speed_y+bonusSpeed_y), facing, self.duration)
+        return AtkEffect(self.nom, x, y, self.width, self.height, self.images, self.dmg*combo , self.knockback_x*facing, self.knockback_y, self.weight, self.speed_x*facing+bonusSpeed_x, (self.speed_y+bonusSpeed_y), facing, self.duration)
