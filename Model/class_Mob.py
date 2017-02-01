@@ -21,17 +21,9 @@ class Mob(Charac):
         self.states['OdmgRight'] = 400
         self.states['OdmgLeft'] = 400
         self.up = False
-        self.down = False
         self.left = False
         self.right = False
-        self.autoHit = False
         self.spell1 = False
-        self.guard = False
-        self.ult = False
 
     def update(self, fps):
-        self.stop()
         Charac.update(self, fps)
-
-    def giveDoubleJump(self):
-        self.doubleJump = True

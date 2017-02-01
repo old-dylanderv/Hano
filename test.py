@@ -12,6 +12,7 @@ from class_Hero import *
 from class_Platform import *
 from class_Atk import *
 from class_Mob import *
+from class_Archer import *
 #initialisation de pygame
 def main(self):
     pygame.init()
@@ -171,8 +172,8 @@ def main(self):
 
     #INIT ENNEMIS
     foes = []
-    foes.append(Mob(500, 500, 64, 64, imagesArcher, 0.3, 0.5, 5, 12, WIDTH, 50, []))
-    foes.append(Mob(600, 500, 64, 64, imagesArcher, 0.3, 0.5, 5, 12, WIDTH, 50, []))
+    foes.append(Archer(500, 500, WIDTH, 1))
+    foes.append(Archer(600, 500, WIDTH, 1))
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()

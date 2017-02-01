@@ -1,7 +1,7 @@
 # -*- coding:Utf-8 -*-
 import pygame
 from pygame.locals import *
-from class_Charac import *
+from class_Mob import *
 from class_Atk import *
 from class_AtkEffect import *
 #Hero est la classe générique des héros
@@ -17,3 +17,9 @@ class Archer(Mob):
                         "OdmgLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Archer/a_dmg_2.png").convert_alpha()), True, False)]}
         atkList = Atk("fleche", 2, 32, 16, {"idleRight":[pygame.image.load("Images/Archer/Fleche.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Archer/Fleche.png").convert_alpha(),True,False)]}, 1, 3, -1, 0.1, 8, -1, 3000),
         Mob.__init__(self, x, y, 64, 64, imagesArcher, 0.3, 0.5, 5, 12, windowWidth, 50, atkList)
+        self.strength = strength
+
+    def update(self, fps):
+        #TODO : L'IA DE L'ARCHER ICI
+
+        Mob.update(self, fps)
