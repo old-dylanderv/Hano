@@ -236,6 +236,11 @@ class Hero(Charac):
         elif(attName == "EOF"):
             self.combo += 0.1
 
+    def get_autoHitTimer2(self):
+        return self.autoHitTimer2
+
+    def get_autoHitTimer3(self):
+        return self.autoHitTimer3
 
     def giveDoubleJump(self):
         self.doubleJump = True
