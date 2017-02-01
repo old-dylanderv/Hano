@@ -303,35 +303,41 @@ if __name__ == "__main__":
     statesBoss = {}
     statesBoss["idleRight"] = 500
     statesBoss["idleLeft"] = 500
-    statesBoss["moveLeft"] = 100
-    statesBoss["moveRight"] = 100
-    statesBoss["atkLeft"] = 75
-    statesBoss["atkRight"] = 75
+    statesBoss["atk1Left"] = 500
+    statesBoss["atk1Right"] = 500
+    statesBoss["atk2Left"] = 500
+    statesBoss["atk2Right"] = 500
 
     imagesBoss = {
                       "idleLeft":
                         [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha()))), True, False),
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha()))), True, False)
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha())), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha())), True, False)
                         ],
                       "idleRight":
                         [
-                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha()))),
-                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha())))
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha())),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha()))
                         ],
-                       "atkLeft":
+                       "atk1Left":
                         [
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_1.png").convert_alpha()))), True, False),
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))), True, False),
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))), True, False),
-                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha()))), True, False)
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_1.png").convert_alpha())), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_2.png").convert_alpha())), True, False),
                         ],
-                        "atkRight":
+                        "atk1Right":
                          [
-                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))),
-                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))),
-                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))),
-                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha())))
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_1.png").convert_alpha())),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_2.png").convert_alpha())),
+                         ],
+                        "atk2Left":
+                         [
+                          pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_1.png").convert_alpha())), True, False),
+                          pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_2.png").convert_alpha())), True, False),
+                         ],
+                        "atk2Right":
+                         [
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_1.png").convert_alpha())),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged2_2.png").convert_alpha())),
                          ]
                      }
 
@@ -339,7 +345,8 @@ if __name__ == "__main__":
     title = TitleItem("title", 500, 25)
     blanchon = AnimItem(imagesBlanchon, statesBlanchon, 500, 384)
     ninja = AnimItem(imagesNinja, statesNinja, 200, 384)
-    anim = [blanchon, ninja]
+    boss = AnimItem(imagesBoss, statesBoss, 700, 200)
+    anim = [blanchon, ninja, boss]
     pygame.display.set_caption('Menu')
     gm = GameMenu(screen, menu_items, title, anim)
     gm.run()
