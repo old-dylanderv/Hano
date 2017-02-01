@@ -91,16 +91,13 @@ class AnimItem(MenuItem):
     def get_image(self):
         return self.images.get(self.state)[self.indexImg]
 
-class GameMenu():
-    def __init__(self, screen, items, title, anim):
+class Menu():
+    def __init__(self, screen, items):
         self.screen = screen
         self.scr_width = self.screen.get_rect().width
         self.scr_height = self.screen.get_rect().height
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.clock = pygame.time.Clock()
-        self.anim = anim
-        self.title = title
-
         self.items = []
         for index, item in enumerate(items):
             menu_item = SelectItem(item)
@@ -114,6 +111,13 @@ class GameMenu():
 
         self.cur_item = 0
         self.items[self.cur_item].set_selected(True)
+
+class GameMenu(Menu):
+    def __init__(self, screen, items, menu, title, anim):
+        Menu.__init__(self, screen, items)
+        self.anim = anim
+        self.title = title
+        self.menu = menu
 
     def set_item_selection(self, key):
         if self.cur_item is None:
@@ -137,8 +141,7 @@ class GameMenu():
                 self.items[self.cur_item].set_selected(True)
             elif key == K_RETURN:
                 if self.cur_item == 0:
-                    test.main(self)
-
+                    self.menu[0].run()
 
     def run(self):
         while 1:
@@ -162,6 +165,39 @@ class GameMenu():
                 self.screen.blit(item.get_image(), item.position)
 
             pygame.display.flip()
+
+class NameMenu(Menu):
+    def __init__(self, screen, items):
+        Menu.__init__(self, screen, items)
+        self.name = ""
+        self.myfont = pygame.font.SysFont("monospace", 15)
+
+    def input_name(self, key):
+        if key == K_RETURN:
+            test.main(self, self.name)
+        elif (key >= 65 and key <= 90) or (key >= 97 and key <= 122) or (key == 32):
+            self.name = self.name + str(unichr(key))
+        elif key == 8:
+            self.name = self.name[:len(self.name)-1]
+
+
+    def run(self):
+        while 1:
+            self.clock.tick(60)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    self.input_name(event.key)
+
+            self.screen.blit(self.bg, (0,0))
+
+            name = self.myfont.render("Entrez votre nom : "+self.name, 1, (255,255,0))
+            self.screen.blit(name, (0,0))
+
+            pygame.display.flip()
+
 
 
 if __name__ == "__main__":
@@ -396,14 +432,18 @@ if __name__ == "__main__":
                            pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_2.png").convert_alpha())),
                           ]
                      }
-
-    menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
-    title = TitleItem("title", 500, 25)
     blanchon = AnimItem(imagesBlanchon, statesBlanchon, 500, 384)
     ninja = AnimItem(imagesNinja, statesNinja, 1000, 384)
     samurai = AnimItem(imagesSamurai, statesSamurai, 200, 256)
     boss = AnimItem(imagesBoss, statesBoss, 730, 370)
     anim = [blanchon, ninja, boss, samurai]
+    jouer = ["Jouer"]
+    title = TitleItem("title", 500, 25)
+    input_name = NameMenu(screen, jouer)
+    menu = [input_name]
+    menu_items = ("Jouer" , "HighScores", "Credits", "Quitter")
+
     pygame.display.set_caption('Menu')
-    gm = GameMenu(screen, menu_items, title, anim)
+
+    gm = GameMenu(screen, menu_items, menu, title, anim)
     gm.run()

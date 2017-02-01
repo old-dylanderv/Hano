@@ -16,14 +16,14 @@ from class_Archer import *
 from class_Samurai import *
 from class_Ninja import *
 #initialisation de pygame
-def main(self):
+def main(self, name = "Nom Par Defaut"):
     pygame.init()
 
     WIDTH = 1280
     HEIGHT = 720
     fenetre  = pygame.display.set_mode((WIDTH,HEIGHT), RESIZABLE)
 
-    fond_e = pygame.transform.scale(pygame.image.load("Images/Background/niveauRecurciforce.png").convert(), (1280,720))
+    fond_e = pygame.transform.scale(pygame.image.load("Images/Background/background.png").convert(), (1280,720))
 
     imagesBlanchon = {
                       "RidleLeft":
