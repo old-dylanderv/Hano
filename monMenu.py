@@ -177,8 +177,8 @@ if __name__ == "__main__":
     statesBlanchon["moveRight"] = 100
     statesBlanchon["atkLeft"] = 75
     statesBlanchon["atkRight"] = 75
-    statesBlanchon["crouchLeft"] = 75
-    statesBlanchon["crouchRight"] = 75
+    statesBlanchon["crouchLeft"] = 150
+    statesBlanchon["crouchRight"] = 150
 
     imagesBlanchon = {
                       "idleLeft":
