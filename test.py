@@ -175,7 +175,7 @@ def main(self):
     foes = []
     foes.append(Archer(500, 500, WIDTH, 1))
     foes.append(Archer(600, 500, WIDTH, 1))
-    foes.append(Samurai(100, 500, WIDTH, 1))
+    #foes.append(Samurai(100, 500, WIDTH, 1))
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
