@@ -256,13 +256,13 @@ class Hero(Charac):
     def comboManager(self, attName):
         if(attName == "autoHit1"):
             self.combo += 0.05
-            self.autoHitTimer2 = 2000
+            self.autoHitTimer2 = 3000
             self.atkList[1].put_on_cd()
             self.punch.play()
         elif(attName == "autoHit2"):
             self.combo += 0.1
             self.autoHitTimer2 = 0
-            self.autoHitTimer3 = 2000
+            self.autoHitTimer3 = 3000
             self.atkList[2].put_on_cd()
             self.sword.play()
         elif(attName == "autoHit3"):

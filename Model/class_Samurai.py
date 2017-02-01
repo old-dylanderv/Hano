@@ -11,7 +11,7 @@ from class_AtkEffect import *
 #   Ils ont des spells (définis dans la classe fille)
 class Samurai(Mob):
     def __init__(self, x, y, windowWidth, strength):
-    imagesSamurai = {"RidleLeft":
+        imagesSamurai = {"RidleLeft":
                         [
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_1.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_idle_2.png").convert_alpha()), True, False)
@@ -46,49 +46,45 @@ class Samurai(Mob):
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_1.png").convert_alpha()),
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_2.png").convert_alpha()),
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()),
+                         ],
+                        "OdmgRight":
+                         [
+                          pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_dmg_2.png").convert_alpha()),
+                         ],
+                         "OdmgLeft":
+                         [
+                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_dmg_2.png").convert_alpha()), True, False),
                          ]
                      }
-        atkList = Atk("sabre", 3, 32, 96, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 6, -3, 0, 4, 0, 400),
-        Mob.__init__(self, x, y, 96, 96, imagesSamurai, 0.5, 1, 4, 5, windowWidth, 60*strength, atkList)
+        atkList = Atk("sabre", 3, 96, 96, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 10, -4, 0, 4, 0, 400),
+        Mob.__init__(self, x, y, 96, 96, imagesSamurai, 0.5, 1, 4, 3, windowWidth, 50*strength, atkList)
         self.strength = strength
-        self.arrowMax = 3 + int(strength)
-        self.arrowCount = 0
-        self.flee_x = 0
-        self.flee_set = False
+        self.areaWidth = 200
 
     def update(self, hero, fps):
-        #TODO : L'IA DE L'ARCHER ICI
-        if(self.flee_set == True):
-            if(self.x-30 > self.flee_x):
-                Animated.changeState(self, "RmoveLeft")
-                self.moveLeft()
-            elif(self.x+30 < self.flee_x):
-                Animated.changeState(self, "RmoveRight")
-                self.moveRight()
-            else:
-                self.flee_set = False
-                self.arrowCount = 0
+        #TODO : L'IA DU Samurai ICI
+        if(self.x-self.areaWidth > hero.get_x2()):
+            self.moveLeft()
+            Animated.changeState(self, "RmoveLeft")
+        elif(self.x+self.rect.width+self.areaWidth < hero.get_x1()):
+            self.moveRight()
+            Animated.changeState(self, "RmoveRight")
         else:
             if(abs(self.speed_x) > 0):
                 self.stop()
             else:
                 if(self.state[0] != 'O'):
-                    if(self.arrowCount < self.arrowMax):
-                        if(self.x > hero.get_x2()):
-                            Animated.changeState(self, "RidleLeft")
-                            atkEffect = self.atkList[0].launch(self.x+self.rect.width, self.y+20, -1, self.strength)
-                        else:
-                            Animated.changeState(self, "RidleRight")
-                            atkEffect = self.atkList[0].launch(self.x-self.atkList[0].get_width(), self.y+20, 1, self.strength)
-                        if(atkEffect != None):
-                            self.atkEffectList.append(atkEffect)
-                            self.arrowCount += 1
-                            if(self.x > hero.get_x2()):
-                                Animated.changeState(self, "Oaa1Left")
-                            else:
-                                Animated.changeState(self, "Oaa1Right")
+                    if(self.x > hero.get_x1()):
+                        Animated.changeState(self, "RidleLeft")
+                        atkEffect = self.atkList[0].launch(self.x, self.y+20, -1, self.strength)
                     else:
-                        self.flee_set = True
-                        self.flee_x = (self.x+pygame.time.get_ticks()%(self.windowWidth))%(self.windowWidth-self.rect.width-200)+100
+                        Animated.changeState(self, "RidleRight")
+                        atkEffect = self.atkList[0].launch(self.x, self.y+20, 1, self.strength)
+                    if(atkEffect != None):
+                        self.atkEffectList.append(atkEffect)
+                        if(self.x > hero.get_x1()):
+                            Animated.changeState(self, "Oaa1Left")
+                        else:
+                            Animated.changeState(self, "Oaa1Right")
 
         Mob.update(self, fps)
