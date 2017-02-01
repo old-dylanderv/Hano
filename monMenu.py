@@ -4,6 +4,8 @@ from pygame.locals import *
 
 import test
 
+import sys
+
 pygame.init()
 
 class MenuItem():
@@ -83,7 +85,6 @@ class AnimItem(MenuItem):
             self.timerAnim = 0
 
     def randState(self):
-        print(pygame.time.get_ticks() % len(self.states))
         state = self.states.keys()[(pygame.time.get_ticks() % len(self.states))]
         self.changeState(state)
 
@@ -91,13 +92,13 @@ class AnimItem(MenuItem):
         return self.images.get(self.state)[self.indexImg]
 
 class GameMenu():
-    def __init__(self, screen, items, title, hero):
+    def __init__(self, screen, items, title, anim):
         self.screen = screen
         self.scr_width = self.screen.get_rect().width
         self.scr_height = self.screen.get_rect().height
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.clock = pygame.time.Clock()
-        self.hero = hero
+        self.anim = anim
         self.title = title
 
         self.items = []
@@ -150,10 +151,15 @@ class GameMenu():
                     self.set_item_selection(event.key)
 
 
-            self.hero.nextImg(60)
+
+
             self.screen.blit(self.bg, (0,0))
             self.screen.blit(self.title.get_image(), self.title.get_position())
-            self.screen.blit(self.hero.get_image(), self.hero.get_position())
+
+            for perso in self.anim:
+                perso.nextImg(60)
+                self.screen.blit(perso.get_image(), perso.get_position())
+
 
             for item in self.items:
                 self.screen.blit(item.get_image(), item.position)
@@ -245,9 +251,95 @@ if __name__ == "__main__":
                         ]
                      }
 
+    statesNinja = {}
+    statesNinja["idleRight"] = 500
+    statesNinja["idleLeft"] = 500
+    statesNinja["moveLeft"] = 100
+    statesNinja["moveRight"] = 100
+    statesNinja["atkLeft"] = 75
+    statesNinja["atkRight"] = 75
+
+    imagesNinja = {
+                      "idleLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_idle_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_idle_2.png").convert_alpha()))), True, False)
+                        ],
+                      "idleRight":
+                        [
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_idle_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_idle_2.png").convert_alpha())))
+                        ],
+                      "moveLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_mv.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_mv.png").convert_alpha()))), True, False)
+                        ],
+                      "moveRight":
+                        [
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_mv.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_mv.png").convert_alpha())))
+                        ],
+                       "atkLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha()))), True, False)
+                        ],
+                        "atkRight":
+                         [
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha())))
+                         ]
+                     }
+
+    statesBoss = {}
+    statesBoss["idleRight"] = 500
+    statesBoss["idleLeft"] = 500
+    statesBoss["moveLeft"] = 100
+    statesBoss["moveRight"] = 100
+    statesBoss["atkLeft"] = 75
+    statesBoss["atkRight"] = 75
+
+    imagesBoss = {
+                      "idleLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha()))), True, False)
+                        ],
+                      "idleRight":
+                        [
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_1.png").convert_alpha()))),
+                         pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_idle_2.png").convert_alpha())))
+                        ],
+                       "atkLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged1_1.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha()))), True, False)
+                        ],
+                        "atkRight":
+                         [
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_1.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_2.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_3.png").convert_alpha()))),
+                          pygame.transform.scale2x(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_aa_4.png").convert_alpha())))
+                         ]
+                     }
+
     menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
     title = TitleItem("title", 500, 25)
     blanchon = AnimItem(imagesBlanchon, statesBlanchon, 500, 384)
+    ninja = AnimItem(imagesNinja, statesNinja, 200, 384)
+    anim = [blanchon, ninja]
     pygame.display.set_caption('Menu')
-    gm = GameMenu(screen, menu_items, title, blanchon)
+    gm = GameMenu(screen, menu_items, title, anim)
     gm.run()
