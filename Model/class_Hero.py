@@ -96,6 +96,9 @@ class Hero(Charac):
     def get_y2(self):
         return self.y+self.rect.height
 
+    def isOnGround(self):
+        return self.onGround
+        
     def get_combo(self):
         return self.combo
 

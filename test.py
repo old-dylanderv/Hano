@@ -15,6 +15,8 @@ from class_Mob import *
 from class_Archer import *
 from class_Samurai import *
 from class_Ninja import *
+from class_Demon import *
+
 #initialisation de pygame
 def main(self):
     pygame.init()
@@ -169,14 +171,15 @@ def main(self):
     sol = Platform(0, HEIGHT-50, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
     #INIT PLATEFORMES
     platforms = []
-    platforms.append(Platform(80, HEIGHT-150, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
-    platforms.append(Platform(250, HEIGHT-250, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
+    platforms.append(Platform(100, HEIGHT-150, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
+    platforms.append(Platform(350, HEIGHT-250, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
 
     #INIT ENNEMIS
     foes = []
-    foes.append(Ninja(500, 500, WIDTH, 1))
-    foes.append(Archer(600, 500, WIDTH, 1))
-    foes.append(Samurai(100, 500, WIDTH, 1))
+#    foes.append(Ninja(500, 500, WIDTH, 1))
+#    foes.append(Archer(600, 500, WIDTH, 1))
+#    foes.append(Samurai(100, 500, WIDTH, 1))
+    foes.append(Demon(500, 350, WIDTH, 1))
 
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
