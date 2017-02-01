@@ -45,6 +45,10 @@ class Animated(Entity):
                         self.changeState("RidleLeft")
                     self.timerAnim = 0
 
+    #Permet d'empecher au hero de glisser
+    def isFirstFrame(self):
+        return self.indexImg == 0
+
     def get_img(self):
         return self.images.get(self.state)[self.indexImg]
 

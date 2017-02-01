@@ -84,7 +84,12 @@ class Hero(Charac):
 
     def update(self, fps):
         #BLOC GESTION MOUVEMENT -----------------------------------
-        if(self.state[0] != 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
+        if(self.state[0] == 'O'): #Pas de mouvement ni d'attaque si le personnage est en animation one time
+            if(self.isFirstFrame() == True):
+                self.speed_x = 0
+                self.currAcc_x = 0
+                self.speed_y = 0
+        else:
             #Left = true && Right = false
             if(self.left == True and self.right == False):
                 Charac.moveLeft(self)
@@ -196,6 +201,7 @@ class Hero(Charac):
                         Animated.changeState(self, "Oaa1Right")
                     else:
                         Animated.changeState(self, "Oaa1Left")
+                    self.atkList[0].put_on_cd() #Si le coup de pied est lance on met un cd sur le coup de poing
 
         if(self.autoHitTimer2 > 0):
             self.autoHitTimer2 = self.autoHitTimer2 - (1000.0/fps)
@@ -207,18 +213,20 @@ class Hero(Charac):
 
     #Ici on peut vérifier si l'atk i à touché quelqu'un avant de la suppr
     def deleteAtkEffect(self, i):
-        if(self.atkEffectList[i].didHit() == True):
+        if(self.atkEffectList[i].didHit() == True): #L'attaque a touché
             self.comboManager(self.atkEffectList[i].get_nom())
         Charac.deleteAtkEffect(self, i)
 
     def comboManager(self, attName):
         if(attName == "autoHit1"):
             self.combo += 0.1
-            self.autoHitTimer2 = 1000
+            self.autoHitTimer2 = 2000
+            self.atkList[1].put_on_cd()
         elif(attName == "autoHit2"):
             self.combo += 0.2
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 2000
+            self.atkList[2].put_on_cd()
         elif(attName == "autoHit3"):
             self.combo += 0.4
             self.autoHitTimer2 = 0

@@ -33,6 +33,9 @@ class Atk():
     def get_width(self):
         return self.width
 
+    def put_on_cd(self):
+        self.timer = self.cd
+        
     #Renvoie un string (pour affichage)
     def get_cd(self):
         return "{0:.2f}".format(self.timer)
