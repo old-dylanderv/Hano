@@ -295,9 +295,16 @@ class CreditMenu(Menu):
 
 
     def run(self):
+        idle = [
+                pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Medite/b_mediteidle_1.png").convert_alpha())),
+                pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Medite/b_mediteidle_2.png").convert_alpha()))
+                ]
+        rect = pygame.Rect(565, 290, 128, 128)
+        idle1 = True
+        timeAnim = 700
+        timeStart = pygame.time.get_ticks()
         while 1:
             self.clock.tick(60)
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -305,7 +312,19 @@ class CreditMenu(Menu):
                     self.input_name(event.key)
 
             self.screen.blit(self.bg, (0,0))
-            #self.screen.blit(pygame.image.load("Images/Medite/b_mediteidle1.png").convert_alpha(), (460,95))
+
+            #Affichage blanchon meditation
+            if(idle1 == True):
+                self.screen.blit(idle[0], rect)
+            else:
+                self.screen.blit(idle[1], rect)
+
+            #Alternance des animations
+            timeAnim = timeAnim - (pygame.time.get_ticks() - timeStart)
+            timeStart = pygame.time.get_ticks()
+            if(timeAnim <= 0.0):
+                timeAnim = 700
+                idle1 = not idle1
 
             #Partie texte pour les remerciements
             graphiste = self.myfont.render("Avec l'aide de : ", 1, (0,0,0))
