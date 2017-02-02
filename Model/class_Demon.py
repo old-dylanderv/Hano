@@ -42,9 +42,11 @@ class Demon(Mob):
                                     pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_atkranged3_2.png").convert_alpha())), True, False)
                                     ],
                         "DRight":[
+                                    pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha())), True, False),
                                     pygame.transform.flip(pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha())), True, False)
                                 ],
                         "DLeft":[
+                                    pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha())),
                                     pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha()))
                                 ]}
         atkList = [Atk("feu", 2, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_1.png").convert_alpha()),
