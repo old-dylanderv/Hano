@@ -63,9 +63,9 @@ class Hero(Charac):
             self.up = True
         elif(event.key == K_DOWN):
             self.down = True
-        elif(event.key == K_a):
+        elif(event.key == K_a or event.key == K_q):
             self.autoHit = True
-        elif(event.key == K_z):
+        elif(event.key == K_z or event.key == K_w):
             self.spell1 = True
         elif(event.key == K_e):
             self.guard = True
