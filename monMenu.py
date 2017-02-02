@@ -109,7 +109,7 @@ def main():
     leaderboard_menu = LeaderboardMenu(screen)
     menu = [input_name, credit_menu, leaderboard_menu]
 
-    menu_items = ("Jouer", "Tutoriel", "HighScores", "Credits", "Quitter")
+    menu_items = ("DifNorm", "DifHard", "Tutoriel", "HighScores", "Credits", "Quitter")
 
     pygame.display.set_caption('Menu')
 

@@ -143,11 +143,11 @@ class GameMenu(Menu):
             elif key == K_RETURN:
                 if self.cur_item == 0:
                     self.menu[0].run()
-                if self.cur_item == 1:
-                    tuto.main(self)
                 if self.cur_item == 2:
-                    self.menu[2].run(readFile())
+                    tuto.main(self)
                 if self.cur_item == 3:
+                    self.menu[2].run(readFile())
+                if self.cur_item == 4:
                     self.menu[1].run()
 
     def run(self):

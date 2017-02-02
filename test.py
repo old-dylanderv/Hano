@@ -22,7 +22,7 @@ import class_Menu
 from class_Menu import *
 
 #initialisation de pygame
-def main(self, name):
+def main(self, name, difHard):
     if(name == ""):
         name = "nom par defaut"
 
