@@ -250,11 +250,11 @@ def main(self, name):
                 while(i < int(niveau+salve/5)):
                     mobId = (pygame.time.get_ticks())%4
                     if(mobId == 0):
-                        foes.append(Ninja((500*niveau*salve)%(WIDTH-100)+50, 500, WIDTH, 1+niveau/10))
+                        foes.append(Ninja((500*niveau*salve)%(WIDTH-100)+50, 200, WIDTH, 1+niveau/10))
                     elif(mobId == 1):
-                        foes.append(Samurai((500*niveau*salve)%(WIDTH-100)+50, 500, WIDTH, 1+niveau/10))
+                        foes.append(Samurai((500*niveau*salve)%(WIDTH-100)+50, 200, WIDTH, 1+niveau/10))
                     elif(mobId == 2):
-                        foes.append(Archer((500*niveau*salve)%(WIDTH-100)+50, 500, WIDTH, 1+niveau/10))
+                        foes.append(Archer((500*niveau*salve)%(WIDTH-100)+50, 200, WIDTH, 1+niveau/10))
                     elif(mobId == 3):
                         foes.append(Corbeau((500*niveau*salve)%(WIDTH-100)+50, 200, WIDTH, 1+niveau/10))
                     i += 1
