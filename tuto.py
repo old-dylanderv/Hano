@@ -204,10 +204,16 @@ def main(self, name = "nom par defaut"):
     timerDamage = 300
 
     #TEXTE DU TUTO------------------------------------------------------------------
+    self.myfontMini = pygame.font.Font("Polices/Lady Radical.ttf", 15)
     self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
     fleches = self.myfont.render("Les fleches directionnelles servent a se deplacer", 1, (200,200,0))
     atkDeBase = self.myfont.render("La touche 'A' permet de donner des coups au corps a corps", 1, (200,200,0))
     atkDistance = self.myfont.render("La touche 'Z' permet de lancer des projectiles", 1, (200,200,0))
+    combol = self.myfont.render("Le combo est possible en realisant 3 attaques basiques successives", 1, (200,200,0))
+    dbSaut  = self.myfont.render("Le double saut est possible", 1, (200,200,0))
+    quit = self.myfontMini.render("Appuyer sur 'Entree' pour ", 1, (200,200,0))
+    quit2 = self.myfontMini.render("retourner au menu principal ", 1, (200,200,0))
+
 
 
     while 1 :
@@ -225,9 +231,13 @@ def main(self, name = "nom par defaut"):
     #GESTION DU DECORS--------------------------------------------------------------
         #Fond
         fenetre.blit(fond_e, (0,0))
-        self.screen.blit(fleches, (700,50))
-        self.screen.blit(atkDeBase, (700,80))
-        self.screen.blit(atkDistance, (700,110))
+        self.screen.blit(fleches, (600,50))
+        self.screen.blit(atkDeBase, (600,80))
+        self.screen.blit(atkDistance, (600,110))
+        self.screen.blit(combol, (600,140))
+        self.screen.blit(dbSaut, (600,170))
+        self.screen.blit(quit, (1100,600))
+        self.screen.blit(quit2, (1100,620))
         #Plateformes
         nbPlatf = len(platforms)
         for i in range (0, nbPlatf):
