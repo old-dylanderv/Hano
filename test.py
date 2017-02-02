@@ -17,6 +17,8 @@ from class_Samurai import *
 from class_Ninja import *
 from class_Corbeau import *
 from class_Demon import *
+import class_Menu
+from class_Menu import *
 
 #initialisation de pygame
 def main(self, name = "Nom Par Defaut"):
@@ -182,7 +184,7 @@ def main(self, name = "Nom Par Defaut"):
                         Atk("EOF", 4, 32, 17, {"idleRight":[pygame.image.load("Images/Blanchon/vector.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/vector.png").convert_alpha(),True,False)]}, 10 , 4, -1, 0, 4, 0, 2000),
                         Atk("airAutoHit", 1, 64, 32, {"idleRight":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 5, 5, 0, 0, 0, 300)
                        ]
-    blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.3, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
+    blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.3, 0.7, 8, 6, WIDTH, 5, blanchon_atkList)
     sol = Platform(0, HEIGHT-70, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
 
     #INIT ENNEMIS
@@ -446,16 +448,10 @@ def main(self, name = "Nom Par Defaut"):
         niveau += 1
 
     keyR = False
-    while(keyR == False):
-        for event in pygame.event.get():
-            if event.type == QUIT: 	#si l'utilisateur clique sur la croix
-                sys.exit()          #on ferme la fenêtre
-            if event.type == KEYDOWN:
-                keyR = True
 
-        fontGO = pygame.font.SysFont("monospace", 40)
-        labelGO = fontGO.render("GAME OVER", 1, (150,50,50))
-        fenetre.blit(labelGO, (300, 300))
-        pygame.display.flip()
+    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), self.name)
+    dieMenu.run()
+
+    pygame.display.flip()
 
     #RENVOYER AU MENU
