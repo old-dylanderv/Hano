@@ -40,11 +40,13 @@ class Samurai(Mob):
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_1.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_2.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()), True, False),
                         ],
                         "Oaa1Right":
                          [
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_1.png").convert_alpha()),
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_2.png").convert_alpha()),
+                          pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()),
                           pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_atk_3.png").convert_alpha()),
                          ],
                         "OdmgRight":
@@ -56,8 +58,10 @@ class Samurai(Mob):
                           pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/s_dmg_2.png").convert_alpha()), True, False),
                          ]
                      }
-        atkList = Atk("sabre", 3, 96, 96, {"idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/particle_sam.png").convert_alpha()), True, False)],"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Samurai/particle_sam.png").convert_alpha())]}, 10, 10, -4, 0, 4, 0, 400),
+        atkList = Atk("sabre", 4, 96, 96, {"idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Samurai/particle_sam.png").convert_alpha()), True, False)],"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Samurai/particle_sam.png").convert_alpha())]}, 10, 10, -4, 0, 4, 0, 400),
         Mob.__init__(self, x, y, 96, 96, imagesSamurai, 0.5, 1, 4, 3, windowWidth, 40*strength, atkList)
+        self.states["Oaa1Right"] = 100
+        self.states["Oaa1Left"] = 100
         self.strength = strength
         self.areaWidth = 200
 

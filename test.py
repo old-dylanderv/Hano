@@ -185,8 +185,8 @@ def main(self, name = "Nom Par Defaut"):
     foes = []
 #    foes.append(Ninja(500, 500, WIDTH, 1))
 #    foes.append(Archer(600, 500, WIDTH, 1))
-#    foes.append(Samurai(100, 500, WIDTH, 1))
-    foes.append(Corbeau(200, 400, WIDTH, 1))
+    foes.append(Samurai(100, 500, WIDTH, 1))
+#    foes.append(Corbeau(200, 400, WIDTH, 1))
 #   foes.append(Demon(500, 350, WIDTH, 1))
 
 
