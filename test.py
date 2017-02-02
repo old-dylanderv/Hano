@@ -198,7 +198,7 @@ def main(self, name = "Nom Par Defaut"):
     Mult = pygame.font.Font("Polices/Lady Radical.ttf", 25)
     Mult.set_bold(False)
     MultB = pygame.font.Font("Polices/Lady Radical.ttf", 40)
-    MultB.set_bold(True)
+    MultB.set_bold(False)
     damageFont = pygame.font.Font("Polices/Lady Radical.ttf", 30)
 
     damageArray = []
@@ -207,8 +207,8 @@ def main(self, name = "Nom Par Defaut"):
     niveau = 1
     salve = 1
     tempsParSalve = 10.0
-    timerFont = pygame.font.SysFont("monospace", 20)
-    levelFont = pygame.font.SysFont("monospace", 15)
+    timerFont = pygame.font.SysFont("Polices/Lady Radical.ttf", 20)
+    levelFont = pygame.font.SysFont("Polices/Lady Radical.ttf", 15)
 
     while not blanchon.isDead() :
         salve = 1
