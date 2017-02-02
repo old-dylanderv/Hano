@@ -145,7 +145,7 @@ class GameMenu(Menu):
                     self.menu[0].run()
                 if self.cur_item == 1:
                     tuto.main(self)
-                if self.cur_item == 2:
+                if self.cur_item == 3:
                     self.menu[1].run()
 
     def run(self):
