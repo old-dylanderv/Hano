@@ -253,7 +253,7 @@ def main(self, name = "Nom Par Defaut"):
 
                 # render text
                 if(salve != 5):
-                    timerLabel = timerFont.render(str(timer), 1, (50,100,200))
+                    timerLabel = timerFont.render("{0:.1f}".format(timer)+" sec", 1, (50,100,200))
                 else:
                     timerLabel = timerFont.render("BOSS", 1, (50,100,200))
                 scoreLabel = scoreFont.render("Score : "+str(int(score)), 1, (200, 200, 100))
