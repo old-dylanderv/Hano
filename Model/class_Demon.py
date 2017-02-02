@@ -62,7 +62,7 @@ class Demon(Mob):
                                             "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_1.png").convert_alpha()),True,False),
                                                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_2.png").convert_alpha()),True,False)]}, 15, 2, 5, 0.8, 0, 0, 2000)]
 
-        Mob.__init__(self, x, y, 256, 96, imagesDemon, 0.01, 0.008, 2, 3, windowWidth, 200*strength, atkList)
+        Mob.__init__(self, x, y, 256, 96, imagesDemon, 0.01, 0.008, 2, 3, windowWidth, 250*strength, atkList)
         self.states["Oaa1Right"] = 200
         self.states["Oaa1Left"] = 200
         self.states["Oaa2Right"] = 200

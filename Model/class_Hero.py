@@ -10,7 +10,7 @@ from class_AtkEffect import *
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
 class Hero(Charac):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList, difHard):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList)
         self.states['RmoveLeft'] = 100
         self.states['RmoveRight'] = 100
@@ -47,6 +47,7 @@ class Hero(Charac):
         self.spell1 = False
         self.guard = False
         self.ult = False
+        self.difHard = difHard
         self.punch = pygame.mixer.Sound("Music/punch.wav")
         self.sword = pygame.mixer.Sound("Music/sword.wav")
         self.eof = pygame.mixer.Sound("Music/error.wav")
@@ -298,7 +299,11 @@ class Hero(Charac):
             self.applause.play()
 
     def set_hp(self, dmg):
-        self.combo = 1
+        #en HARD on drop tout le combo en prenant des dmg
+        if(self.difHard == True):
+            self.combo = 1
+        else: #en NORMAL on drop que la moitié du bonus > 1
+            self.combo = float("{0:.2f}".format(1+(self.combo-1)/2))
         if(self.state[:7] == "Fcrouch"):
             dmg = dmg/2.0
             self.bloc.play()
