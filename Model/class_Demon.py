@@ -49,7 +49,7 @@ class Demon(Mob):
                                     pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha())),
                                     pygame.transform.scale2x(pygame.transform.scale2x(pygame.image.load("Images/Boss/boss_dead.png").convert_alpha()))
                                 ]}
-        atkList = [Atk("feu", 2, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_1.png").convert_alpha()),
+        atkList = [Atk("feu", 1.5, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_1.png").convert_alpha()),
                                                         pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_2.png").convert_alpha())],
                                             "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_1.png").convert_alpha()),True,False),
                                                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/fire_2.png").convert_alpha()),True,False)]}, 10, 3, -1, 0, 6, 0, 3000),
@@ -60,7 +60,7 @@ class Demon(Mob):
                 Atk("glace", 2, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_1.png").convert_alpha()),
                                                         pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_2.png").convert_alpha())],
                                             "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_1.png").convert_alpha()),True,False),
-                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_2.png").convert_alpha()),True,False)]}, 15, 2, 5, 0.8, 0, 0, 2000)]
+                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Boss/ice_2.png").convert_alpha()),True,False)]}, 18, 2, 5, 0.8, 0, 0, 2000)]
 
         Mob.__init__(self, x, y, 256, 96, imagesDemon, 0.01, 0.008, 2, 3, windowWidth, 250*strength, atkList)
         self.states["Oaa1Right"] = 200
@@ -72,7 +72,7 @@ class Demon(Mob):
         self.states["DRight"] = 200
         self.states["DLeft"] = 200
         self.strength = strength
-        self.spellMax = int(6*strength)
+        self.spellMax = int(7*strength)
         self.spellCount = 0
         self.flee_x = 0
         self.flee_y = 0

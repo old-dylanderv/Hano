@@ -222,7 +222,7 @@ def main(self, name, difHard):
 
     #INIT MUSIQUE
     pygame.mixer.init()
-    musicMob = "Music/Music_mobs.wav"
+    musicMob = "Music/mob.wav"
     musicBoss = "Music/Music_Boss.wav"
     #INIT VAR DE JEU
     damageArray = []
