@@ -195,10 +195,11 @@ def main(self, name = "Nom Par Defaut"):
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
     fps = 60
-    myfont = pygame.font.SysFont("monospace", 15)
-    myfont.set_bold(True)
-    damageFont = pygame.font.SysFont("monospace", 30)
-    damageFont.set_bold(True)
+    Mult = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    Mult.set_bold(False)
+    MultB = pygame.font.Font("Polices/Lady Radical.ttf", 40)
+    MultB.set_bold(True)
+    damageFont = pygame.font.Font("Polices/Lady Radical.ttf", 30)
 
     damageArray = []
     timerDamage = 300
