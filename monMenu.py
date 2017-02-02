@@ -256,7 +256,8 @@ def main():
     title = TitleItem("title", 500, 25)
     input_name = NameMenu(screen, jouer)
     credit_menu = CreditMenu(screen)
-    menu = [input_name, credit_menu]
+    leaderboard_menu = LeaderboardMenu(screen)
+    menu = [input_name, credit_menu, leaderboard_menu]
 
     menu_items = ("Jouer", "Tutoriel", "HighScores", "Credits", "Quitter")
 
