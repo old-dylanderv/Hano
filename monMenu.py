@@ -258,7 +258,7 @@ def main():
     credit_menu = CreditMenu(screen)
     menu = [input_name, credit_menu]
 
-    menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
+    menu_items = ("Jouer", "Tutoriel", "HighScores", "Credits", "Quitter")
 
     pygame.display.set_caption('Menu')
 

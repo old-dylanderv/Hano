@@ -2,6 +2,8 @@
 import pygame
 from pygame.locals import *
 
+import leaderboard
+from leaderboard import *
 import monMenu
 import test
 import tuto
@@ -143,7 +145,7 @@ class GameMenu(Menu):
                     self.menu[0].run()
                 if self.cur_item == 1:
                     tuto.main(self)
-                if self.cur_item == 2:
+                if self.cur_item == 3:
                     self.menu[1].run()
 
     def run(self):
@@ -262,6 +264,7 @@ class DieMenu(Menu):
                     monMenu.main()
 
     def run(self):
+        writeFile(addScore(readFile(), self.score, self.name))
         while 1:
             self.clock.tick(60)
 
