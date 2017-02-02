@@ -184,10 +184,6 @@ def main(self, name = "Nom Par Defaut"):
                        ]
     blanchon = Hero(200, 200, 64, 64, imagesBlanchon, 0.3, 0.7, 8, 6, WIDTH, 100.0, blanchon_atkList)
     sol = Platform(0, HEIGHT-70, WIDTH, 10, pygame.image.load("Images/plateformtest.png").convert_alpha(), 0.4)
-    #INIT PLATEFORMES
-    platforms = []
-    platforms.append(Platform(100, HEIGHT-180, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
-    platforms.append(Platform(350, HEIGHT-280, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
 
     #INIT ENNEMIS
     foes = []
@@ -220,13 +216,16 @@ def main(self, name = "Nom Par Defaut"):
 
     while not blanchon.isDead() :
         salve = 1
-        #RANDOMISER PLATEFORME ICI
+        #INIT PLATEFORMES
+        platforms = []
+        platforms.append(Platform(300+(pygame.time.get_ticks()%400)-200, HEIGHT-180, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
+        platforms.append(Platform(350+(pygame.time.get_ticks()%100)-50, HEIGHT-280, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
         while salve < 6 and not blanchon.isDead():
             if(salve < 5):
                 #AJOUTER DES MOBS A FOES
                 i = 0
                 while(i < int(niveau+salve/5)):
-                    mobId = pygame.time.get_ticks()%4
+                    mobId = (i*pygame.time.get_ticks())%4
                     if(mobId == 0):
                         foes.append(Ninja(500, 500, WIDTH, 1+niveau/10))
                     elif(mobId == 1):
