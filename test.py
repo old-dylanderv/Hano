@@ -274,6 +274,7 @@ def main(self, name, difHard):
                 pygame.mixer.music.play(-1)
             elif(salve == 1):
                 pygame.mixer.music.load(musicMob)
+                pygame.mixer.music.set_volume(0.5)
                 pygame.mixer.music.play(-1)
             #BOUCLE DE JEU =========================================================================================
             while(len(foes) > 0 and (timer > 0.0 or salve >= 4) and not blanchon.isDead()):
