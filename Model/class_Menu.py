@@ -287,6 +287,7 @@ class CreditMenu(Menu):
         Menu.__init__(self, screen)
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.myfontMini = pygame.font.Font("Polices/Lady Radical.ttf", 15)
 
     def input_name(self, key):
         if key == K_RETURN:
@@ -304,11 +305,52 @@ class CreditMenu(Menu):
                     self.input_name(event.key)
 
             self.screen.blit(self.bg, (0,0))
+            #self.screen.blit(pygame.image.load("Images/Medite/b_mediteidle1.png").convert_alpha(), (460,95))
 
-            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
-            self.screen.blit(name, (0,0))
+            #Partie texte pour les remerciements
+            graphiste = self.myfont.render("Avec l'aide de : ", 1, (0,0,0))
+            self.screen.blit(graphiste, (260,500))
+            dumas = self.myfont.render("    - Stack-Overflow", 1, (0,0,0))
+            self.screen.blit(dumas, (260,530))
+            sorin = self.myfont.render("    - Pygame.org ", 1, (0,0,0))
+            self.screen.blit(sorin, (260,560))
 
-            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
-            self.screen.blit(name, (1000,0))
+            #Partie texte pour les concepteurs
+            graphiste = self.myfont.render("Concepteurs : ", 1, (0,0,0))
+            self.screen.blit(graphiste, (190,300))
+            dumas = self.myfont.render("    - ORTHLIEB  Teo", 1, (0,0,0))
+            self.screen.blit(dumas, (190,330))
+            sorin = self.myfont.render("    - DERVAUX  Dylan ", 1, (0,0,0))
+            self.screen.blit(sorin, (190,360))
+
+            #Partie texte pour les devs
+            graphiste = self.myfont.render("Developpeurs : ", 1, (0,0,0))
+            self.screen.blit(graphiste, (520,150))
+            dumas = self.myfont.render("    - ORTHLIEB  Teo", 1, (0,0,0))
+            self.screen.blit(dumas, (520,180))
+            sorin = self.myfont.render("    - DERVAUX  Dylan ", 1, (0,0,0))
+            self.screen.blit(sorin, (520,210))
+
+            #Partie texte pour les graphistes
+            graphiste = self.myfont.render("Graphistes : ", 1, (0,0,0))
+            self.screen.blit(graphiste, (800,300))
+            dumas = self.myfont.render("    - DUMAS  Remi", 1, (0,0,0))
+            self.screen.blit(dumas, (800,330))
+            sorin = self.myfont.render("    - SORIN-DOIZE  Clement ", 1, (0,0,0))
+            self.screen.blit(sorin, (800,360))
+            gineys = self.myfont.render("   - GINEYS  Julien", 1, (0,0,0))
+            self.screen.blit(gineys, (800,390))
+
+            #Partie texte pour ^^
+            graphiste = self.myfont.render("Inspire d'une histoire (presque) vraie ", 1, (0,0,0))
+            self.screen.blit(graphiste, (780,530))
+
+            #Partie texte pour quitter
+            quit = self.myfontMini.render("Appuyer sur 'Entree' pour ", 1, (0,0,0))
+            self.screen.blit(quit, (1100,600))
+            quit2 = self.myfontMini.render("retourner au menu principal ", 1, (0,0,0))
+            self.screen.blit(quit2, (1100,620))
+
+
 
             pygame.display.flip()
