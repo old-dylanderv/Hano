@@ -244,8 +244,12 @@ def main(self, name = "Nom Par Defaut"):
                 else:
                     timer = timer - (pygame.time.get_ticks() - timeSave)/1000.0
                     timeSave = pygame.time.get_ticks()
+
                 # render text
-                timerLabel = timerFont.render(str(timer), 1, (50,100,200))
+                if(salve != 5):
+                    timerLabel = timerFont.render(str(timer), 1, (50,100,200))
+                else:
+                    timerLabel = timerFont.render("BOSS", 1, (50,100,200))
 
                 clock.tick(fps)
                 #GESTION EVENT------------------------------------------------------------------
@@ -261,8 +265,7 @@ def main(self, name = "Nom Par Defaut"):
                 #Fond
                 fenetre.blit(fond_e, (0,0))
                 #timer
-                if(salve != 5):
-                    fenetre.blit(timerLabel, (500, 670))
+                fenetre.blit(timerLabel, (500, 670))
                 fenetre.blit(niveauLabel, (500, 700))
                 #Plateformes
                 nbPlatf = len(platforms)
