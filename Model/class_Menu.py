@@ -258,7 +258,7 @@ class DieMenu(Menu):
         self.items[self.cur_item].set_selected(True)
 
 
-    def set_item_selection(self, key):
+    def set_item_selection(self, key, difHard):
         if self.cur_item is None:
             self.cur_item = 0
         else:
@@ -280,7 +280,7 @@ class DieMenu(Menu):
                 self.items[self.cur_item].set_selected(True)
             elif key == K_RETURN:
                 if self.cur_item == 0:
-                    test.main(self, self.name)
+                    test.main(self, self.name, difHard)
                 if self.cur_item == 1:
                     monMenu.main()
 
@@ -293,7 +293,7 @@ class DieMenu(Menu):
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    self.set_item_selection(event.key)
+                    self.set_item_selection(event.key, difHard)
 
 
 
