@@ -255,7 +255,9 @@ def main():
     jouer = ["Jouer"]
     title = TitleItem("title", 500, 25)
     input_name = NameMenu(screen, jouer)
-    menu = [input_name]
+    credit_menu = CreditMenu(screen)
+    menu = [input_name, credit_menu]
+
     menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
 
     pygame.display.set_caption('Menu')
