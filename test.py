@@ -192,25 +192,31 @@ def main(self, name = "Nom Par Defaut"):
     #INIT ENNEMIS
     foes = []
 
-    #INIT SYSTEM CLOCK
-    clock = pygame.time.Clock()
-    fps = 60
+    #INIT POLICE
     Mult = pygame.font.Font("Polices/Lady Radical.ttf", 25)
     Mult.set_bold(False)
     MultB = pygame.font.Font("Polices/Lady Radical.ttf", 40)
     MultB.set_bold(False)
     damageFont = pygame.font.Font("Polices/Lady Radical.ttf", 30)
-
-    damageArray = []
-    timerDamage = 300
-
-    niveau = 1
-    salve = 1
-    tempsParSalve = 10.0
     timerFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
     timerFont.set_bold(False)
     levelFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
     levelFont.set_bold(False)
+    scoreFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    levelFont.set_bold(False)
+
+    #INIT VAR DE JEU
+    damageArray = []
+    timerDamage = 300
+    score = 0
+    niveau = 1
+    salve = 1
+
+    tempsParSalve = 10.0
+
+    #INIT SYSTEM CLOCK
+    clock = pygame.time.Clock()
+    fps = 60
 
     while not blanchon.isDead() :
         salve = 1
@@ -250,6 +256,7 @@ def main(self, name = "Nom Par Defaut"):
                     timerLabel = timerFont.render(str(timer), 1, (50,100,200))
                 else:
                     timerLabel = timerFont.render("BOSS", 1, (50,100,200))
+                scoreLabel = scoreFont.render("Score : "+str(int(score)), 1, (200, 200, 100))
 
                 clock.tick(fps)
                 #GESTION EVENT------------------------------------------------------------------
@@ -286,8 +293,10 @@ def main(self, name = "Nom Par Defaut"):
                 else:
                     MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255, 0, 0))
 
-                fenetre.blit(Multipl, (700, 680))
-                fenetre.blit(MultiplCombo, (800, 670))
+                fenetre.blit(Multipl, (700, 660))
+                fenetre.blit(MultiplCombo, (800, 650))
+                #Affichage du score
+                fenetre.blit(scoreLabel, (700, 690))
 
                 #CoolDown Attaque de Blanchon
                 tailleRect1 = 60
@@ -416,6 +425,8 @@ def main(self, name = "Nom Par Defaut"):
 
                     foes[i].update(blanchon, fps)
                     if(foes[i].get_hp() <= 0):
+                        #AJOUT DES POINTS AU SCORE
+                        score += foes[i].get_hpMax()*foes[i].get_hpMax()
                         foes.pop(i)
                     else:
                         i += 1
@@ -430,6 +441,8 @@ def main(self, name = "Nom Par Defaut"):
                 pygame.draw.rect(fenetre, (0,255,0), (blanchon.get_rect().x, blanchon.get_rect().y - 10,   int(max(min(blanchon.get_hp() / float(blanchon.get_hpMax()) * 60, 60), 0)),   6))
 
                 pygame.display.flip()
+            #AJOUTE DES POINTS AU SCORE
+            score += (tempsParSalve - timer)*500
             salve += 1
         niveau += 1
 

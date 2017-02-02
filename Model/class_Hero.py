@@ -284,6 +284,8 @@ class Hero(Charac):
 
     def set_hp(self, dmg):
         self.combo = 1
+        if(self.state[:7] == "Fcrouch"):
+            dmg = dmg/2.0
         Charac.set_hp(self, dmg)
         if(self.hp <= 0.0):
             if(self.facing == 1):
