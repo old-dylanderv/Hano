@@ -48,6 +48,7 @@ class Hero(Charac):
         self.punch = pygame.mixer.Sound("Music/punch.wav")
         self.sword = pygame.mixer.Sound("Music/sword.wav")
         self.eof = pygame.mixer.Sound("Music/error.wav")
+        self.bloc = pygame.mixer.Sound("Music/bloc.wav")
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
@@ -294,6 +295,7 @@ class Hero(Charac):
         self.combo = 1
         if(self.state[:7] == "Fcrouch"):
             dmg = dmg/2.0
+            self.bloc.play()
         Charac.set_hp(self, dmg)
         if(self.hp <= 0.0):
             if(self.facing == 1):

@@ -127,10 +127,10 @@ class Moine(Mob):
                     else: #Le bon laser
                         if(self.x > hero.get_x1()):
                             Animated.changeState(self, "RidleLeft")
-                            atkEffect = self.atkList[1].launch(self.x, self.y+30, -1, self.strength)
+                            atkEffect = self.atkList[1].launch(self.x, self.y+20, -1, self.strength)
                         else:
                             Animated.changeState(self, "RidleRight")
-                            atkEffect = self.atkList[1].launch(self.x, self.y+30, 1, self.strength)
+                            atkEffect = self.atkList[1].launch(self.x, self.y+20, 1, self.strength)
                         if(atkEffect != None):
                             if(self.stockOrb < 4):
                                 self.stockOrb += 4
