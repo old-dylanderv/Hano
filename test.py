@@ -17,6 +17,7 @@ from class_Samurai import *
 from class_Ninja import *
 from class_Corbeau import *
 from class_Demon import *
+from class_Moine import *
 import class_Menu
 from class_Menu import *
 
@@ -234,9 +235,9 @@ def main(self, name):
         platforms.append(Platform(300+(pygame.time.get_ticks()%400)-200, HEIGHT-180, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
         platforms.append(Platform(350+(pygame.time.get_ticks()%100)-50, HEIGHT-280, 100, 10, pygame.image.load("Images/plateform.png").convert_alpha(), 1))
         while salve < 6 and not blanchon.isDead():
+            i = 0
             if(salve < 5):
                 #AJOUTER DES MOBS A FOES
-                i = 0
                 while(i < int(niveau+salve/5)):
                     mobId = (pygame.time.get_ticks())%4
                     if(mobId == 0):
@@ -250,7 +251,12 @@ def main(self, name):
                     i += 1
             else:
                 #AJOUTER UN BOSS A FOES
-                foes.append(Demon(500, 350, WIDTH, 1+niveau/10))
+                while(i < 1+int(niveau/5)):
+                    if((niveau+i)%2 == 0):
+                        foes.append(Demon(500, 350, WIDTH, 1+niveau/10))
+                    elif((niveau+i)%2 == 1):
+                        foes.append(Moine(500, 350, WIDTH, 1+niveau/10))
+                    i += 1
             niveauLabel = levelFont.render(str(niveau)+" - "+str(salve), 1, (250,250,250))
             timer = tempsParSalve
             timeSave = pygame.time.get_ticks()
