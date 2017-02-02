@@ -188,8 +188,10 @@ def main(self, name = "Nom Par Defaut"):
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
     fps = 60
-    myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
-    #myfont.set_bold(True)
+    Mult = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    Mult.set_bold(False)
+    MultB = pygame.font.Font("Polices/Lady Radical.ttf", 40)
+    MultB.set_bold(True)
     damageFont = pygame.font.Font("Polices/Lady Radical.ttf", 30)
     #damageFont.set_bold(True)
 
@@ -218,8 +220,10 @@ def main(self, name = "Nom Par Defaut"):
 
     #GESTION DU HERO----------------------------------------------------------------
         #Affichage Multiplicateur de dégats
-        CountAH = myfont.render(u"Mult : "+str(blanchon.get_combo()), 1, (255,255,0))
-        fenetre.blit(CountAH, (700, 680))
+        Multipl = Mult.render(u"Mult : ", 1, (255,255,0))
+        MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255,255,0))
+        fenetre.blit(Multipl, (700, 680))
+        fenetre.blit(MultiplCombo, (800, 670))
 
         #CoolDown Attaque de Blanchon
         tailleRect1 = 60
@@ -235,20 +239,20 @@ def main(self, name = "Nom Par Defaut"):
             posRect1 = 715 - (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
             tailleRect1 = (60*float(cd))/float(blanchon_atkList[4].get_maxCd())
             fenetre.blit(blanchonAaMidAir, (100,660))
-            CdAH = myfont.render(cd, 1, (255,0,0))
+            CdAH = damageFont.render(cd, 1, (255,0,0))
         elif blanchon.get_autoHitTimer3() > 0:
             pygame.draw.rect(fenetre, (200,200,50), (95, 655, 60, 60))
             fenetre.blit(blanchonAa3, (100,660))
             posRect1 = 715 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)))/float(3)
             tailleRect1 = (60*float("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)))/float(3)
-            CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,0,0))
+            CdAH = damageFont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer3()/1000)), 1, (255,0,0))
 
         elif blanchon.get_autoHitTimer2() > 0:
             pygame.draw.rect(fenetre, (200,200,50), (95, 655, 60, 60))
             fenetre.blit(blanchonAa2, (100,660))
             posRect1 = 715 - (60*float("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)))/float(3)
             tailleRect1 = (60*float("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)))/float(3)
-            CdAH = myfont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,0,0))
+            CdAH = damageFont.render(str("{0:.1f}".format(blanchon.get_autoHitTimer2()/1000)), 1, (255,0,0))
         else:
             cd = blanchon_atkList[0].get_cd()
             if(float(cd) > 0):
@@ -259,13 +263,13 @@ def main(self, name = "Nom Par Defaut"):
             fenetre.blit(blanchonAa1, (100,660))
             posRect1 = 715 - ((60*float(cd))/float(blanchon_atkList[0].get_maxCd()))
             tailleRect1 = (60*float(cd))/float(blanchon_atkList[0].get_maxCd())
-            CdAH = myfont.render(cd, 1, (255,0,0))
+            CdAH = damageFont.render(cd, 1, (255,0,0))
 
         CaseAa = pygame.Surface((60,tailleRect1), pygame.SRCALPHA)
         CaseAa.fill(colorRect)
         fenetre.blit(CaseAa, (95,posRect1))
         if(float(cd) > 0):
-            fenetre.blit(CdAH, (110, 50))
+            fenetre.blit(CdAH, (110, 670))
 
         if(float(blanchon_atkList[3].get_cd()) > 0):
             pygame.draw.rect(fenetre, (0,0,0), (175, 655, 60, 60))
@@ -274,7 +278,7 @@ def main(self, name = "Nom Par Defaut"):
             pygame.draw.rect(fenetre, (200,200,50), (175, 655, 60, 60))
             pygame.draw.rect(fenetre, (255,255,255), (180, 660, 50, 50))
 
-        fenetre.blit(blanchonVector, (189,630+47))
+        fenetre.blit(blanchonVector, (189,677))
         tailleRect2 = 65
         posRect2 = 715
 
@@ -284,9 +288,9 @@ def main(self, name = "Nom Par Defaut"):
         CaseAa.fill((125,125,125,128))
         fenetre.blit(CaseAa, (175,posRect2))
 
-        CdProj = myfont.render(str(blanchon_atkList[3].get_cd()), 1, (255,0,0))
+        CdProj = damageFont.render(str(blanchon_atkList[3].get_cd()), 1, (255,0,0))
         if(float(blanchon_atkList[3].get_cd()) > 0):
-            fenetre.blit(CdProj, (190, 50))
+            fenetre.blit(CdProj, (190, 670))
         #Teste Hero => Plateforme
         heroOnGround = blanchon.isOnGround()
         blanchon.setOnAir()
