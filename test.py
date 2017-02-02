@@ -224,7 +224,7 @@ def main(self, name = "Nom Par Defaut"):
             timer = tempsParSalve
             timeSave = pygame.time.get_ticks()
             #BOUCLE DE JEU =========================================================================================
-            while(len(foes) > 0 and (timer > 0.0 or salve == 4)):
+            while(len(foes) > 0 and (timer > 0.0 or salve >= 4)):
                 #GESTION TIMER-----------------------------------------------------------------
                 if(timer <= 0.0):
                     timer = 0
@@ -248,7 +248,8 @@ def main(self, name = "Nom Par Defaut"):
                 #Fond
                 fenetre.blit(fond_e, (0,0))
                 #timer
-                fenetre.blit(timerLabel, (500, 670))
+                if(salve != 5):
+                    fenetre.blit(timerLabel, (500, 670))
                 fenetre.blit(niveauLabel, (500, 700))
                 #Plateformes
                 nbPlatf = len(platforms)
