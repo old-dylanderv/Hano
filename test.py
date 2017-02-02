@@ -226,8 +226,11 @@ def main(self, name = "Nom Par Defaut"):
             #BOUCLE DE JEU =========================================================================================
             while(len(foes) > 0 and (timer > 0.0 or salve == 4)):
                 #GESTION TIMER-----------------------------------------------------------------
-                timer = timer - (pygame.time.get_ticks() - timeSave)/1000.0
-                timeSave = pygame.time.get_ticks()
+                if(timer <= 0.0):
+                    timer = 0
+                else:
+                    timer = timer - (pygame.time.get_ticks() - timeSave)/1000.0
+                    timeSave = pygame.time.get_ticks()
                 # render text
                 timerLabel = timerFont.render(str(timer), 1, (50,100,200))
 

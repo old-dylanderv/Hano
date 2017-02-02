@@ -24,7 +24,7 @@ class Corbeau(Mob):
         atkList = Atk("shuriken", 2, 16, 16, {"idleLeft":[pygame.image.load("Images/Corbeau/shuriken.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Corbeau/shuriken.png").convert_alpha(),True,False)]}, 2, 3, 1, 0.3, 0, 2, 2000),
         Mob.__init__(self, x, y, 32, 32, imagesCorbeau, 0.01, 1, 1, 8, windowWidth, 10*strength, atkList)
         self.strength = strength
-        self.min_y = (pygame.time.get_ticks()%200) + 100
+        self.min_y = (pygame.time.get_ticks()%200) + 200
         self.left = True
         self.right = False
 
