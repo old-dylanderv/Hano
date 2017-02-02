@@ -114,7 +114,6 @@ class GameMenu(Menu):
             if(index == 0):
                 pos_x = 30
                 pos_y = 130 + (menu_item.height * (index * 1.2)) + menu_item.height
-                print(pos_y)
             elif(index == 1):
                 pos_x = 180
                 pos_y = 180
@@ -155,7 +154,7 @@ class GameMenu(Menu):
                 if self.cur_item == 2:
                     tuto.main(self)
                 if self.cur_item == 3:
-                    self.menu[2].run(readFile())
+                    self.menu[2].run(readFile(False), readFile(True),)
                 if self.cur_item == 4:
                     self.menu[1].run()
                 if self.cur_item == 5:
@@ -285,8 +284,8 @@ class DieMenu(Menu):
                 if self.cur_item == 1:
                     monMenu.main()
 
-    def run(self):
-        writeFile(addScore(readFile(), self.score, self.name))
+    def run(self, difHard):
+        writeFile(addScore(readFile(difHard), self.score, self.name), difHard)
         while 1:
             self.clock.tick(60)
 
@@ -405,6 +404,7 @@ class LeaderboardMenu(Menu):
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.img = pygame.image.load("Images/Menu/HighScoresNS.png").convert_alpha()
         self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.myfontBig = pygame.font.Font("Polices/Lady Radical.ttf", 35)
         self.myfontMini = pygame.font.Font("Polices/Lady Radical.ttf", 15)
 
     def input_name(self, key):
@@ -412,7 +412,7 @@ class LeaderboardMenu(Menu):
             monMenu.main()
 
 
-    def run(self, tabScore):
+    def run(self, tabScoreMoyen, tabScoreHard):
         while 1:
             self.clock.tick(60)
             for event in pygame.event.get():
@@ -425,10 +425,20 @@ class LeaderboardMenu(Menu):
 
             self.screen.blit(self.img, (520,100))
 
+            normal = self.myfontBig.render("Normal", 1, (0,0,0))
+            self.screen.blit(normal, (190,190))
             i = 0
-            while i < len(tabScore):
-                score = self.myfont.render(tabScore[i][0]+" - "+tabScore[i][1], 1, (0,0,0))
-                self.screen.blit(score, (190,200 + (30 * i)))
+            while i < len(tabScoreMoyen):
+                score = self.myfont.render(tabScoreMoyen[i][0]+" - "+tabScoreMoyen[i][1], 1, (0,0,0))
+                self.screen.blit(score, (190,250 + (30 * i)))
+                i += 1
+
+            insane = self.myfontBig.render("Insane", 1, (0,0,0))
+            self.screen.blit(insane, (900,190))
+            i = 0
+            while i < len(tabScoreHard):
+                score = self.myfont.render(tabScoreHard[i][0]+" - "+tabScoreHard[i][1], 1, (0,0,0))
+                self.screen.blit(score, (900,250 + (30 * i)))
                 i += 1
 
             #Partie texte pour quitter

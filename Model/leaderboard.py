@@ -1,7 +1,10 @@
 # -*- coding:Utf-8 -*-
 
-def readFile():
-    fichier = open("leaderboard.txt", "r")
+def readFile(difHard):
+    if(difHard):
+        fichier = open("leaderboardHard.txt", "r")
+    else:
+        fichier = open("leaderboardMoyen.txt", "r")
     aaa = fichier.read()
     fichier.close()
     aaa = aaa.split(";")
@@ -61,8 +64,11 @@ def addScore(tabScore, score, name):
 
     return tabScore
 
-def writeFile(tabScore):
-    fichier = open("leaderboard.txt", "w")
+def writeFile(tabScore, difHard):
+    if(difHard):
+        fichier = open("leaderboardHard.txt", "w")
+    else:
+        fichier = open("leaderboardMoyen.txt", "w")
     i = 0
     while i < len(tabScore):
         fichier.write(str(tabScore[i][0])+"-"+str(tabScore[i][1])+";")

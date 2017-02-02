@@ -509,7 +509,7 @@ def main(self, name, difHard):
     keyR = False
 
     dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), name, score)
-    dieMenu.run()
+    dieMenu.run(difHard)
 
     pygame.display.flip()
 
