@@ -143,6 +143,8 @@ class GameMenu(Menu):
                     self.menu[0].run()
                 if self.cur_item == 1:
                     tuto.main(self)
+                if self.cur_item == 2:
+                    self.menu[1].run()
 
     def run(self):
         while 1:
@@ -277,5 +279,36 @@ class DieMenu(Menu):
             self.screen.blit(label, (390,95))
             for item in self.items:
                 self.screen.blit(item.get_image(), item.position)
+
+            pygame.display.flip()
+
+class CreditMenu(Menu):
+    def __init__(self, screen):
+        Menu.__init__(self, screen)
+        self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
+        self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+
+    def input_name(self, key):
+        if key == K_RETURN:
+            monMenu.main()
+
+
+    def run(self):
+        while 1:
+            self.clock.tick(60)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    self.input_name(event.key)
+
+            self.screen.blit(self.bg, (0,0))
+
+            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
+            self.screen.blit(name, (0,0))
+
+            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
+            self.screen.blit(name, (1000,0))
 
             pygame.display.flip()
