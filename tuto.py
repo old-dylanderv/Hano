@@ -16,6 +16,10 @@ from class_Mob import *
 from class_SacDeSable import *
 import monMenu
 
+def exit(key):
+    if(key == pygame.K_RETURN):
+        monMenu.main()
+
 #initialisation de pygame
 def main(self, name = "nom par defaut"):
     pygame.init()
@@ -212,9 +216,8 @@ def main(self, name = "nom par defaut"):
         for event in pygame.event.get():
             if event.type == QUIT: 	#si l'utilisateur clique sur la croix
                 sys.exit()          #on ferme la fenêtre
-            if event.key == pygame.K_ESCAPE:
-                monMenu.main()
             if event.type == KEYDOWN:
+                exit(event.key)
                 blanchon.key_down(event)
             if event.type == KEYUP:
                 blanchon.key_up(event)
