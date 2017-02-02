@@ -18,7 +18,7 @@ class Animated(Entity):
         self.timerAnim = 0
 
     def changeState(self, newState):
-        if(newState != self.state):
+        if(newState != self.state and self.state[0] != 'D'):
             oldState = self.state
             try:
                 self.state = self.states.keys()[self.states.keys().index(newState)]
@@ -36,7 +36,7 @@ class Animated(Entity):
             if(self.indexImg == len(self.images.get(self.state))):
                 if(self.state[0] == 'R'): #Si l'animation est en mode repeat
                     self.indexImg = 0
-                elif(self.state[0] == 'F'): #Si l'animation est en mode freeze
+                elif(self.state[0] == 'F' or self.state[0] == 'D'): #Si l'animation est en mode freeze ou dead
                     self.indexImg -= 1
                 elif(self.state[0] == 'O'): #Si l'animation est en mode one-time
                     if(self.facing == 1):
@@ -44,7 +44,6 @@ class Animated(Entity):
                     else:
                         self.changeState("RidleLeft")
                     self.timerAnim = 0
-
     #Permet d'empecher au hero de glisser
     def isFirstFrame(self):
         return self.indexImg == 0
