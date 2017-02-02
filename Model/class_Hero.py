@@ -48,6 +48,8 @@ class Hero(Charac):
         self.punch = pygame.mixer.Sound("Music/punch.wav")
         self.sword = pygame.mixer.Sound("Music/sword.wav")
         self.eof = pygame.mixer.Sound("Music/error.wav")
+        self.bloc = pygame.mixer.Sound("Music/bloc.wav")
+        self.applause = pygame.mixer.Sound("Music/applause.wav")
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
@@ -267,19 +269,20 @@ class Hero(Charac):
         Charac.deleteAtkEffect(self, i)
 
     def comboManager(self, attName):
+        comboTemp = self.combo
         if(attName == "autoHit1"):
-            self.combo += 0.05
+            self.combo += 0.1
             self.autoHitTimer2 = 3000
             self.atkList[1].put_on_cd()
             self.punch.play()
         elif(attName == "autoHit2"):
-            self.combo += 0.1
+            self.combo += 0.2
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 3000
             self.atkList[2].put_on_cd()
             self.sword.play()
         elif(attName == "autoHit3"):
-            self.combo += 0.2
+            self.combo += 0.3
             self.autoHitTimer2 = 0
             self.autoHitTimer3 = 0
             self.punch.play()
@@ -289,11 +292,14 @@ class Hero(Charac):
         elif(attName == "airAutoHit"):
             self.combo += 0.1
             self.sword.play()
+        if((int(self.combo) - int(comboTemp)) == 1 ):
+            self.applause.play()
 
     def set_hp(self, dmg):
         self.combo = 1
         if(self.state[:7] == "Fcrouch"):
             dmg = dmg/2.0
+            self.bloc.play()
         Charac.set_hp(self, dmg)
         if(self.hp <= 0.0):
             if(self.facing == 1):
