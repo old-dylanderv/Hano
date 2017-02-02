@@ -2,6 +2,8 @@
 import pygame
 from pygame.locals import *
 
+import leaderboard
+from leaderboard import *
 import monMenu
 import test
 import tuto
@@ -262,6 +264,7 @@ class DieMenu(Menu):
                     monMenu.main()
 
     def run(self):
+        writeFile(addScore(readFile(), self.score, self.name))
         while 1:
             self.clock.tick(60)
 
