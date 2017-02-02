@@ -221,7 +221,16 @@ def main(self, name = "Nom Par Defaut"):
     #GESTION DU HERO----------------------------------------------------------------
         #Affichage Multiplicateur de dégats
         Multipl = Mult.render(u"Mult : ", 1, (255,255,0))
-        MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255,255,0))
+        combo = blanchon.get_combo()
+        if(blanchon.get_combo() < 2):
+            MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255, 255, 0))
+        elif(blanchon.get_combo() < 3):
+            MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (0, 0, 255))
+        elif(blanchon.get_combo() < 4):
+            MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255, 0, 255))
+        else:
+            MultiplCombo = MultB.render(str(blanchon.get_combo()), 1, (255, 0, 0))
+
         fenetre.blit(Multipl, (700, 680))
         fenetre.blit(MultiplCombo, (800, 670))
 
