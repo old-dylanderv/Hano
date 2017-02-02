@@ -72,7 +72,7 @@ class Demon(Mob):
         self.states["DRight"] = 200
         self.states["DLeft"] = 200
         self.strength = strength
-        self.spellMax = 5 + int(strength)
+        self.spellMax = int(6*strength)
         self.spellCount = 0
         self.flee_x = 0
         self.flee_y = 0
