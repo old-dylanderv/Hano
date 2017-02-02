@@ -262,8 +262,8 @@ def main(self, name = "Nom Par Defaut"):
                 fenetre.blit(fond_e, (0,0))
                 #timer
                 if(salve != 5):
-                    fenetre.blit(timerLabel, (500, 670))
-                fenetre.blit(niveauLabel, (500, 700))
+                    fenetre.blit(timerLabel, (490, 660))
+                fenetre.blit(niveauLabel, (500, 690))
                 #Plateformes
                 nbPlatf = len(platforms)
                 for i in range (0, nbPlatf):
