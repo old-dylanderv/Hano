@@ -142,13 +142,17 @@ class GameMenu(Menu):
                 self.items[self.cur_item].set_selected(True)
             elif key == K_RETURN:
                 if self.cur_item == 0:
-                    self.menu[0].run()
+                    self.menu[0].run(False)
+                if self.cur_item == 1:
+                    self.menu[0].run(True)
                 if self.cur_item == 2:
                     tuto.main(self)
                 if self.cur_item == 3:
                     self.menu[2].run(readFile())
                 if self.cur_item == 4:
                     self.menu[1].run()
+                if self.cur_item == 5:
+                    sys.exit()
 
     def run(self):
         while 1:
@@ -192,16 +196,16 @@ class NameMenu(Menu):
         self.cur_item = 0
         self.items[self.cur_item].set_selected(True)
 
-    def input_name(self, key):
+    def input_name(self, key, difHard):
         if key == K_RETURN:
-            test.main(self, self.name)
+            test.main(self, self.name, difHard)
         elif (key >= 65 and key <= 90) or (key >= 97 and key <= 122) or (key == 32):
             self.name = self.name + str(unichr(key))
         elif key == 8:
             self.name = self.name[:len(self.name)-1]
 
 
-    def run(self):
+    def run(self, difHard):
         while 1:
             self.clock.tick(60)
 
@@ -209,7 +213,7 @@ class NameMenu(Menu):
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    self.input_name(event.key)
+                    self.input_name(event.key, difHard)
 
             self.screen.blit(self.bg, (0,0))
 
