@@ -229,7 +229,8 @@ class NameMenu(Menu):
 class DieMenu(Menu):
     def __init__(self, screen, items, name, score):
         Menu.__init__(self, screen)
-        self.font = scoreFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.font = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.img = pygame.transform.scale(pygame.image.load("Images/Menu/Panneau.png").convert_alpha(), (550, 450))
         self.score = score
         self.name = name
         self.items = []
@@ -237,8 +238,8 @@ class DieMenu(Menu):
             menu_item = SelectItem(item)
 
             t_h = len(items) * menu_item.height
-            pos_x = 515
-            pos_y = 150 + (menu_item.height * (index * 1.2)) + menu_item.height
+            pos_x = 530
+            pos_y = 200 + (menu_item.height * (index * 1.2)) + menu_item.height
 
             menu_item.set_position(pos_x, pos_y)
             self.items.append(menu_item)
@@ -285,10 +286,10 @@ class DieMenu(Menu):
 
 
 
-            pygame.draw.rect(self.screen, (127,127,127), (390, 95, 500, 320))
-            self.screen.blit(pygame.image.load("Images/Menu/GameOver.png").convert_alpha(), (460,95))
-            label = self.font.render(self.name+" - Score : "+str(int(self.score)), 1, (200, 200, 100))
-            self.screen.blit(label, (390,95))
+            self.screen.blit(self.img, (390, 80))
+            self.screen.blit(pygame.image.load("Images/Menu/GameOver.png").convert_alpha(), (480,140))
+            label = self.font.render(self.name+" - Score : "+str(int(self.score)), 1, (250, 250, 150))
+            self.screen.blit(label, (480,240))
             for item in self.items:
                 self.screen.blit(item.get_image(), item.position)
 
