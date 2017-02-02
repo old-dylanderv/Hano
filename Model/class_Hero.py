@@ -45,9 +45,9 @@ class Hero(Charac):
         self.spell1 = False
         self.guard = False
         self.ult = False
-        self.punch = pygame.mixer.Sound("punch.wav")
-        self.sword = pygame.mixer.Sound("sword.wav")
-        self.eof = pygame.mixer.Sound("error.wav")
+        self.punch = pygame.mixer.Sound("Music/punch.wav")
+        self.sword = pygame.mixer.Sound("Music/sword.wav")
+        self.eof = pygame.mixer.Sound("Music/error.wav")
 
     def key_down(self, event):
         if(event.key == K_RIGHT):
