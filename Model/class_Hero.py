@@ -30,6 +30,8 @@ class Hero(Charac):
         self.states['Oaa3Left'] = 60
         self.states['OaaaRight'] = 75
         self.states['OaaaLeft'] = 75
+        self.states['OdmgRight'] = 100
+        self.states['OdmgLeft'] = 100
         self.states['DRight'] = 500
         self.states['DLeft'] = 500
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
@@ -306,7 +308,11 @@ class Hero(Charac):
                 Animated.changeState(self, "DRight")
             else:
                 Animated.changeState(self, "DLeft")
-
+        else:
+            if(self.facing == 1):
+                Animated.changeState(self, "OdmgRight")
+            else:
+                Animated.changeState(self, "OdmgLeft")
     def get_autoHitTimer2(self):
         return self.autoHitTimer2
 
