@@ -207,8 +207,10 @@ def main(self, name = "Nom Par Defaut"):
     niveau = 1
     salve = 1
     tempsParSalve = 10.0
-    timerFont = pygame.font.SysFont("Polices/Lady Radical.ttf", 20)
-    levelFont = pygame.font.SysFont("Polices/Lady Radical.ttf", 15)
+    timerFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    timerFont.set_bold(False)
+    levelFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    levelFont.set_bold(False)
 
     while not blanchon.isDead() :
         salve = 1
