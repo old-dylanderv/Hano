@@ -171,6 +171,16 @@ def main(self, name):
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False)
                         ],
+                       "OdmgRight":
+                        [
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_dmg_2.png").convert_alpha()),
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_dmg_2.png").convert_alpha()),
+                        ],
+                       "OdmgLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_dmg_2.png").convert_alpha()), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_dmg_2.png").convert_alpha()), True, False),
+                        ],
                        "DRight":
                         [
                          pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()),
