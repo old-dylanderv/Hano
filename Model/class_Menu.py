@@ -214,8 +214,10 @@ class NameMenu(Menu):
 
 
 class DieMenu(Menu):
-    def __init__(self, screen, items, name):
+    def __init__(self, screen, items, name, score):
         Menu.__init__(self, screen)
+        self.font = scoreFont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.score = score
         self.name = name
         self.items = []
         for index, item in enumerate(items):
@@ -267,8 +269,12 @@ class DieMenu(Menu):
                 if event.type == pygame.KEYDOWN:
                     self.set_item_selection(event.key)
 
-            pygame.draw.rect(self.screen, (255,255,255), (390, 95, 500, 320))
 
+
+            pygame.draw.rect(self.screen, (127,127,127), (390, 95, 500, 320))
+            self.screen.blit(pygame.image.load("Images/Menu/GameOver.png").convert_alpha(), (460,95))
+            label = self.font.render(self.name+" - Score : "+str(int(self.score)), 1, (200, 200, 100))
+            self.screen.blit(label, (390,95))
             for item in self.items:
                 self.screen.blit(item.get_image(), item.position)
 

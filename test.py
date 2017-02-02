@@ -21,7 +21,10 @@ import class_Menu
 from class_Menu import *
 
 #initialisation de pygame
-def main(self, name = "Nom Par Defaut"):
+def main(self, name):
+    if(name == ""):
+        name = "Nom Par Defaut"
+
     pygame.init()
 
     WIDTH = 1280
@@ -449,7 +452,7 @@ def main(self, name = "Nom Par Defaut"):
 
     keyR = False
 
-    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), self.name)
+    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), name, score)
     dieMenu.run()
 
     pygame.display.flip()
