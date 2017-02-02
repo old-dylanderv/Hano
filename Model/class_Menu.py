@@ -104,16 +104,23 @@ class GameMenu(Menu):
     def __init__(self, screen, items, menu, title, anim):
         Menu.__init__(self, screen)
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
+        self.jouer = pygame.image.load("Images/Menu/JouerNS.png").convert_alpha()
         self.anim = anim
         self.title = title
         self.menu = menu
         self.items = []
         for index, item in enumerate(items):
             menu_item = SelectItem(item)
-
-            t_h = len(items) * menu_item.height
-            pos_x = 50
-            pos_y = 75 + (menu_item.height * (index * 1.2)) + menu_item.height
+            if(index == 0):
+                pos_x = 30
+                pos_y = 130 + (menu_item.height * (index * 1.2)) + menu_item.height
+                print(pos_y)
+            elif(index == 1):
+                pos_x = 180
+                pos_y = 180
+            else:
+                pos_x = 50
+                pos_y = (menu_item.height * (index * 1.2)) + menu_item.height
 
             menu_item.set_position(pos_x, pos_y)
             self.items.append(menu_item)
@@ -167,6 +174,7 @@ class GameMenu(Menu):
 
             self.screen.blit(self.bg, (0,0))
             self.screen.blit(self.title.get_image(), self.title.get_position())
+            self.screen.blit(self.jouer, (50,70))
 
             for perso in self.anim:
                 perso.nextImg(60)
