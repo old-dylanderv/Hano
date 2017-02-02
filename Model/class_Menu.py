@@ -145,6 +145,8 @@ class GameMenu(Menu):
                     self.menu[0].run()
                 if self.cur_item == 1:
                     tuto.main(self)
+                if self.cur_item == 2:
+                    self.menu[2].run(readFile())
                 if self.cur_item == 3:
                     self.menu[1].run()
 
@@ -176,7 +178,7 @@ class NameMenu(Menu):
         Menu.__init__(self, screen)
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.name = ""
-        self.myfont = pygame.font.SysFont("monospace", 15)
+        self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 42)
         self.items = []
         for index, item in enumerate(items):
             menu_item = SelectItem(item)
@@ -211,8 +213,15 @@ class NameMenu(Menu):
 
             self.screen.blit(self.bg, (0,0))
 
-            name = self.myfont.render("Entrez votre nom : "+self.name, 1, (255,255,0))
-            self.screen.blit(name, (0,0))
+            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
+
+            self.screen.blit(name, ((self.scr_width/2)-170,(self.scr_height/2)-150))
+
+            textarea = self.myfont.render(self.name,1,(0,0,0))
+
+            self.screen.blit(textarea,((self.scr_width/2)-9*len(self.name),self.scr_height/2-50))
+
+
 
             pygame.display.flip()
 
@@ -366,6 +375,48 @@ class CreditMenu(Menu):
             #Partie texte pour ^^
             graphiste = self.myfont.render("Inspire d'une histoire (presque) vraie ", 1, (0,0,0))
             self.screen.blit(graphiste, (780,530))
+
+            #Partie texte pour quitter
+            quit = self.myfontMini.render("Appuyer sur 'Entree' pour ", 1, (0,0,0))
+            self.screen.blit(quit, (1100,600))
+            quit2 = self.myfontMini.render("retourner au menu principal ", 1, (0,0,0))
+            self.screen.blit(quit2, (1100,620))
+
+
+
+            pygame.display.flip()
+
+class LeaderboardMenu(Menu):
+    def __init__(self, screen):
+        Menu.__init__(self, screen)
+        self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
+        self.img = pygame.image.load("Images/Menu/HighScoresNS.png").convert_alpha()
+        self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+        self.myfontMini = pygame.font.Font("Polices/Lady Radical.ttf", 15)
+
+    def input_name(self, key):
+        if key == K_RETURN:
+            monMenu.main()
+
+
+    def run(self, tabScore):
+        while 1:
+            self.clock.tick(60)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    self.input_name(event.key)
+
+            self.screen.blit(self.bg, (0,0))
+
+            self.screen.blit(self.img, (520,100))
+
+            i = 0
+            while i < len(tabScore):
+                score = self.myfont.render(tabScore[i][0]+" - "+tabScore[i][1], 1, (0,0,0))
+                self.screen.blit(score, (190,200 + (30 * i)))
+                i += 1
 
             #Partie texte pour quitter
             quit = self.myfontMini.render("Appuyer sur 'Entree' pour ", 1, (0,0,0))
