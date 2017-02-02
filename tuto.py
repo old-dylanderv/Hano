@@ -201,7 +201,7 @@ def main(self, name = "nom par defaut"):
 
     #TEXTE DU TUTO------------------------------------------------------------------
     self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
-    fleches = self.myfont.render("Les fleches directionnelles servent à se deplacer", 1, (200,200,0))
+    fleches = self.myfont.render("Les fleches directionnelles servent a se deplacer", 1, (200,200,0))
     atkDeBase = self.myfont.render("La touche 'A' permet de donner des coups au corps a corps", 1, (200,200,0))
     atkDistance = self.myfont.render("La touche 'Z' permet de lancer des projectiles", 1, (200,200,0))
 
@@ -222,9 +222,9 @@ def main(self, name = "nom par defaut"):
     #GESTION DU DECORS--------------------------------------------------------------
         #Fond
         fenetre.blit(fond_e, (0,0))
-        self.screen.blit(fleches, (50,50))
-        self.screen.blit(atkDeBase, (50,80))
-        self.screen.blit(atkDistance, (50,110))
+        self.screen.blit(fleches, (700,50))
+        self.screen.blit(atkDeBase, (700,80))
+        self.screen.blit(atkDistance, (700,110))
         #Plateformes
         nbPlatf = len(platforms)
         for i in range (0, nbPlatf):
