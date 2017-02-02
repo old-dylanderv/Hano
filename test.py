@@ -164,6 +164,16 @@ def main(self, name = "Nom Par Defaut"):
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_2.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False)
+                        ],
+                       "DRight":
+                        [
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()),
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha())
+                        ],
+                       "DLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()), True, False)
                         ]}
     blanchon_atkList = [
                         Atk("autoHit1", 0.5, 32, 32, {"idleRight":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 5, 5, -1, 0, 0, 0, 225),
