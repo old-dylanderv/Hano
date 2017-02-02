@@ -49,6 +49,9 @@ class Animated(Entity):
     def isFirstFrame(self):
         return self.indexImg == 0
 
+    def isLastFrame(self):
+        return self.indexImg == len(self.images.get(self.state)) -1
+
     def get_img(self):
         return self.images.get(self.state)[self.indexImg]
 

@@ -164,6 +164,16 @@ def main(self, name = "Nom Par Defaut"):
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_aa2_2.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False),
                          pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_atkjumpdown.png").convert_alpha()), True, False)
+                        ],
+                       "DRight":
+                        [
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()),
+                         pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha())
+                        ],
+                       "DLeft":
+                        [
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()), True, False),
+                         pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Blanchon/b_gameover.png").convert_alpha()), True, False)
                         ]}
     blanchon_atkList = [
                         Atk("autoHit1", 0.5, 32, 32, {"idleRight":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleLeft":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 5, 5, -1, 0, 0, 0, 225),
@@ -199,10 +209,10 @@ def main(self, name = "Nom Par Defaut"):
     timerFont = pygame.font.SysFont("monospace", 20)
     levelFont = pygame.font.SysFont("monospace", 15)
 
-    while 1 :
+    while not blanchon.isDead() :
         salve = 1
         #RANDOMISER PLATEFORME ICI
-        while salve < 6:
+        while salve < 6 and not blanchon.isDead():
             if(salve < 5):
                 #AJOUTER DES MOBS A FOES
                 i = 0
@@ -224,7 +234,7 @@ def main(self, name = "Nom Par Defaut"):
             timer = tempsParSalve
             timeSave = pygame.time.get_ticks()
             #BOUCLE DE JEU =========================================================================================
-            while(len(foes) > 0 and (timer > 0.0 or salve >= 4)):
+            while(len(foes) > 0 and (timer > 0.0 or salve >= 4) and not blanchon.isDead()):
                 #GESTION TIMER-----------------------------------------------------------------
                 if(timer <= 0.0):
                     timer = 0
@@ -404,3 +414,18 @@ def main(self, name = "Nom Par Defaut"):
                 pygame.display.flip()
             salve += 1
         niveau += 1
+
+    keyR = False
+    while(keyR == False):
+        for event in pygame.event.get():
+            if event.type == QUIT: 	#si l'utilisateur clique sur la croix
+                sys.exit()          #on ferme la fenêtre
+            if event.type == KEYDOWN:
+                keyR = True
+
+        fontGO = pygame.font.SysFont("monospace", 40)
+        labelGO = fontGO.render("GAME OVER", 1, (150,50,50))
+        fenetre.blit(labelGO, (300, 300))
+        pygame.display.flip()
+
+    #RENVOYER AU MENU
