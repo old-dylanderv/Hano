@@ -66,7 +66,7 @@ class Ninja(Mob):
                           pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Ninja/n_hurt.png").convert_alpha()), True, False),
                          ]
                      }
-        atkList = Atk("sabre", 2, 64, 32, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 10, -1, 0, 0, 0, 400),
+        atkList = Atk("sabre", 2.5 64, 32, {"idleLeft":[pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha()],"idleRight":[pygame.transform.flip(pygame.image.load("Images/Blanchon/particlehit.png").convert_alpha(),True,False)]}, 10, 10, -1, 0, 0, 0, 400),
         Mob.__init__(self, x, y, 64, 64, imagesNinja, 0.3, 2, 8, 8, windowWidth, 30*strength, atkList)
         self.strength = strength
         self.areaWidth = 250
