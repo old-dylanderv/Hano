@@ -10,7 +10,7 @@ from class_AtkEffect import *
 #   Ils peuvent double-sauter
 #   Ils ont des spells (définis dans la classe fille)
 class Hero(Charac):
-    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList, difHard):
+    def __init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList, difHard = False):
         Charac.__init__(self, x, y, width, height, images, weight, baseAcc_x, baseJumpForce, maxSpeed_x, windowWidth, hp, atkList)
         self.states['RmoveLeft'] = 100
         self.states['RmoveRight'] = 100
