@@ -161,6 +161,8 @@ class GameMenu(Menu):
                     sys.exit()
 
     def run(self):
+        pygame.mixer.music.load("Music/menu.wav")
+        pygame.mixer.music.play(-1)
         while 1:
             self.clock.tick(60)
 
