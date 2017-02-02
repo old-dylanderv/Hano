@@ -101,9 +101,6 @@ class Hero(Charac):
     def isOnGround(self):
         return self.onGround
 
-    def isDead(self):
-        return self.states[0] == 'D' and Animated.isLastFrame(self)
-
     def get_combo(self):
         return self.combo
 
@@ -290,9 +287,9 @@ class Hero(Charac):
         Charac.set_hp(self, dmg)
         if(self.hp <= 0.0):
             if(self.facing == 1):
-                Animated.changeState("DRight")
+                Animated.changeState(self, "DRight")
             else:
-                Animated.changeState("DLeft")
+                Animated.changeState(self, "DLeft")
 
     def get_autoHitTimer2(self):
         return self.autoHitTimer2

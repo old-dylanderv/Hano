@@ -72,6 +72,9 @@ class Charac(Animated):
         #Animation du Charac
         Animated.update(self)
 
+    def isDead(self):
+        return self.state[0] == 'D' and Animated.isLastFrame(self)
+
     #On sépare cette fonction de l'update pour pouvoir la personnaliser dans Hero
     def deleteAtkEffect(self, i):
         self.atkEffectList.pop(i)
