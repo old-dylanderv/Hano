@@ -234,9 +234,17 @@ class Hero(Charac):
 
             if(self.spell1 == True):
                 if(self.facing == 1):
-                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, self.speed_x)
+                    if(self.speed_x > 0):
+                        bnspd_x = self.speed_x
+                    else:
+                        bnspd_x = 0
+                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing, self.y+20, self.facing, self.combo, bnspd_x)
                 else:
-                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[3].get_width(), self.y+20, self.facing, self.combo, self.speed_x)
+                    if(self.speed_x < 0):
+                        bnspd_x = self.speed_x
+                    else:
+                        bnspd_x = 0
+                    atkEffect = self.atkList[3].launch(self.x+self.rect.width/2+20*self.facing-self.atkList[3].get_width(), self.y+20, self.facing, self.combo, bnspd_x)
                 if(atkEffect != None):
                     self.atkEffectList.append(atkEffect)
                     if(self.facing == 1):
