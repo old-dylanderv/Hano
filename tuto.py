@@ -7,6 +7,7 @@ from pygame.locals import *
 #importation de la bibliothèque system
 import sys
 sys.path.append('Model/')
+sys.path.append('Polices/')
 #importation de nos classes
 from class_Hero import *
 from class_Platform import *
@@ -187,10 +188,10 @@ def main(self, name = "Nom Par Defaut"):
     #INIT SYSTEM CLOCK
     clock = pygame.time.Clock()
     fps = 60
-    myfont = pygame.font.SysFont("monospace", 15)
-    myfont.set_bold(True)
-    damageFont = pygame.font.SysFont("monospace", 30)
-    damageFont.set_bold(True)
+    myfont = pygame.font.Font("Polices/Lady Radical.ttf", 25)
+    #myfont.set_bold(True)
+    damageFont = pygame.font.Font("Polices/Lady Radical.ttf", 30)
+    #damageFont.set_bold(True)
 
     damageArray = []
     timerDamage = 300
@@ -217,7 +218,7 @@ def main(self, name = "Nom Par Defaut"):
 
     #GESTION DU HERO----------------------------------------------------------------
         #Affichage Multiplicateur de dégats
-        CountAH = myfont.render(u"Multiplicateur : "+str(blanchon.get_combo()), 1, (255,255,0))
+        CountAH = myfont.render(u"Mult : "+str(blanchon.get_combo()), 1, (255,255,0))
         fenetre.blit(CountAH, (700, 680))
 
         #CoolDown Attaque de Blanchon
