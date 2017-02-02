@@ -448,19 +448,10 @@ def main(self, name = "Nom Par Defaut"):
         niveau += 1
 
     keyR = False
-#    while(keyR == False):
-#        for event in pygame.event.get():
-#            if event.type == QUIT: 	#si l'utilisateur clique sur la croix
-#                sys.exit()          #on ferme la fenêtre
-#            if event.type == KEYDOWN:
-#                keyR = True
 
-    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "RetourMenu"), self.name)
+    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), self.name)
     dieMenu.run()
 
-#        fontGO = pygame.font.SysFont("monospace", 40)
-#        labelGO = fontGO.render("GAME OVER", 1, (150,50,50))
-#        fenetre.blit(labelGO, (300, 300))
     pygame.display.flip()
 
     #RENVOYER AU MENU

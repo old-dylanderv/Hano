@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 
+import monMenu
 import test
 import tuto
 
@@ -254,7 +255,7 @@ class DieMenu(Menu):
                 if self.cur_item == 0:
                     test.main(self, self.name)
                 if self.cur_item == 1:
-                    monMenu.main(self)
+                    monMenu.main()
 
     def run(self):
         while 1:
