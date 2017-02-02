@@ -17,9 +17,14 @@ from class_Samurai import *
 from class_Ninja import *
 from class_Corbeau import *
 from class_Demon import *
+import class_Menu
+from class_Menu import *
 
 #initialisation de pygame
-def main(self, name = "Nom Par Defaut"):
+def main(self, name):
+    if(name == ""):
+        name = "Nom Par Defaut"
+
     pygame.init()
 
     WIDTH = 1280
@@ -475,16 +480,10 @@ def main(self, name = "Nom Par Defaut"):
         niveau += 1
 
     keyR = False
-    while(keyR == False):
-        for event in pygame.event.get():
-            if event.type == QUIT: 	#si l'utilisateur clique sur la croix
-                sys.exit()          #on ferme la fenêtre
-            if event.type == KEYDOWN:
-                keyR = True
 
-        fontGO = pygame.font.SysFont("monospace", 40)
-        labelGO = fontGO.render("GAME OVER", 1, (150,50,50))
-        fenetre.blit(labelGO, (300, 300))
-        pygame.display.flip()
+    dieMenu = class_Menu.DieMenu(fenetre, ("Rejouer", "Menu"), name, score)
+    dieMenu.run()
+
+    pygame.display.flip()
 
     #RENVOYER AU MENU
