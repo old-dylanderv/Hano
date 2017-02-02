@@ -18,7 +18,8 @@ from class_Ninja import *
 from class_Corbeau import *
 from class_Demon import *
 from class_Moine import *
-
+import class_Menu
+from class_Menu import *
 
 #initialisation de pygame
 def main(self, name):
