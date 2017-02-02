@@ -56,17 +56,17 @@ class Moine(Mob):
         atkList = [Atk("violet", 2.5, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged1_1.png").convert_alpha()),
                                                         pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged1_2.png").convert_alpha())],
                                             "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged1_1.png").convert_alpha()),True,False),
-                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged1_2.png").convert_alpha()),True,False)]}, 8, -12, -5, 0, 6, 0, 3000),
+                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged1_2.png").convert_alpha()),True,False)]}, 7, -12, -5, 0, 6, 0, 3000),
                 Atk("lazer", 3, 32, 16, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged2_1.png").convert_alpha()),
                                                     pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged2_2.png").convert_alpha())],
                                         "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged2_1.png").convert_alpha()),True,False),
-                                                    pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged2_2.png").convert_alpha()),True,False)]}, 5, 3, -1, 0, 12, 0, 3000),
+                                                    pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged2_2.png").convert_alpha()),True,False)]}, 4, 3, -1, 0, 12, 0, 3000),
                 Atk("orbe", 0.1, 32, 32, {"idleRight":[pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged3_1.png").convert_alpha()),
                                                         pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged3_2.png").convert_alpha())],
                                             "idleLeft":[pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged3_1.png").convert_alpha()),True,False),
-                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged3_2.png").convert_alpha()),True,False)]}, 12, 3, -3, 0.1, 2, -3, 4000)]
+                                                        pygame.transform.flip(pygame.transform.scale2x(pygame.image.load("Images/Moine/m_atkranged3_2.png").convert_alpha()),True,False)]}, 10, 3, -3, 0.1, 2, -3, 4000)]
 
-        Mob.__init__(self, x, y, 64, 64, imagesMoine, 0.2, 0.5, 2, 4, windowWidth, 200*strength, atkList)
+        Mob.__init__(self, x, y, 64, 64, imagesMoine, 0.2, 0.5, 2, 4, windowWidth, 130*strength, atkList)
         self.states["Oaa1Right"] = 200
         self.states["Oaa1Left"] = 200
         self.states["Oaa2Right"] = 200
