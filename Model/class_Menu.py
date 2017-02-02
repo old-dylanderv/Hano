@@ -174,7 +174,7 @@ class NameMenu(Menu):
         Menu.__init__(self, screen)
         self.bg = pygame.transform.scale(pygame.image.load("Images/Menu/backgroundcredit.png").convert(), (1280,720))
         self.name = ""
-        self.myfont = pygame.font.SysFont("monospace", 15)
+        self.myfont = pygame.font.Font("Polices/Lady Radical.ttf", 42)
         self.items = []
         for index, item in enumerate(items):
             menu_item = SelectItem(item)
@@ -209,8 +209,10 @@ class NameMenu(Menu):
 
             self.screen.blit(self.bg, (0,0))
 
-            name = self.myfont.render("Entrez votre nom : "+self.name, 1, (255,255,0))
-            self.screen.blit(name, (0,0))
+            name = self.myfont.render("Entrez votre nom : ", 1, (255,255,0))
+            self.screen.blit(name, ((self.scr_width/2)-170,(self.scr_height/2)-150))
+            textarea = self.myfont.render(self.name,1,(0,0,0))
+            self.screen.blit(textarea,((self.scr_width/2)-9*len(self.name),self.scr_height/2-50))
 
             pygame.display.flip()
 
