@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 
 import test
+import tuto
 
 import sys
 
@@ -142,6 +143,8 @@ class GameMenu(Menu):
             elif key == K_RETURN:
                 if self.cur_item == 0:
                     self.menu[0].run()
+                if self.cur_item == 1:
+                    tuto.main(self)
 
     def run(self):
         while 1:
@@ -441,7 +444,7 @@ if __name__ == "__main__":
     title = TitleItem("title", 500, 25)
     input_name = NameMenu(screen, jouer)
     menu = [input_name]
-    menu_items = ("Jouer" , "HighScores", "Credits", "Quitter")
+    menu_items = ("Jouer", "HighScores", "Credits", "Quitter")
 
     pygame.display.set_caption('Menu')
 

@@ -30,6 +30,8 @@ class Hero(Charac):
         self.states['Oaa3Left'] = 60
         self.states['OaaaRight'] = 75
         self.states['OaaaLeft'] = 75
+        self.states['DRight'] = 500
+        self.states['DLeft'] = 500
         self.autoHitTimer2 = 0 #Sert à transformer l'auto hit 1 apres un coup reussi
         self.autoHitTimer3 = 0 #Sert à transformer l'auto hit 2 apres un coup reussi
         self.combo = 1
@@ -98,7 +100,7 @@ class Hero(Charac):
 
     def isOnGround(self):
         return self.onGround
-        
+
     def get_combo(self):
         return self.combo
 
@@ -283,6 +285,11 @@ class Hero(Charac):
     def set_hp(self, dmg):
         self.combo = 1
         Charac.set_hp(self, dmg)
+        if(self.hp <= 0.0):
+            if(self.facing == 1):
+                Animated.changeState(self, "DRight")
+            else:
+                Animated.changeState(self, "DLeft")
 
     def get_autoHitTimer2(self):
         return self.autoHitTimer2
